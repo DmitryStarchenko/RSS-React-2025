@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/types.ts","./src/api/getpokemon.tsx","./src/app/app.tsx","./src/header/header.tsx","./src/header/index.ts","./src/main/main.tsx","./src/main/components/card-list.tsx","./src/main/components/card.tsx","./src/main/components/full-list.tsx","./src/main/components/list.tsx","./vite.config.ts","./index.tsx"],"version":"5.8.3"}
