@@ -14,7 +14,8 @@ export class Footer extends Component {
       <div className={styles.footer}>
         <button
           className={styles.errorButton}
-          onClick={() => this.setState({ isError: true })}>
+          onClick={() => this.setState({ isError: true })}
+        >
           Throw Error
         </button>
       </div>
