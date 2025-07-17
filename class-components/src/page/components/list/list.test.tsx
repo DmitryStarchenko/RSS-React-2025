@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { List } from './list';
 import { Results } from 'types';
 
-describe('header testing', () => {
+describe('list testing', () => {
   const results: Results = {
     name: '',
     url: '5bcvbxbgnfngfnfgnffgnfnnzcfxbfdbf/5/',
@@ -16,11 +16,11 @@ describe('header testing', () => {
     p = screen.getByText('Pokemon id: 5');
   });
 
-  test('input testing', () => {
+  test('li testing', () => {
     expect(li.tagName).toBe('LI');
   });
 
-  test('header testing', () => {
+  test('paragraph list testing', () => {
     expect(p.tagName).toBe('P');
   });
 });
