@@ -12,12 +12,10 @@ describe('ErrorBoundary', () => {
   let consoleError;
 
   beforeEach(() => {
-    // Перехватываем console.error, чтобы избежать вывода ошибок в консоль во время тестов
     consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
   afterEach(() => {
-    // Восстанавливаем console.error после каждого теста
     consoleError.mockRestore();
   });
 
