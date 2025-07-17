@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { Card } from './card';
 import { type Pokemon } from '../../../types';
 
-describe('header testing', () => {
+describe('card testing', () => {
   const cards: Pokemon = {
     id: 321,
     name: '',
@@ -24,11 +24,11 @@ describe('header testing', () => {
     heading = screen.getByRole('heading');
   });
 
-  test('img testing', () => {
+  test('card img testing', () => {
     expect(img.tagName).toBe('IMG');
   });
 
-  test('heading testing', () => {
+  test('card heading testing', () => {
     expect(heading.tagName).toBe('H2');
   });
 });
