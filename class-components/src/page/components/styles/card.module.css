@@ -1,0 +1,17 @@
+.imageConteiner {
+  border-bottom: 2px solid yellow;
+  padding: 10px;
+}
+
+.image {
+  width: 280px;
+}
+
+.stats {
+  border-top: 2px solid yellow;
+  padding: 10px;
+}
+
+.stat {
+  margin: 5px 0;
+}
