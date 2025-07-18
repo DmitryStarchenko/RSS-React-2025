@@ -3,6 +3,7 @@ import { List, Results } from '../types';
 import { Header } from './header';
 import { CardList, FullList, Loader, NotFound } from './components';
 import { Footer } from './footer';
+import { apiRequest } from './api';
 
 type State = {
   list: Results[];
@@ -19,12 +20,7 @@ export class Page extends Component {
 
   componentDidMount(): void {
     const idItem = localStorage.getItem('key');
-    fetch(
-      `https://pokeapi.co/api/v2/pokemon/${idItem ? idItem : ''}?limit=40,`,
-      {
-        method: 'GET',
-      },
-    )
+    apiRequest(idItem)
       .then((response) => response.json())
       .then((response: List) =>
         idItem
@@ -34,9 +30,7 @@ export class Page extends Component {
   }
 
   searchRequest = (searchString: string): void => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${searchString}?limit=40,`, {
-      method: 'GET',
-    })
+    apiRequest(searchString)
       .then((response) => {
         if (
           Math.trunc(response.status / 100) === 4 ||
