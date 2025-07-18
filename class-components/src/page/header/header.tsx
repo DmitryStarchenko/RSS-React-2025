@@ -35,8 +35,7 @@ export class Header extends Component<Props> {
             type="submit"
             onClick={() => {
               this.props.searchRequest(this.state.search);
-            }}
-          >
+            }}>
             Search
           </button>
         </div>

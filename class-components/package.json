@@ -10,6 +10,7 @@
     "format:fix": "prettier --write .",
     "preview": "vite preview",
     "prepare": "husky",
+    "lint-staged": "lint-staged",
     "test": "vitest",
     "test:coverage": "npx vitest --coverage"
   },
@@ -37,6 +38,7 @@
     "globals": "^16.2.0",
     "husky": "^9.1.7",
     "jsdom": "^26.1.0",
+    "lint-staged": "^16.1.2",
     "msw": "^2.10.4",
     "prettier": "3.6.2",
     "typescript": "~5.8.3",

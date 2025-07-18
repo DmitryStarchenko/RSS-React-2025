@@ -39,8 +39,7 @@ export class ErrorBoundary extends Component<MyComponentProps, State> {
           />
           <button
             className={styles.buttonRefresh}
-            onClick={() => window.location.reload()}
-          >
+            onClick={() => window.location.reload()}>
             Refresh
           </button>
         </div>
