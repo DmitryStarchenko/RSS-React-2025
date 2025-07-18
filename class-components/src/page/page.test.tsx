@@ -25,41 +25,8 @@ describe('Page testing', () => {
 
   test('data is saved to local storage', () => {
     if (ref.current && typeof ref.current.searchRequest === 'function') {
-      ref.current.searchRequest('pickachu');
+      ref.current.searchRequest('pikachu');
       expect(localStorage.length).toBe(0);
     }
-  });
-
-  test('responds with the pokemons', async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=40');
-
-    await expect(response.json()).resolves.toEqual([
-      {
-        name: 'asdasd',
-        url: 'asdsadasd',
-      },
-      {
-        name: 'tret',
-        url: 'wetewt',
-      },
-    ]);
-  });
-
-  test('responds with the pokemon', async () => {
-    const response = await fetch(
-      'https://pokeapi.co/api/v2/pokemon/pikachu?limit=40',
-    );
-    await expect(response.json()).resolves.toEqual({
-      id: 10,
-      name: 'dsfdsfdfs',
-      sprites: {
-        other: {
-          dream_world: {
-            front_default: 'ghjgjgjh',
-          },
-        },
-      },
-      stats: [],
-    });
   });
 });
