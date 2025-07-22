@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import styles from './not-found.module.css';
+import styles from '../styles/not-found.module.css';
 
 export function NotFound(): ReactElement {
   return (

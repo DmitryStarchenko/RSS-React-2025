@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import styles from './error-boundary.module.css';
+import styles from '../styles/error-boundary.module.css';
 
 interface MyComponentProps {
   children?: React.ReactNode;
@@ -39,8 +39,7 @@ export class ErrorBoundary extends Component<MyComponentProps, State> {
           />
           <button
             className={styles.buttonRefresh}
-            onClick={() => window.location.reload()}
-          >
+            onClick={() => window.location.reload()}>
             Refresh
           </button>
         </div>
