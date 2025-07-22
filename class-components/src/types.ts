@@ -3,6 +3,7 @@ export interface Pokemon {
   name: string;
   sprites: Other;
   stats: Stat[];
+  results: Results[];
 }
 
 interface Other {
