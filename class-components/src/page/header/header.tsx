@@ -1,14 +1,12 @@
-import { useState } from 'react';
 import styles from './header.module.css';
+import { useLocalStorage } from '../../shared';
 
 export function Header({
   searchRequest,
 }: {
   searchRequest: (search: string) => void;
 }) {
-  const [search, setSearch] = useState('');
-
-  const idItem = localStorage.getItem('key');
+  const [value, setValue] = useLocalStorage('');
   return (
     <header className={styles.header}>
       <img
@@ -20,18 +18,17 @@ export function Header({
         <input
           className={styles.input}
           type="search"
-          placeholder={
-            idItem ? `Opened card ${idItem}` : 'Enter ID (0-649) or name'
-          }
+          placeholder={'Enter ID (0-649) or name'}
           onChange={(event) => {
-            setSearch(event.target.value);
+            if (typeof setValue !== 'string') setValue(event.target.value);
           }}
+          value={typeof value === 'string' ? value : ''}
         />
         <button
           className={styles.buttonSearch}
           type="submit"
           onClick={() => {
-            searchRequest(search);
+            searchRequest(typeof value === 'string' ? value : '');
           }}>
           Search
         </button>

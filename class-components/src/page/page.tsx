@@ -4,18 +4,19 @@ import { Header } from './header';
 import { CardList, FullList, Loader, NotFound } from './components';
 import { Footer } from './footer';
 import { apiRequest } from './api';
+import { useLocalStorage } from '../shared';
 
 export function Page() {
   const [list, setList] = useState<Results[]>([]);
   const [card, setCard] = useState<Pokemon>();
   const [error, setError] = useState(false);
+  const [value] = useLocalStorage('');
 
   useEffect((): void => {
-    const idItem = localStorage.getItem('key');
-    apiRequest(idItem)
+    apiRequest(typeof value === 'string' ? value : '')
       .then((response) => response.json())
       .then((response: Pokemon) =>
-        idItem && response ? setCard(response) : setList(response.results),
+        value && response ? setCard(response) : setList(response.results),
       );
   }, []);
 
@@ -33,11 +34,6 @@ export function Page() {
         }
       })
       .then((response: Pokemon) => {
-        if (response && response.name) {
-          localStorage.setItem('key', response.name);
-        } else {
-          localStorage.setItem('key', '');
-        }
         if (searchString.length) {
           setCard(response);
         } else {
