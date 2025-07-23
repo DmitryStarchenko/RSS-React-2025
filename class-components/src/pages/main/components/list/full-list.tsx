@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import styles from '../styles/full-list.module.css';
-import { Results } from '../../../types';
+import { Results } from '../../../../types';
 import { List } from '.';
 
 export function FullList({ list }: { list: Results[] }): ReactElement {

@@ -1,1 +1,1 @@
-export { Header } from './page/header';
+export { Header } from './pages/main/header';

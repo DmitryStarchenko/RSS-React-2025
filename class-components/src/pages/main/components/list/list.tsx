@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import styles from '../styles/list.module.css';
-import { Results } from '../../../types';
+import { Results } from '../../../../types';
 
 export function List(props: Results): ReactElement {
   return (

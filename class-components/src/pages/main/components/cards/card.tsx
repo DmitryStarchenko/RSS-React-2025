@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Pokemon } from '../../../types';
+import { Pokemon } from '../../../../types';
 import styles from '../styles/card.module.css';
 
 export function Card(props: Pokemon): ReactElement {

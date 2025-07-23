@@ -1,11 +1,11 @@
-import { ErrorBoundary, Page } from '../page';
+import { Footer } from '../widgets';
+import { ErrorBoundary, Main } from '../pages/main';
 
 export function App() {
   return (
-    <>
-      <ErrorBoundary>
-        <Page />
-      </ErrorBoundary>
-    </>
+    <ErrorBoundary>
+      <Main />
+      <Footer />
+    </ErrorBoundary>
   );
 }

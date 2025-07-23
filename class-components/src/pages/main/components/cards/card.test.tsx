@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Card } from './card';
-import { type Pokemon } from '../../../types';
+import { type Pokemon } from '../../../../types';
 
 describe('card testing', () => {
   const cards: Pokemon = {

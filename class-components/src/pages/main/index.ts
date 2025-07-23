@@ -1,2 +1,2 @@
 export { ErrorBoundary } from './components';
-export { Page } from './page';
+export { Main } from './main';

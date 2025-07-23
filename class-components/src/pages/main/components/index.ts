@@ -1,3 +1,4 @@
+export { PageButton } from './page-button';
 export { ErrorBoundary } from './error-boundary';
 export { List, FullList } from './list';
 export { CardList, Card } from './cards';

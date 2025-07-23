@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 import { render } from '@testing-library/react';
-import { Page } from './page';
+import { Main } from './main';
 import React from 'react';
 
 describe('Page testing', () => {
-  const ref = React.createRef<Page>();
+  const ref = React.createRef<Main>();
   beforeEach(() => {
-    render(<Page ref={ref} />);
+    render(<Main ref={ref} />);
   });
 
   test('waiting for request to be sent', async () => {

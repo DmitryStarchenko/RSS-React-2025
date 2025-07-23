@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Pokemon, Results } from '../types';
+import { Pokemon, Results } from '../../types';
 import { Header } from './header';
 import { CardList, FullList, Loader, NotFound } from './components';
-import { Footer } from './footer';
-import { apiRequest } from './api';
-import { useLocalStorage } from '../shared';
+import { apiRequest, useLocalStorage } from '../../shared';
 
-export function Page() {
+export function Main() {
   const [list, setList] = useState<Results[]>([]);
   const [card, setCard] = useState<Pokemon>();
   const [error, setError] = useState(false);
@@ -56,7 +54,6 @@ export function Page() {
       ) : (
         <Loader />
       )}
-      <Footer />
     </>
   );
 }
