@@ -1,13 +1,19 @@
 import styles from './header.module.css';
-import { useLocalStorage } from '../../../shared';
-import { PageButton } from '../components';
+import { handlerSearchRequest, useLocalStorage } from '../../../shared';
+import { NavLink, useNavigate } from 'react-router';
+import { useContext } from 'react';
+import { CardContext } from '../../../shared';
 
-export function Header({
-  searchRequest,
-}: {
-  searchRequest: (search: string, pageNumber?: number) => void;
-}) {
+export function Header() {
   const [value, setValue] = useLocalStorage('');
+  const { setList, setCard, setError } = useContext(CardContext);
+  const navigate = useNavigate();
+  const props = {
+    setList,
+    setCard,
+    setError,
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.conteinerLogo}>
@@ -16,13 +22,13 @@ export function Header({
           src="../../public/assets/Pikachu.webp"
           alt="pikachu"
         />
-        <a href="about">
+        <NavLink to="/about">
           <img
             className={styles.dialogBuble}
             src="../../../assets/dialogue-bubble.png"
             alt="dialogue-bubble"
           />
-        </a>
+        </NavLink>
       </div>
       <div className={styles.headerContent}>
         <input
@@ -38,12 +44,20 @@ export function Header({
           className={styles.buttonSearch}
           type="submit"
           onClick={() => {
-            searchRequest(typeof value === 'string' ? value : '');
+            handlerSearchRequest(
+              typeof value === 'string' ? value : '',
+              0,
+              props,
+            );
+            if (value === '') {
+              navigate(`/main`);
+            } else {
+              navigate(`/main/card/${value}`);
+            }
           }}>
           Search
         </button>
       </div>
-      <PageButton searchRequest={searchRequest} />
     </header>
   );
 }
