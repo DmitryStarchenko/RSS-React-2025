@@ -20,8 +20,8 @@ export function Page() {
       );
   }, []);
 
-  const searchRequest = (searchString: string): void => {
-    apiRequest(searchString)
+  const searchRequest = (searchString: string, pageNumber: number): void => {
+    apiRequest(searchString, pageNumber)
       .then((response) => {
         if (
           Math.trunc(response.status / 100) === 4 ||

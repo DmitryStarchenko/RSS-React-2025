@@ -1,10 +1,11 @@
 import styles from './header.module.css';
 import { useLocalStorage } from '../../shared';
+import { PageButton } from '../components/page-button';
 
 export function Header({
   searchRequest,
 }: {
-  searchRequest: (search: string) => void;
+  searchRequest: (search: string, pageNumber?: number) => void;
 }) {
   const [value, setValue] = useLocalStorage('');
   return (
@@ -33,6 +34,7 @@ export function Header({
           Search
         </button>
       </div>
+      <PageButton searchRequest={searchRequest} />
     </header>
   );
 }
