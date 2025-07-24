@@ -7,7 +7,7 @@ type Props = {
   setError: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function handlerSearchRequest(
+export function handleSearchRequest(
   searchString: string = '',
   pageNumber: number = 1,
   props: Props,

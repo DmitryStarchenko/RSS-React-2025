@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function useLocalStorage(initialValue: string) {
-  const key = 'SavePokemon';
+export function useLocalStorage(initialValue: string, key: string) {
   const getValue = () => {
     const value = localStorage.getItem(key);
     return value ? value : initialValue;

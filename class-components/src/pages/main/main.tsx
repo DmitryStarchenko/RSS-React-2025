@@ -1,13 +1,13 @@
 import { useContext, useEffect } from 'react';
 import { Pokemon } from '../../types';
-import { Header } from './header';
-import { Pagination } from './components';
+import { Card, FullList, Loader, NotFound, Search } from './components';
 import { apiRequest, CardContext, useLocalStorage } from '../../shared';
-import { Outlet } from 'react-router';
 
 export function Main() {
-  const [value] = useLocalStorage('');
-  const { setList, setCard, setIsLoading } = useContext(CardContext);
+  const KEY = 'SavePokemon';
+  const [value] = useLocalStorage('', KEY);
+  const { setList, setCard, setIsLoading, isLoading, error, card, list } =
+    useContext(CardContext);
 
   useEffect((): void => {
     apiRequest(typeof value === 'string' ? value : '')
@@ -25,9 +25,16 @@ export function Main() {
 
   return (
     <>
-      <Header />
-      <Pagination />
-      <Outlet />
+      <Search />
+      {error ? (
+        <NotFound />
+      ) : isLoading ? (
+        <Loader />
+      ) : card ? (
+        <Card cards={card} />
+      ) : (
+        <FullList list={list} />
+      )}
     </>
   );
 }

@@ -1,40 +1,33 @@
 import { useEffect, useState } from 'react';
-import styles from '../styles/page-button.module.css';
-import { handlerSearchRequest } from '../../../../shared';
+import styles from '../styles/pagination.module.css';
+import { handleSearchRequest } from '../../../../shared';
 import { useContext } from 'react';
 import { CardContext } from '../../../../shared';
-import { useNavigate } from 'react-router';
+import { useSearchParams } from 'react-router';
 
 export function Pagination() {
   const [countLinesShown, setCountLinesShown] = useState(0);
-  const [page, setPage] = useState(1);
+  const [numberPage, setNumberPage] = useState(0);
   const [isLeftButtonDisabled, setIsLeftButtonDisabled] = useState(false);
   const [isRightButtonDisabled, setIsRightButtonDisabled] = useState(false);
   const { setList, setCard, setError } = useContext(CardContext);
-  const navigate = useNavigate();
-  const props = {
-    setList,
-    setCard,
-    setError,
-  };
+  const [searchParam, setSearchParam] = useSearchParams();
+
   const increment = () => {
     setCountLinesShown(countLinesShown + 40);
-    handlerSearchRequest('', countLinesShown, props);
-    setPage(page + 1);
   };
 
   const decrement = () => {
     setCountLinesShown(countLinesShown > 0 ? countLinesShown - 40 : 0);
-    handlerSearchRequest('', countLinesShown, props);
-    setPage(page > 1 ? page - 1 : 1);
   };
 
   useEffect(() => {
-    navigate(`/main/page/${page}`);
-  }, [page]);
-
-  useEffect(() => {
-    handlerSearchRequest('', countLinesShown, props);
+    const props = {
+      setList,
+      setCard,
+      setError,
+    };
+    handleSearchRequest('', countLinesShown, props);
     if (countLinesShown === 0) {
       setIsLeftButtonDisabled(true);
     } else {
@@ -45,7 +38,17 @@ export function Pagination() {
     } else {
       setIsRightButtonDisabled(false);
     }
-  }, [countLinesShown]);
+    setNumberPage(countLinesShown / 40 + 1);
+    setSearchParam(`page=${numberPage}`);
+  }, [
+    countLinesShown,
+    numberPage,
+    searchParam,
+    setCard,
+    setError,
+    setList,
+    setSearchParam,
+  ]);
 
   return (
     <div className={styles.pageButton}>
@@ -57,6 +60,7 @@ export function Pagination() {
         }}>
         {'<<<'}
       </button>
+      <span className={styles.numberPage}>{`Page ${numberPage}`}</span>
       <button
         className={styles.buttonRight}
         disabled={isRightButtonDisabled}
