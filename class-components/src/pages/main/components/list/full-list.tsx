@@ -1,21 +1,27 @@
-import { ReactElement } from 'react';
+import { ReactElement, useContext } from 'react';
 import styles from '../styles/full-list.module.css';
-import { Results } from '../../../../types';
 import { List } from '.';
-import { Pagination } from '..';
+import { CardContext } from '../../../../shared';
+import { Pagination } from '../pagination';
+import { Card } from '..';
 
-export function FullList({ list }: { list: Results[] }): ReactElement {
+export function FullList() {
+  const { list, cardView } = useContext(CardContext);
+
   return (
     <>
       <Pagination />
-      <main className={styles.cardList}>
-        <div className={styles.headerList}>
-          <p className={styles.nameColumn}>Name</p>
-          <p className={styles.descriptionsColumn}>Descriptions</p>
+      <main className={styles.main}>
+        <div className={styles.cardList}>
+          <div className={styles.headerList}>
+            <p className={styles.nameColumn}>Name</p>
+            <p className={styles.descriptionsColumn}>Descriptions</p>
+          </div>
+          {list.map((element): ReactElement => {
+            return <List key={element.name} {...element} />;
+          })}
         </div>
-        {list.map((element): ReactElement => {
-          return <List key={element.name} {...element} />;
-        })}
+        {cardView ? <Card /> : undefined}
       </main>
     </>
   );

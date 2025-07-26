@@ -5,10 +5,10 @@ export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.conteinerLogo}>
-        <NavLink to="/main">
+        <NavLink to="/">
           <img
             className={styles.logo}
-            src="../../public/assets/Pikachu.webp"
+            src="../../assets/Pikachu.webp"
             alt="pikachu"
           />
         </NavLink>

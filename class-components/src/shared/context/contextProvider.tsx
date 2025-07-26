@@ -9,6 +9,8 @@ export function CardContextProvider({ children }: ProviderProps) {
   const [card, setCard] = useState<Pokemon>();
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentSearchParam, setCurrentSearchParam] = useState();
+  const [cardView, setCardView] = useState(false);
 
   const value = {
     list,
@@ -19,6 +21,10 @@ export function CardContextProvider({ children }: ProviderProps) {
     setError,
     isLoading,
     setIsLoading,
+    currentSearchParam,
+    setCurrentSearchParam,
+    cardView,
+    setCardView,
   };
 
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;

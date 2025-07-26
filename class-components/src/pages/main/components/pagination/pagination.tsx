@@ -6,20 +6,33 @@ import { CardContext } from '../../../../shared';
 import { useSearchParams } from 'react-router';
 
 export function Pagination() {
-  const [countLinesShown, setCountLinesShown] = useState(0);
-  const [numberPage, setNumberPage] = useState(0);
+  const MAX_PAGE = 15;
+  const MIN_PAGE = 1;
+
+  const [numberPage, setNumberPage] = useState(MIN_PAGE);
   const [isLeftButtonDisabled, setIsLeftButtonDisabled] = useState(false);
   const [isRightButtonDisabled, setIsRightButtonDisabled] = useState(false);
-  const { setList, setCard, setError } = useContext(CardContext);
-  const [searchParam, setSearchParam] = useSearchParams();
+  const {
+    setList,
+    setCard,
+    setError,
+    currentSearchParam,
+    setCurrentSearchParam,
+  } = useContext(CardContext);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const increment = () => {
-    setCountLinesShown(countLinesShown + 40);
+    setNumberPage(numberPage + 1);
   };
 
   const decrement = () => {
-    setCountLinesShown(countLinesShown > 0 ? countLinesShown - 40 : 0);
+    setNumberPage(numberPage > 1 ? numberPage - 1 : MIN_PAGE);
   };
+
+  useEffect(() => {
+    const currentParam = searchParams.get('page') || '1';
+    setNumberPage(Number(currentParam));
+  }, []);
 
   useEffect(() => {
     const props = {
@@ -27,29 +40,26 @@ export function Pagination() {
       setCard,
       setError,
     };
-    handleSearchRequest('', countLinesShown, props);
-    if (countLinesShown === 0) {
+    handleSearchRequest('', numberPage - 1, props);
+    if (numberPage === MIN_PAGE) {
       setIsLeftButtonDisabled(true);
     } else {
       setIsLeftButtonDisabled(false);
     }
-    if (countLinesShown === 640) {
+    if (numberPage === MAX_PAGE) {
       setIsRightButtonDisabled(true);
     } else {
       setIsRightButtonDisabled(false);
     }
-    setNumberPage(countLinesShown / 40 + 1);
-    setSearchParam(`page=${numberPage}`);
-  }, [
-    countLinesShown,
-    numberPage,
-    searchParam,
-    setCard,
-    setError,
-    setList,
-    setSearchParam,
-  ]);
+  }, [setCard, setError, setList, numberPage]);
 
+  useEffect(() => {
+    setCurrentSearchParam({ page: `${numberPage}` });
+  }, [numberPage]);
+
+  useEffect(() => {
+    setSearchParams(currentSearchParam);
+  }, [currentSearchParam]);
   return (
     <div className={styles.pageButton}>
       <button

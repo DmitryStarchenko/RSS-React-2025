@@ -12,8 +12,10 @@ export function handleSearchRequest(
   pageNumber: number = 1,
   props: Props,
 ) {
+  const countLinesShown = pageNumber * 40;
   const { setList, setCard, setError } = props;
-  apiRequest(searchString, pageNumber)
+
+  apiRequest(searchString, countLinesShown)
     .then((response) => {
       if (
         Math.trunc(response.status / 100) === 4 ||
