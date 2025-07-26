@@ -1,17 +1,70 @@
 .aboutMain {
+  height: 13rem;
 }
 
 .content {
 }
 
-.ghConteiner {
-}
-
 .gh {
-}
-
-.rsConteiner {
+  position: absolute;
+  left: 30%;
+  width: 100px;
+  height: 100px;
+  background-image: url('../../../assets/pokebol.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 100%;
+  animation: dws-bounce 7s linear forwards;
 }
 
 .rs {
+  position: absolute;
+  right: 30%;
+  width: 100px;
+  height: 100px;
+  background-image: url('../../../assets/pokebol.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 100%;
+  animation: dws-bounce 8s linear forwards;
+}
+
+@keyframes dws-bounce {
+  0% {
+    bottom: 100%;
+  }
+  20% {
+    bottom: 50%;
+  }
+  35% {
+    bottom: 80%;
+  }
+  50% {
+    bottom: 50%;
+  }
+  60% {
+    bottom: 65%;
+  }
+  70% {
+    bottom: 50%;
+  }
+  100% {
+    bottom: 50%;
+  }
+}
+
+.gh:hover {
+  background-image: url('../../../public/assets/gh.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.rs:hover {
+  background-image: url('../../../public/assets/rs.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
