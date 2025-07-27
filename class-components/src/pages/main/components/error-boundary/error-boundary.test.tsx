@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ErrorBoundary } from './error-boundary';
+import { BrowserRouter } from 'react-router-dom';
 
 const ThrowError = () => {
   throw new Error('Test error');
@@ -29,9 +30,11 @@ describe('ErrorBoundary', () => {
 
   test('should render fallback UI when an error occurs', () => {
     render(
-      <ErrorBoundary>
-        <ThrowError />
-      </ErrorBoundary>,
+      <BrowserRouter>
+        <ErrorBoundary>
+          <ThrowError />
+        </ErrorBoundary>
+      </BrowserRouter>,
     );
     expect(screen.getByText('Not Found')).toBeInTheDocument();
   });
@@ -49,9 +52,11 @@ describe('ErrorBoundary', () => {
 
   test('should call console.error when an error occurs', () => {
     render(
-      <ErrorBoundary>
-        <ThrowError />
-      </ErrorBoundary>,
+      <BrowserRouter>
+        <ErrorBoundary>
+          <ThrowError />
+        </ErrorBoundary>
+      </BrowserRouter>,
     );
     expect(consoleError).toHaveBeenCalled();
   });
