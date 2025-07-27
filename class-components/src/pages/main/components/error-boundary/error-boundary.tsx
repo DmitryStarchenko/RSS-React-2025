@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import styles from '../styles/error-boundary.module.css';
+import { Link } from 'react-router';
 
 interface MyComponentProps {
   children?: React.ReactNode;
@@ -37,11 +38,13 @@ export class ErrorBoundary extends Component<MyComponentProps, State> {
             src="../../../../assets/animation.gif"
             alt="animation"
           />
-          <button
-            className={styles.buttonRefresh}
-            onClick={() => window.location.reload()}>
-            Refresh
-          </button>
+          <Link to="">
+            <button
+              className={styles.buttonRefresh}
+              onClick={() => window.location.reload()}>
+              Refresh
+            </button>
+          </Link>
         </div>
       );
     }

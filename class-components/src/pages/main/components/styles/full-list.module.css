@@ -32,6 +32,8 @@
 
 .detailsContent {
   display: flex;
+  position: sticky;
+  top: 15px;
   height: 100%;
 }
 
