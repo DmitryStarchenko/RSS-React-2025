@@ -29,3 +29,18 @@
   height: 30px;
   margin: 0;
 }
+
+.detailsContent {
+  display: flex;
+  height: 100%;
+}
+
+.buttonClose {
+  height: 20px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgb(199, 199, 1);
+  cursor: pointer;
+  transform: rotate(-90deg);
+  margin-top: 50px;
+}

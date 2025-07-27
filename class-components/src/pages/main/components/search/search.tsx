@@ -4,8 +4,8 @@ import {
   useLocalStorage,
   CardContext,
 } from '../../../../shared';
-import { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router';
+import { useContext } from 'react';
+import { useSearchParams } from 'react-router';
 
 export function Search() {
   const KEY = 'SavePokemon';
@@ -13,8 +13,6 @@ export function Search() {
   const { setList, setCard, setError, setCurrentSearchParam } =
     useContext(CardContext);
   const [searchParam, setSearchParam] = useSearchParams();
-  const navigate = useNavigate();
-  const [currentUrl, setCurrentUrl] = useState('');
   searchParam.get('page');
 
   const props = {
@@ -25,24 +23,13 @@ export function Search() {
 
   const handleSearch = () => {
     handleSearchRequest(typeof value === 'string' ? value : '', 0, props);
-    setCurrentSearchParam('');
-    setSearchParam('');
     if (value === '') {
-      navigate('/');
+      setCurrentSearchParam('');
+      setSearchParam('');
+    } else {
+      setCurrentSearchParam({ card: `${value}` });
     }
   };
-
-  useEffect(() => {
-    if (value === '') {
-      console.log(currentUrl);
-      setCurrentUrl('/');
-      console.log(currentUrl);
-    } else {
-      console.log(currentUrl);
-      setCurrentUrl(`/search/${value}`);
-      console.log(currentUrl);
-    }
-  }, [value]);
 
   return (
     <div className={styles.searchContent}>
@@ -55,14 +42,12 @@ export function Search() {
         }}
         value={typeof value === 'string' ? value : ''}
       />
-      <Link to={currentUrl}>
-        <button
-          className={styles.buttonSearch}
-          type="submit"
-          onClick={handleSearch}>
-          Search
-        </button>
-      </Link>
+      <button
+        className={styles.buttonSearch}
+        type="submit"
+        onClick={handleSearch}>
+        Search
+      </button>
     </div>
   );
 }

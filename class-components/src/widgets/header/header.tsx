@@ -5,7 +5,7 @@ export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.conteinerLogo}>
-        <NavLink to="/">
+        <NavLink to="">
           <img
             className={styles.logo}
             src="../../assets/Pikachu.webp"

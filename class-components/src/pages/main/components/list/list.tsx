@@ -13,11 +13,11 @@ export function List(props: Results) {
     setCardView,
   } = useContext(CardContext);
   const [searchParams, setSearchParams] = useSearchParams();
-  searchParams.get('card');
+  searchParams.get('details');
 
   const handleClick = (event) => {
     event.preventDefault();
-    setCurrentSearchParam({ ...currentSearchParam, card: `${props.name}` });
+    setCurrentSearchParam({ ...currentSearchParam, details: `${props.name}` });
     apiRequest(props.name)
       .then((response) => response.json())
       .then((response: Pokemon) => {

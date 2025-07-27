@@ -18,15 +18,18 @@ export function Pagination() {
     setError,
     currentSearchParam,
     setCurrentSearchParam,
+    setCardView,
   } = useContext(CardContext);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const increment = () => {
     setNumberPage(numberPage + 1);
+    setCardView(false);
   };
 
   const decrement = () => {
     setNumberPage(numberPage > 1 ? numberPage - 1 : MIN_PAGE);
+    setCardView(false);
   };
 
   useEffect(() => {

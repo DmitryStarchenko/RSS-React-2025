@@ -1,15 +1,16 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Pokemon } from '../../types';
-import { FullList, Loader, NotFound, Search } from './components';
+import { Card, Loader, NotFound, Search } from './components';
 import { apiRequest, CardContext, useLocalStorage } from '../../shared';
-import { Outlet, useNavigate } from 'react-router';
+import { Outlet, useSearchParams } from 'react-router';
 
 export function Main() {
   const KEY = 'SavePokemon';
   const [value] = useLocalStorage('', KEY);
-  const { setList, setCard, setIsLoading, isLoading, error } =
+  const { setList, setCard, setIsLoading, error, isLoading } =
     useContext(CardContext);
-  const navigate = useNavigate();
+  const [searchParam] = useSearchParams();
+  const [cardUrl, setCardUrl] = useState('');
 
   useEffect((): void => {
     apiRequest(typeof value === 'string' ? value : '')
@@ -23,11 +24,11 @@ export function Main() {
           setIsLoading(false);
         }
       });
-    if (value !== '') {
-      navigate('');
-      navigate(`search/${value}`, { replace: true });
-    }
   }, []);
+
+  useEffect(() => {
+    setCardUrl(searchParam.get('card') || '');
+  }, [searchParam]);
 
   return (
     <>
@@ -36,10 +37,10 @@ export function Main() {
         <NotFound />
       ) : isLoading ? (
         <Loader />
-      ) : value === '' ? (
-        <FullList />
-      ) : (
+      ) : cardUrl === '' ? (
         <Outlet />
+      ) : (
+        <Card />
       )}
     </>
   );
