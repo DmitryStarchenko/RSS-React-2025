@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ErrorBoundary } from './error-boundary';
 
-// Тестовый компонент, который будет вызывать ошибку
 const ThrowError = () => {
   throw new Error('Test error');
 };
