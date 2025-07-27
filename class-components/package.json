@@ -14,6 +14,14 @@
     "test": "vitest",
     "test:coverage": "npx vitest --coverage"
   },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix"
+    ],
+    "*": [
+      "prettier --write --ignore-unknown"
+    ]
+  },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
