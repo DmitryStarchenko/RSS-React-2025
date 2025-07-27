@@ -1,0 +1,25 @@
+.listItem {
+  display: flex;
+  gap: 30px;
+  height: 25px;
+  padding: 5px;
+  border-bottom: 2px solid yellow;
+  cursor: pointer;
+}
+
+.liName {
+  width: 100px;
+  margin: 0;
+  font-size: 20px;
+}
+
+.description {
+  margin: 0;
+  font-size: 20px;
+  padding-left: 20px;
+  border-left: 2px solid yellow;
+}
+
+.listItem:hover {
+  background-color: rgba(255, 255, 0, 0.151);
+}
