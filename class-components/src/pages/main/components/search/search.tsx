@@ -10,16 +10,15 @@ import { useSearchParams } from 'react-router';
 export function Search() {
   const KEY = 'SavePokemon';
   const [value, setValue] = useLocalStorage('', KEY);
+  const [searchParam, setSearchParam] = useSearchParams();
   const { setList, setCard, setError, setCurrentSearchParam } =
     useContext(CardContext);
-  const [searchParam, setSearchParam] = useSearchParams();
-  searchParam.get('page');
-
   const props = {
     setList,
     setCard,
     setError,
   };
+  searchParam.get('page');
 
   const handleSearch = () => {
     handleSearchRequest(typeof value === 'string' ? value : '', 0, props);

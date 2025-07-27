@@ -12,6 +12,7 @@ export function Pagination() {
   const [numberPage, setNumberPage] = useState(MIN_PAGE);
   const [isLeftButtonDisabled, setIsLeftButtonDisabled] = useState(false);
   const [isRightButtonDisabled, setIsRightButtonDisabled] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
   const {
     setList,
     setCard,
@@ -20,7 +21,6 @@ export function Pagination() {
     setCurrentSearchParam,
     setCardView,
   } = useContext(CardContext);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const increment = () => {
     setNumberPage(numberPage + 1);
@@ -63,6 +63,7 @@ export function Pagination() {
   useEffect(() => {
     setSearchParams(currentSearchParam);
   }, [currentSearchParam]);
+
   return (
     <div className={styles.pageButton}>
       <button

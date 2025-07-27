@@ -13,6 +13,7 @@ export function List(props: Results) {
     setCardView,
   } = useContext(CardContext);
   const [searchParams, setSearchParams] = useSearchParams();
+  const pokemonId = props.url.slice(34).slice(0, -1);
   searchParams.get('details');
 
   const handleClick = (event) => {
@@ -34,10 +35,7 @@ export function List(props: Results) {
   return (
     <li className={styles.listItem} onClick={(event) => handleClick(event)}>
       <p className={styles.liName}>{props.name}</p>
-      <p
-        className={
-          styles.description
-        }>{`Pokemon id: ${props.url.slice(34).slice(0, -1)}`}</p>
+      <p className={styles.description}>{`Pokemon id: ${pokemonId}`}</p>
     </li>
   );
 }

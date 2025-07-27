@@ -10,8 +10,8 @@ export function FullList() {
   const { list, card, cardView, setCardView, setCurrentSearchParam } =
     useContext(CardContext);
   const [searchParam] = useSearchParams();
-  const pageParam = searchParam.get('page');
   const [isLoadingCard, setIsLoadingCard] = useState(true);
+  const pageParam = searchParam.get('page');
 
   useEffect(() => {
     setIsLoadingCard(false);

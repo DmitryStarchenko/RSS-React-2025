@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Pokemon } from '../../types';
-import { Card, Loader, NotFound, Search } from './components';
+import { Card, Loader, NotFound, Search } from '.';
 import { apiRequest, CardContext, useLocalStorage } from '../../shared';
 import { Outlet, useSearchParams } from 'react-router';
 
@@ -12,7 +12,7 @@ export function Main() {
   const [searchParam] = useSearchParams();
   const [cardUrl, setCardUrl] = useState('');
 
-  useEffect((): void => {
+  useEffect(() => {
     apiRequest(typeof value === 'string' ? value : '')
       .then((response) => response.json())
       .then((response: Pokemon) => {
