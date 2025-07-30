@@ -1,7 +1,12 @@
+import { useContext } from 'react';
 import styles from './header.module.css';
 import { NavLink } from 'react-router';
+import { StyleContext } from '../../shared';
+import { changeTheme } from '../../shared';
 
 export function Header() {
+  const { isDarkTheme, setIsDarkTheme } = useContext(StyleContext);
+
   return (
     <header className={styles.header}>
       <div className={styles.conteinerLogo}>
@@ -20,6 +25,12 @@ export function Header() {
           />
         </NavLink>
       </div>
+      <div
+        className={styles.iconMode}
+        onClick={() => {
+          setIsDarkTheme(!isDarkTheme);
+          changeTheme();
+        }}></div>
     </header>
   );
 }

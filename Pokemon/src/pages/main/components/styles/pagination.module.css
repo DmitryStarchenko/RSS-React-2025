@@ -8,30 +8,30 @@
 .buttonRight {
   width: 60px;
   height: 25px;
-  border: 2px solid rgb(207, 207, 1);
+  border: 2px solid var(--border-color);
   border-radius: 20px;
-  background-color: yellow;
-  color: rgb(151, 151, 1);
+  background-color: var(--main-color);
+  color: var(--text-color);
   cursor: pointer;
   font-weight: bold;
 }
 
 .buttonRight:disabled {
-  background-color: rgb(207, 207, 1);
+  background-color: var(--disabled-color);
   cursor: auto;
 }
 
 .buttonLeft:disabled {
-  background-color: rgb(207, 207, 1);
+  background-color: var(--disabled-color);
   cursor: auto;
 }
 
 .numberPage {
   width: 70px;
   height: 21px;
-  border: 2px solid rgb(207, 207, 1);
+  border: 2px solid var(--border-color);
   border-radius: 20px;
-  background-color: yellow;
-  color: rgb(151, 151, 1);
+  background-color: var(--main-color);
+  color: var(--text-color);
   text-align: center;
 }

@@ -1,2 +1,2 @@
-export { CardContextProvider } from './contextProvider';
-export { CardContext } from './context';
+export { CardContextProvider, CardContext } from './card-context';
+export { StyleContextProvider, StyleContext } from './style-context';

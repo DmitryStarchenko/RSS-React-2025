@@ -2,4 +2,6 @@ import { createRoot } from 'react-dom/client';
 import { App } from './src/app';
 import './styles.css';
 
-createRoot(document.getElementById('root')).render(<App />);
+export const root = document.getElementById('root');
+
+createRoot(root).render(<App />);

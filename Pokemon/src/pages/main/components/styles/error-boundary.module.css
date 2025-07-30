@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 930px;
 }
 
 .errorText {
@@ -10,7 +11,7 @@
 }
 
 .animation {
-  border: 4px solid rgb(207, 207, 1);
+  border: 4px solid var(--border-color);
   border-radius: 20px;
 }
 
@@ -18,9 +19,9 @@
   width: 100px;
   height: 40px;
   margin-top: 30px;
-  border: 2px solid rgb(207, 207, 1);
+  border: 2px solid var(--border-color);
   border-radius: 20px;
-  background-color: yellow;
-  color: rgb(151, 151, 1);
+  background-color: var(--main-color);
+  color: var(--text-color);
   cursor: pointer;
 }
