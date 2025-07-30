@@ -1,6 +1,7 @@
 import { setPokemon } from '../../../../shared/store/slices/pokemonSlice';
 import { useAppDispatch, useAppSelector } from '../../../../shared/store';
 import styles from '../styles/popup.module.css';
+import { FileDownloader } from './file-downloader';
 
 export function Popup() {
   const pokemons = useAppSelector((state) => state.pokemon.pokemon);
@@ -17,7 +18,7 @@ export function Popup() {
           onClick={() => dispatch(setPokemon([]))}>
           Unselect all
         </button>
-        <button className={styles.download}>Download</button>
+        <FileDownloader />
       </div>
     </div>
   ) : undefined;
