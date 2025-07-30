@@ -1,0 +1,24 @@
+import { setPokemon } from '../../../../shared/store/slices/pokemonSlice';
+import { useAppDispatch, useAppSelector } from '../../../../shared/store';
+import styles from '../styles/popup.module.css';
+
+export function Popup() {
+  const pokemons = useAppSelector((state) => state.pokemon.pokemon);
+  const dispatch = useAppDispatch();
+  return pokemons.length > 0 ? (
+    <div className={styles.popup}>
+      <p
+        className={
+          styles.text
+        }>{`You have chosen ${pokemons.length} pokemon(s)`}</p>
+      <div className={styles.buttonConteiner}>
+        <button
+          className={styles.remove}
+          onClick={() => dispatch(setPokemon([]))}>
+          Unselect all
+        </button>
+        <button className={styles.download}>Download</button>
+      </div>
+    </div>
+  ) : undefined;
+}

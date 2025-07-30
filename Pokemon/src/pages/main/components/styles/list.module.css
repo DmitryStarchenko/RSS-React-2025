@@ -37,6 +37,7 @@
   background-image: url('../../../../../assets/matche.png');
   background-position: center;
   background-size: contain;
+  background-repeat: no-repeat;
   cursor: pointer;
 }
 
@@ -52,5 +53,6 @@
   border: none;
   background-image: url('../../../../../assets/fire.webp');
   background-position: center;
+  background-repeat: no-repeat;
   background-size: contain;
 }

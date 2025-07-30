@@ -36,22 +36,25 @@ export function List(props: Results) {
       });
   };
 
-  useEffect(() => {
-    pokemon.map((item) => {
-      if (item.name === props.name) setIsChecked(true);
-    });
-  }, []);
-
   const handleChecked = () => {
     setIsChecked(!isChecked);
     dispatch(setPokemon([...pokemon, props]));
     if (isChecked) {
       dispatch(deletePokemon(props.name));
-    } else {
-      dispatch(setPokemon([...pokemon, props]));
     }
-    console.log(pokemon);
   };
+
+  useEffect(() => {
+    if (pokemon.length === 0) {
+      setIsChecked(false);
+    } else {
+      pokemon.map((item) => {
+        if (item.name === props.name) {
+          setIsChecked(true);
+        }
+      });
+    }
+  }, [pokemon]);
 
   useEffect(() => {
     setSearchParams(currentSearchParam);

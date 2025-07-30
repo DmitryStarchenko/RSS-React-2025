@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Pokemon } from '../../types';
-import { Card, Loader, NotFound, Search } from '.';
+import { Card, Loader, NotFound, Search, Popup } from '.';
 import { apiRequest, CardContext, useLocalStorage } from '../../shared';
 import { Outlet, useSearchParams } from 'react-router';
 
@@ -42,6 +42,7 @@ export function Main() {
       ) : (
         <Card />
       )}
+      <Popup />
     </>
   );
 }
