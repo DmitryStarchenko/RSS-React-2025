@@ -33,9 +33,12 @@ export function List(props: Results) {
   }, [setCurrentSearchParam]);
 
   return (
-    <li className={styles.listItem} onClick={(event) => handleClick(event)}>
-      <p className={styles.liName}>{props.name}</p>
-      <p className={styles.description}>{`Pokemon id: ${pokemonId}`}</p>
-    </li>
+    <div className={styles.content}>
+      <input className={styles.checkbox} type="checkbox" />
+      <li className={styles.listItem} onClick={(event) => handleClick(event)}>
+        <p className={styles.liName}>{props.name}</p>
+        <p className={styles.description}>{`Pokemon id: ${pokemonId}`}</p>
+      </li>
+    </div>
   );
 }

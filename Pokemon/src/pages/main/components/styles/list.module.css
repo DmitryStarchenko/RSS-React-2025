@@ -23,3 +23,34 @@
 .listItem:hover {
   background-color: rgba(255, 255, 0, 0.151);
 }
+
+.content {
+  display: flex;
+}
+
+.checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 8px;
+  border: none;
+  background-image: url('../../../../../public/assets/matche.png');
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.checkbox:hover {
+  border: none;
+  background-image: url('../../../../../public/assets/fire-matche.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.checkbox:checked {
+  border: none;
+  background-image: url('../../../../../assets/fire.webp');
+  background-position: center;
+  background-size: contain;
+}
