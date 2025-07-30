@@ -17,9 +17,14 @@ export const pokemonSlice = createSlice({
     setPokemon: (state, action: PayloadAction<Results[]>) => {
       state.pokemon = action.payload;
     },
+    deletePokemon: (state, action: PayloadAction<string>) => {
+      state.pokemon = state.pokemon.filter(
+        (item) => item.name !== action.payload,
+      );
+    },
   },
 });
 
-export const { setPokemon } = pokemonSlice.actions;
+export const { setPokemon, deletePokemon } = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;
