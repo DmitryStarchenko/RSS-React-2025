@@ -1,0 +1,15 @@
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 600px;
+  height: 400px;
+  border: 2px solid rgb(207, 207, 1);
+  border-radius: 20px;
+  margin: 20px 0 50px 0;
+}
+
+.errorText {
+  font-size: 40px;
+  font-weight: bold;
+}
