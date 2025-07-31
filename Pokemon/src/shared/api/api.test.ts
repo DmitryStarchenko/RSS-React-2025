@@ -30,16 +30,14 @@ describe('Page testing', () => {
   });
 
   test('respons with the pokemon', async () => {
-    const response = await fetch(
-      'https://pokeapi.co/api/v2/pokemon/pikachu?limit=40',
-    );
+    const response = await fetch('https://pokeapi.co/pikachu');
     await expect(response.json()).resolves.toEqual({
       id: 10,
-      name: 'dsfdsfdfs',
+      name: 'pikachu',
       sprites: {
         other: {
           dream_world: {
-            front_default: 'ghjgjgjh',
+            front_default: 'http://pictures.by',
           },
         },
       },

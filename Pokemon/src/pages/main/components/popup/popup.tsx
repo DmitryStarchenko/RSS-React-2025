@@ -9,6 +9,7 @@ export function Popup() {
   return pokemons.length > 0 ? (
     <div className={styles.popup}>
       <p
+        data-testid="textPopup"
         className={
           styles.text
         }>{`You have chosen ${pokemons.length} pokemon(s)`}</p>

@@ -10,9 +10,14 @@ export function Card() {
     <div className={styles.card}>
       <div className={styles.imageConteiner}>
         {' '}
-        <img className={styles.image} src={urlImage} alt={card.name} />
+        <img
+          data-testid="test-img"
+          className={styles.image}
+          src={urlImage}
+          alt={card.name}
+        />
       </div>
-      <h2>{card.name.toUpperCase()}</h2>
+      <h2 data-testid="test-h2">{card.name.toUpperCase()}</h2>
       <div className={styles.stats}>
         {card.stats.map((element) => (
           <p key={element.stat.name} className={styles.stat}>

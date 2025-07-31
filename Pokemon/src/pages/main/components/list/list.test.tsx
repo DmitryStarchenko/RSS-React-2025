@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
 import '@testing-library/jest-dom/vitest';
-import { FullList } from '.';
+import { List } from '.';
 import { Results } from 'types';
 import { CardContext, StyleContextProvider } from '../../../../shared';
 import { BrowserRouter } from 'react-router-dom';
@@ -11,17 +11,12 @@ import { store } from '../../../../shared/store';
 type ProviderProps = { children: React.ReactNode };
 
 export function MockCardContextProvider({ children }: ProviderProps) {
-  const list: Results[] = [
-    { name: 'pikachu', url: 'http://pictures.by' },
-    { name: 'pikachu', url: 'http://pictures.by' },
-  ];
   const setCurrentSearchParam = () => {};
   const setList = () => {};
   const setCard = () => {};
   const setError = () => {};
 
   const value = {
-    list,
     setList,
     setCard,
     setError,
@@ -31,19 +26,20 @@ export function MockCardContextProvider({ children }: ProviderProps) {
 }
 
 describe('card testing', () => {
-  test('full list display components', () => {
+  test('list display components', () => {
+    const list: Results = { name: 'pikachu', url: 'http://pictures.by' };
     render(
       <BrowserRouter>
         <Provider store={store}>
           <StyleContextProvider>
             <MockCardContextProvider>
-              <FullList />
+              <List {...list} />
             </MockCardContextProvider>
           </StyleContextProvider>
         </Provider>
       </BrowserRouter>,
     );
-    expect(screen.getByTestId('nameColumn')).toBeInTheDocument();
-    expect(screen.getByTestId('descriptionsColumn')).toBeInTheDocument();
+    expect(screen.getByTestId('pokemonName')).toBeInTheDocument();
+    expect(screen.getByTestId('pokemonDescription')).toBeInTheDocument();
   });
 });

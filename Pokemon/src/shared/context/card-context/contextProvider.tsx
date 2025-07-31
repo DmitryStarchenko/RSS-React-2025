@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Pokemon, Results } from '../../types';
+import { Pokemon, Results } from '../../../types';
 import { CardContext } from '.';
 
 type ProviderProps = { children: React.ReactNode };

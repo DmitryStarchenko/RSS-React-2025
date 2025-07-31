@@ -69,8 +69,12 @@ export function List(props: Results) {
         onChange={handleChecked}
       />
       <li className={styles.listItem} onClick={(event) => handleClick(event)}>
-        <p className={styles.liName}>{props.name}</p>
-        <p className={styles.description}>{`Pokemon id: ${pokemonId}`}</p>
+        <p data-testid="pokemonName" className={styles.liName}>
+          {props.name}
+        </p>
+        <p
+          data-testid="pokemonDescription"
+          className={styles.description}>{`Pokemon id: ${pokemonId}`}</p>
       </li>
     </div>
   );

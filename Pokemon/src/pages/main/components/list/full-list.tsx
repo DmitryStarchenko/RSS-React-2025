@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from '../styles/full-list.module.css';
 import { List } from '.';
 import { CardContext } from '../../../../shared';
@@ -41,10 +41,16 @@ export function FullList() {
       <main className={styles.main}>
         <div className={styles.cardList}>
           <div className={styles.headerList}>
-            <p className={styles.nameColumn}>Name</p>
-            <p className={styles.descriptionsColumn}>Descriptions</p>
+            <p data-testid="nameColumn" className={styles.nameColumn}>
+              Name
+            </p>
+            <p
+              data-testid="descriptionsColumn"
+              className={styles.descriptionsColumn}>
+              Descriptions
+            </p>
           </div>
-          {list.map((element): ReactElement => {
+          {list.map((element) => {
             return <List key={element.name} {...element} />;
           })}
         </div>

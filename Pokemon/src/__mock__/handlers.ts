@@ -13,14 +13,14 @@ export const handlers = [
       },
     ]);
   }),
-  http.get('https://pokeapi.co/api/v2/pokemon/pikachu?limit=40', () => {
+  http.get('https://pokeapi.co/pikachu', () => {
     return HttpResponse.json({
       id: 10,
-      name: 'dsfdsfdfs',
+      name: 'pikachu',
       sprites: {
         other: {
           dream_world: {
-            front_default: 'ghjgjgjh',
+            front_default: 'http://pictures.by',
           },
         },
       },

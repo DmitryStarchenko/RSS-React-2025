@@ -24,10 +24,14 @@ export function FileDownloader() {
 
   return (
     <div>
-      <button className={styles.download} onClick={handleDownload}>
+      <button
+        data-testid="buttonDownload"
+        className={styles.download}
+        onClick={handleDownload}>
         Download
       </button>
       <a
+        data-testid="linkDownload"
         ref={downloadRef}
         href={downloadUrl}
         download={`${pokemons.length}-pokemons.txt`}
