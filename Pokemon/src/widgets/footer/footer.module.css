@@ -1,0 +1,28 @@
+.footer {
+  width: 90%;
+  height: 120px;
+  margin-top: 30px;
+  padding: 20px;
+  border-top: 2px solid var(--border-color);
+}
+
+.pokebol {
+  position: absolute;
+  width: 100px;
+  animation: dws-bounce 10s linear infinite;
+}
+
+@keyframes dws-bounce {
+  0% {
+    left: 5%;
+    transform: rotate(-360deg);
+  }
+  50% {
+    left: 90%;
+    transform: rotate(360deg);
+  }
+  100% {
+    left: 5%;
+    transform: rotate(-360deg);
+  }
+}
