@@ -3,5 +3,4 @@ import { App } from './src/app';
 import './styles.css';
 
 export const root = document.getElementById('root');
-
-ReactDOM.createRoot(root).render(<App />);
+if (root instanceof HTMLElement) ReactDOM.createRoot(root).render(<App />);
