@@ -7,7 +7,7 @@ import { Outlet, useSearchParams } from 'react-router';
 export function Main() {
   const KEY = 'SavePokemon';
   const [value] = useLocalStorage('', KEY);
-  const { setList, setCard, setIsLoading, error, isLoading } =
+  const { card, setList, setCard, setIsLoading, error, isLoading } =
     useContext(CardContext);
   const [searchParam] = useSearchParams();
   const [cardUrl, setCardUrl] = useState('');
@@ -39,8 +39,10 @@ export function Main() {
         <Loader />
       ) : cardUrl === '' ? (
         <Outlet />
-      ) : (
+      ) : card ? (
         <Card />
+      ) : (
+        <Loader />
       )}
       <Popup />
     </>

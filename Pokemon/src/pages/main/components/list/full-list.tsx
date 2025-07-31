@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import styles from '../styles/full-list.module.css';
 import { List } from '.';
 import { CardContext } from '../../../../shared';
@@ -16,7 +16,11 @@ export function FullList() {
     setIsLoadingDetails,
   } = useContext(CardContext);
   const [searchParam] = useSearchParams();
-  const pageParam = searchParam.get('page');
+  const pageParam = searchParam.get('page') || undefined;
+
+  useEffect(() => {
+    if (!pageParam) setCardView(false);
+  }, [pageParam]);
 
   const viewDetailsCard = () => {
     return (
