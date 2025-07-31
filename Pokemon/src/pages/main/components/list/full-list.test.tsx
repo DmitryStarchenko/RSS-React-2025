@@ -19,6 +19,7 @@ export function MockCardContextProvider({ children }: ProviderProps) {
   const setList = () => {};
   const setCard = () => {};
   const setError = () => {};
+  const setCardView = () => {};
 
   const value = {
     list,
@@ -26,6 +27,7 @@ export function MockCardContextProvider({ children }: ProviderProps) {
     setCard,
     setError,
     setCurrentSearchParam,
+    setCardView,
   };
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;
 }
