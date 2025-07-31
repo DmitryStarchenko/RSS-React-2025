@@ -12,7 +12,7 @@ import {
 export function List(props: Results) {
   const {
     setCard,
-    setIsLoading,
+    setIsLoadingDetails,
     currentSearchParam,
     setCurrentSearchParam,
     setCardView,
@@ -25,14 +25,14 @@ export function List(props: Results) {
   const pokemon = useAppSelector((state) => state.pokemon.pokemon);
 
   const handleClick = (event) => {
+    setCardView(true);
     event.preventDefault();
     setCurrentSearchParam({ ...currentSearchParam, details: `${props.name}` });
     apiRequest(props.name)
       .then((response) => response.json())
       .then((response: Pokemon) => {
         setCard(response);
-        setIsLoading(false);
-        setCardView(true);
+        setIsLoadingDetails(false);
       });
   };
 

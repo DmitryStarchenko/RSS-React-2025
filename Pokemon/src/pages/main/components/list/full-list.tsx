@@ -1,32 +1,34 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import styles from '../styles/full-list.module.css';
 import { List } from '.';
 import { CardContext } from '../../../../shared';
 import { Pagination } from '../pagination';
-import { Card, Loader } from '..';
+import { Card } from '..';
 import { useSearchParams } from 'react-router';
 
 export function FullList() {
-  const { list, card, cardView, setCardView, setCurrentSearchParam } =
-    useContext(CardContext);
+  const {
+    list,
+    cardView,
+    setCardView,
+    setCurrentSearchParam,
+    isLoadingDetails,
+    setIsLoadingDetails,
+  } = useContext(CardContext);
   const [searchParam] = useSearchParams();
-  const [isLoadingCard, setIsLoadingCard] = useState(true);
   const pageParam = searchParam.get('page');
-
-  useEffect(() => {
-    setIsLoadingCard(false);
-  }, [card]);
 
   const viewDetailsCard = () => {
     return (
       <>
         <div className={styles.detailsContent}>
-          {isLoadingCard ? <Loader /> : <Card />}
+          <Card />
           <button
             className={styles.buttonClose}
             onClick={() => {
               setCardView(false);
               setCurrentSearchParam({ page: `${pageParam}` });
+              setIsLoadingDetails(true);
             }}>
             CLOSE
           </button>
@@ -54,7 +56,13 @@ export function FullList() {
             return <List key={element.name} {...element} />;
           })}
         </div>
-        {cardView ? viewDetailsCard() : undefined}
+        {cardView ? (
+          isLoadingDetails ? (
+            <h1 className={styles.loader}>Loading...</h1>
+          ) : (
+            viewDetailsCard()
+          )
+        ) : undefined}
       </main>
     </>
   );

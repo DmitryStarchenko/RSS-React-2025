@@ -46,3 +46,13 @@
   transform: rotate(-90deg);
   margin-top: 50px;
 }
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  width: 401px;
+  top: 50px;
+  height: 100%;
+}
