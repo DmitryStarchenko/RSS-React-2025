@@ -4,8 +4,7 @@ import '@testing-library/jest-dom/vitest';
 import { Pagination } from './pagination';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from '../../../../shared/store';
-import { CardContext, StyleContextProvider } from '../../../../shared';
+import { CardContext, StyleContextProvider, store } from '../../../../shared';
 
 type ProviderProps = { children: React.ReactNode };
 

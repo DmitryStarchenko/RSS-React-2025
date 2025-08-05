@@ -1,5 +1,8 @@
 import { setPokemon } from '../../../../shared/store/slices/pokemonSlice';
-import { useAppDispatch, useAppSelector } from '../../../../shared/store';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../shared/store/configureStore';
 import styles from '../styles/popup.module.css';
 import { FileDownloader } from './file-downloader';
 

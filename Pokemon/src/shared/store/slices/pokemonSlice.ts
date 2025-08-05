@@ -27,4 +27,4 @@ export const pokemonSlice = createSlice({
 
 export const { setPokemon, deletePokemon } = pokemonSlice.actions;
 
-export default pokemonSlice.reducer;
+export const pokemonReducer = pokemonSlice.reducer;

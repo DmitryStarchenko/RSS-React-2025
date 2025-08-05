@@ -1,12 +1,11 @@
+import '@testing-library/jest-dom/vitest';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
-import '@testing-library/jest-dom/vitest';
-import { FullList } from '.';
-import { Results } from 'types';
-import { CardContext, StyleContextProvider } from '../../../../shared';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from '../../../../shared/store';
+import { FullList } from '.';
+import { Results } from '../../../../types';
+import { CardContext, StyleContextProvider, store } from '../../../../shared';
 
 type ProviderProps = { children: React.ReactNode };
 

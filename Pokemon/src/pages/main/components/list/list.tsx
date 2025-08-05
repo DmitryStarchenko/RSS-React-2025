@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router';
 import styles from '../styles/list.module.css';
 import { Results } from '../../../../types';
-import { CardContext } from '../../../../shared';
-import { useSearchParams } from 'react-router';
-import { useAppDispatch, useAppSelector } from '../../../../shared/store';
 import {
+  CardContext,
+  useAppDispatch,
+  useAppSelector,
   deletePokemon,
   setPokemon,
-} from '../../../../shared/store/slices/pokemonSlice';
+} from '../../../../shared';
 
 export function List(props: Results) {
   const {

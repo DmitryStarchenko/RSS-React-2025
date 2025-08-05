@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { Card, Loader, NotFound, Search, Popup } from '.';
-import { CardContext } from '../../shared';
 import { Outlet, useSearchParams } from 'react-router';
-import { useGetPokemonQuery } from '../../shared/store/services/api';
+import { Card, Loader, NotFound, Search, Popup } from '.';
+import { CardContext, useGetPokemonQuery } from '../../shared';
 
 export function Main() {
   const { card, setList, setCard, paramsQuery, setIsLoadingDetails } =

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useAppSelector } from '../../../../shared/store';
+import { useAppSelector } from '../../../../shared';
 import styles from '../styles/popup.module.css';
 
 export function FileDownloader() {

@@ -1,11 +1,10 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, test, vi } from 'vitest';
 import '@testing-library/jest-dom/vitest';
-import { Search } from './search';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from '../../../../shared/store';
-import { CardContext, StyleContextProvider } from '../../../../shared';
+import { describe, expect, test, vi } from 'vitest';
+import { Search } from './search';
+import { CardContext, StyleContextProvider, store } from '../../../../shared';
 
 type ProviderProps = { children: React.ReactNode };
 

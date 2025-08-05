@@ -1,7 +1,7 @@
-import styles from '../styles/search.module.css';
-import { useLocalStorage, CardContext } from '../../../../shared';
 import { useContext } from 'react';
 import { useSearchParams } from 'react-router';
+import styles from '../styles/search.module.css';
+import { useLocalStorage, CardContext } from '../../../../shared';
 
 export function Search() {
   const KEY = 'SavePokemon';

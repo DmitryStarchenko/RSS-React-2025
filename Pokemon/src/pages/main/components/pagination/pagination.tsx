@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import styles from '../styles/pagination.module.css';
-import { useContext } from 'react';
-import { CardContext } from '../../../../shared';
+import { useEffect, useState, useContext } from 'react';
 import { useSearchParams } from 'react-router';
+import styles from '../styles/pagination.module.css';
+import { CardContext } from '../../../../shared';
 
 export function Pagination() {
   const MAX_PAGE = 15;
