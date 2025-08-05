@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router';
 import styles from '../styles/list.module.css';
 import { Results } from '../../../../types';
 import {
@@ -17,10 +16,8 @@ export function List(props: Results) {
     setCurrentSearchParam,
     setCardView,
   } = useContext(CardContext);
-  const [searchParams, setSearchParams] = useSearchParams();
   const [isChecked, setIsChecked] = useState(false);
   const pokemonId = props.url.slice(34).slice(0, -1);
-  searchParams.get('details');
   const dispatch = useAppDispatch();
   const pokemon = useAppSelector((state) => state.pokemon.pokemon);
   const paramsQuery = {
@@ -54,10 +51,6 @@ export function List(props: Results) {
       });
     }
   }, [pokemon]);
-
-  useEffect(() => {
-    setSearchParams(currentSearchParam);
-  }, [setCurrentSearchParam]);
 
   return (
     <div className={styles.content}>
