@@ -12,13 +12,13 @@ export function MockCardContextProvider({ children }: ProviderProps) {
   const setCurrentSearchParam = () => {};
   const setList = () => {};
   const setCard = () => {};
-  const setError = () => {};
+  const setParamsQuery = () => {};
   const setCardView = () => {};
 
   const value = {
     setList,
     setCard,
-    setError,
+    setParamsQuery,
     setCurrentSearchParam,
     setCardView,
   };
