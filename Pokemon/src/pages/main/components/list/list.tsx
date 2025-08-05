@@ -60,7 +60,7 @@ export function List(props: Results) {
         checked={isChecked}
         onChange={handleChecked}
       />
-      <li className={styles.listItem} onClick={(event) => handleClick(event)}>
+      <li className={styles.listItem} onClick={handleClick}>
         <p data-testid="pokemonName" className={styles.liName}>
           {props.name}
         </p>

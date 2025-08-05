@@ -63,9 +63,7 @@ export function Pagination() {
         data-testid="buttonLeft"
         className={styles.buttonLeft}
         disabled={isLeftButtonDisabled}
-        onClick={() => {
-          decrement();
-        }}>
+        onClick={decrement}>
         {'<<<'}
       </button>
       <span className={styles.numberPage}>{`Page ${numberPage}`}</span>
@@ -73,9 +71,7 @@ export function Pagination() {
         data-testid="buttonRight"
         className={styles.buttonRight}
         disabled={isRightButtonDisabled}
-        onClick={() => {
-          increment();
-        }}>
+        onClick={increment}>
         {'>>>'}
       </button>
     </div>

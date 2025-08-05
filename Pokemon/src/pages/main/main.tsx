@@ -12,33 +12,30 @@ export function Main() {
 
   useEffect(() => {
     if (!isLoading) {
-      if (Array.isArray(data.results)) {
+      if (data.results) {
         setList(data.results);
       } else {
         setCard(data);
         setIsLoadingDetails(false);
       }
     }
-  }, [data, isLoading, setCard, setList]);
+  }, [data, isLoading]);
 
   useEffect(() => {
     setCardUrl(searchParam.get('card') || '');
   }, [searchParam]);
 
+  const renderContent = () => {
+    if (error) return <NotFound />;
+    if (isLoading) return <Loader />;
+    if (cardUrl === '') return <Outlet />;
+    if (card) return <Card />;
+  };
+
   return (
     <>
       <Search />
-      {error ? (
-        <NotFound />
-      ) : isLoading ? (
-        <Loader />
-      ) : cardUrl === '' ? (
-        <Outlet />
-      ) : card ? (
-        <Card />
-      ) : (
-        <Loader />
-      )}
+      {renderContent()}
       <Popup />
     </>
   );
