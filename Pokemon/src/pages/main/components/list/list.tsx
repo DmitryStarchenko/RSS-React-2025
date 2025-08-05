@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import styles from '../styles/list.module.css';
-import { Pokemon, Results } from '../../../../types';
-import { apiRequest, CardContext } from '../../../../shared';
+import { Results } from '../../../../types';
+import { CardContext } from '../../../../shared';
 import { useSearchParams } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../../../shared/store';
 import {
@@ -11,8 +11,7 @@ import {
 
 export function List(props: Results) {
   const {
-    setCard,
-    setIsLoadingDetails,
+    setParamsQuery,
     currentSearchParam,
     setCurrentSearchParam,
     setCardView,
@@ -23,17 +22,16 @@ export function List(props: Results) {
   searchParams.get('details');
   const dispatch = useAppDispatch();
   const pokemon = useAppSelector((state) => state.pokemon.pokemon);
+  const paramsQuery = {
+    name: props.name,
+    pageNumber: undefined,
+  };
 
   const handleClick = (event) => {
     setCardView(true);
     event.preventDefault();
     setCurrentSearchParam({ ...currentSearchParam, details: `${props.name}` });
-    apiRequest(props.name)
-      .then((response) => response.json())
-      .then((response: Pokemon) => {
-        setCard(response);
-        setIsLoadingDetails(false);
-      });
+    setParamsQuery(paramsQuery);
   };
 
   const handleChecked = () => {

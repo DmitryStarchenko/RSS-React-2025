@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import pokemonReducer from './slices/pokemonSlice';
+import { pokemonApi } from './services/api';
 
 export const store = configureStore({
   reducer: {
     pokemon: pokemonReducer,
+    [pokemonApi.reducerPath]: pokemonApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(pokemonApi.middleware),
 });
 
 type RootState = ReturnType<typeof store.getState>;

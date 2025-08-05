@@ -1,30 +1,26 @@
 import { useContext, useEffect, useState } from 'react';
-import { Pokemon } from '../../types';
 import { Card, Loader, NotFound, Search, Popup } from '.';
-import { apiRequest, CardContext, useLocalStorage } from '../../shared';
+import { CardContext } from '../../shared';
 import { Outlet, useSearchParams } from 'react-router';
+import { useGetPokemonQuery } from '../../shared/store/services/api';
 
 export function Main() {
-  const KEY = 'SavePokemon';
-  const [value] = useLocalStorage('', KEY);
-  const { card, setList, setCard, setIsLoading, error, isLoading } =
+  const { card, setList, setCard, paramsQuery, setIsLoadingDetails } =
     useContext(CardContext);
   const [searchParam] = useSearchParams();
   const [cardUrl, setCardUrl] = useState('');
+  const { data, error, isLoading } = useGetPokemonQuery(paramsQuery);
 
   useEffect(() => {
-    apiRequest(typeof value === 'string' ? value : '')
-      .then((response) => response.json())
-      .then((response: Pokemon) => {
-        if (value && response) {
-          setCard(response);
-          setIsLoading(false);
-        } else {
-          setList(response.results);
-          setIsLoading(false);
-        }
-      });
-  }, []);
+    if (!isLoading) {
+      if (Array.isArray(data.results)) {
+        setList(data.results);
+      } else {
+        setCard(data);
+        setIsLoadingDetails(false);
+      }
+    }
+  }, [data, isLoading, setCard, setList]);
 
   useEffect(() => {
     setCardUrl(searchParam.get('card') || '');

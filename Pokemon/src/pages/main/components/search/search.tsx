@@ -1,9 +1,5 @@
 import styles from '../styles/search.module.css';
-import {
-  handleSearchRequest,
-  useLocalStorage,
-  CardContext,
-} from '../../../../shared';
+import { useLocalStorage, CardContext } from '../../../../shared';
 import { useContext } from 'react';
 import { useSearchParams } from 'react-router';
 
@@ -11,17 +7,15 @@ export function Search() {
   const KEY = 'SavePokemon';
   const [value, setValue] = useLocalStorage('', KEY);
   const [searchParam, setSearchParam] = useSearchParams();
-  const { setList, setCard, setError, setCurrentSearchParam } =
-    useContext(CardContext);
-  const props = {
-    setList,
-    setCard,
-    setError,
-  };
+  const { setCurrentSearchParam, setParamsQuery } = useContext(CardContext);
   searchParam.get('page');
+  const paramsQuery = {
+    name: typeof value === 'string' ? value : '',
+    pageNumber: undefined,
+  };
 
   const handleSearch = () => {
-    handleSearchRequest(typeof value === 'string' ? value : '', 0, props);
+    setParamsQuery(paramsQuery);
     if (value === '') {
       setCurrentSearchParam('');
       setSearchParam('');

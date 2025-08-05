@@ -34,7 +34,7 @@ export function FileDownloader() {
         data-testid="linkDownload"
         ref={downloadRef}
         href={downloadUrl}
-        download={`${pokemons.length}-pokemons.txt`}
+        download={`${pokemons.length}-pokemons.csv`}
         style={{ display: 'none' }}>
         Download
       </a>

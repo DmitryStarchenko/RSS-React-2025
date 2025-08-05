@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import styles from '../styles/pagination.module.css';
-import { handleSearchRequest } from '../../../../shared';
 import { useContext } from 'react';
 import { CardContext } from '../../../../shared';
 import { useSearchParams } from 'react-router';
@@ -14,13 +13,16 @@ export function Pagination() {
   const [isRightButtonDisabled, setIsRightButtonDisabled] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const {
-    setList,
-    setCard,
-    setError,
     currentSearchParam,
     setCurrentSearchParam,
     setCardView,
+    setParamsQuery,
   } = useContext(CardContext);
+
+  const paramsQuery = {
+    name: '',
+    pageNumber: (numberPage - 1) * 40,
+  };
 
   const increment = () => {
     setNumberPage(numberPage + 1);
@@ -38,12 +40,6 @@ export function Pagination() {
   }, []);
 
   useEffect(() => {
-    const props = {
-      setList,
-      setCard,
-      setError,
-    };
-    handleSearchRequest('', numberPage - 1, props);
     if (numberPage === MIN_PAGE) {
       setIsLeftButtonDisabled(true);
     } else {
@@ -54,10 +50,8 @@ export function Pagination() {
     } else {
       setIsRightButtonDisabled(false);
     }
-  }, [setCard, setError, setList, numberPage]);
-
-  useEffect(() => {
     setCurrentSearchParam({ page: `${numberPage}` });
+    setParamsQuery(paramsQuery);
   }, [numberPage]);
 
   useEffect(() => {
