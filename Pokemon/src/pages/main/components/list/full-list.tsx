@@ -21,18 +21,18 @@ export function FullList() {
     if (!pageParam) setCardView(false);
   }, [pageParam]);
 
+  const handleClick = () => {
+    setCardView(false);
+    setCurrentSearchParam({ page: `${pageParam}` });
+    setIsLoadingDetails(true);
+  };
+
   const viewDetailsCard = () => {
     return (
       <>
         <div className={styles.detailsContent}>
           <Card />
-          <button
-            className={styles.buttonClose}
-            onClick={() => {
-              setCardView(false);
-              setCurrentSearchParam({ page: `${pageParam}` });
-              setIsLoadingDetails(true);
-            }}>
+          <button className={styles.buttonClose} onClick={handleClick}>
             CLOSE
           </button>
         </div>

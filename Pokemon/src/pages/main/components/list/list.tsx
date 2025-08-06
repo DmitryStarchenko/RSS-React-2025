@@ -10,6 +10,8 @@ import {
 } from '../../../../shared';
 
 export function List(props: Results) {
+  const sliceLeft = 34;
+  const sliceRight = -1;
   const {
     setParamsQuery,
     currentSearchParam,
@@ -17,7 +19,7 @@ export function List(props: Results) {
     setCardView,
   } = useContext(CardContext);
   const [isChecked, setIsChecked] = useState(false);
-  const pokemonId = props.url.slice(34).slice(0, -1);
+  const pokemonId = props.url.slice(sliceLeft).slice(0, sliceRight);
   const dispatch = useAppDispatch();
   const pokemon = useAppSelector((state) => state.pokemon.pokemon);
   const paramsQuery = {

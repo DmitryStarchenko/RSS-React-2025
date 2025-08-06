@@ -18,6 +18,12 @@ body {
 
 .logo {
   width: 250px;
+  height: 250px;
+  background-image: var(--logo);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
 }
 
 .dialogBuble {

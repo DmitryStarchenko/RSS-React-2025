@@ -7,7 +7,7 @@
 }
 
 .imageConteiner {
-  border-bottom: 2px solid var(--main-color);
+  border-bottom: 2px solid var(--border-color);
   padding: 10px;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .stats {
-  border-top: 2px solid var(--main-color);
+  border-top: 2px solid var(--border-color);
   padding: 10px;
 }
 

@@ -14,6 +14,11 @@ export function Header() {
     dispatch(pokemonApi.util.resetApiState());
   };
 
+  const handleChangeTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+    changeTheme();
+  };
+
   return (
     <header className={styles.header}>
       <button className={styles.resetCache} onClick={handleResetCache}>
@@ -21,11 +26,7 @@ export function Header() {
       </button>
       <div className={styles.conteinerLogo}>
         <NavLink to="">
-          <img
-            className={styles.logo}
-            src="../../assets/Pikachu.webp"
-            alt="pikachu"
-          />
+          <div className={styles.logo}></div>
         </NavLink>
         <NavLink to="/about">
           <img
@@ -35,12 +36,7 @@ export function Header() {
           />
         </NavLink>
       </div>
-      <div
-        className={styles.iconMode}
-        onClick={() => {
-          setIsDarkTheme(!isDarkTheme);
-          changeTheme();
-        }}></div>
+      <div className={styles.iconMode} onClick={handleChangeTheme}></div>
     </header>
   );
 }
