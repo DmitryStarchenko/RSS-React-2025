@@ -16,7 +16,7 @@ export function Popup() {
         className={
           styles.text
         }>{`You have chosen ${pokemons.length} pokemon(s)`}</p>
-      <div className={styles.buttonConteiner}>
+      <div className={styles.buttonContainer}>
         <button
           className={styles.remove}
           onClick={() => dispatch(setPokemon([]))}>

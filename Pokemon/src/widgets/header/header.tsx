@@ -24,13 +24,13 @@ export function Header() {
       <button className={styles.resetCache} onClick={handleResetCache}>
         Reset Cache
       </button>
-      <div className={styles.conteinerLogo}>
+      <div className={styles.containerLogo}>
         <NavLink to="">
           <div className={styles.logo}></div>
         </NavLink>
         <NavLink to="/about">
           <img
-            className={styles.dialogBuble}
+            className={styles.dialogBubble}
             src="../../../assets/dialogue-bubble.png"
             alt="dialogue-bubble"
           />
