@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from 'react';
 import { Outlet, useSearchParams } from 'react-router';
 import { Card, Loader, NotFound, Search, Popup } from '.';
 import { CardContext, useGetPokemonQuery } from '../../shared';
+import styles from './main.module.css';
 
 export function Main() {
   const { card, setList, setCard, paramsQuery, setIsLoadingDetails } =
     useContext(CardContext);
   const [searchParam] = useSearchParams();
   const [cardUrl, setCardUrl] = useState('');
-  const { data, error, isLoading } = useGetPokemonQuery(paramsQuery);
+  const { data, error, isLoading, refetch } = useGetPokemonQuery(paramsQuery);
 
   useEffect(() => {
     if (!isLoading) {
@@ -35,6 +36,9 @@ export function Main() {
   return (
     <>
       <Search />
+      <button className={styles.refetch} onClick={() => refetch()}>
+        Refetch
+      </button>
       {renderContent()}
       <Popup />
     </>
