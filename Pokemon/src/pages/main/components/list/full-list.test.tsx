@@ -1,11 +1,11 @@
 import '@testing-library/jest-dom/vitest';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
-import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { FullList } from '.';
 import { Results } from '../../../../types';
 import { CardContext, StyleContextProvider, store } from '../../../../shared';
+import { BrowserRouter, Route, Routes } from 'react-router';
 
 type ProviderProps = { children: React.ReactNode };
 
@@ -31,18 +31,20 @@ export function MockCardContextProvider({ children }: ProviderProps) {
   return <CardContext.Provider value={value}>{children}</CardContext.Provider>;
 }
 
-describe('card testing', () => {
+describe('full list testing', () => {
   test('full list display components', () => {
     render(
-      <BrowserRouter>
-        <Provider store={store}>
-          <StyleContextProvider>
-            <MockCardContextProvider>
-              <FullList />
-            </MockCardContextProvider>
-          </StyleContextProvider>
-        </Provider>
-      </BrowserRouter>,
+      <Provider store={store}>
+        <StyleContextProvider>
+          <MockCardContextProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<FullList />} />
+              </Routes>
+            </BrowserRouter>
+          </MockCardContextProvider>
+        </StyleContextProvider>
+      </Provider>,
     );
     expect(screen.getByTestId('nameColumn')).toBeInTheDocument();
     expect(screen.getByTestId('descriptionsColumn')).toBeInTheDocument();

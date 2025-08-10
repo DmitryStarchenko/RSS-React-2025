@@ -2,9 +2,9 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 import { Pagination } from './pagination';
-import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { CardContext, StyleContextProvider, store } from '../../../../shared';
+import { BrowserRouter } from 'react-router';
 
 type ProviderProps = { children: React.ReactNode };
 
