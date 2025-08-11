@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+}
+
+.conteinerLogo {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  position: relative;
+}
+
+.logo {
+  width: 250px;
+}
+
+.dialogBuble {
+  position: absolute;
+  width: 170px;
+  height: 120px;
+  top: 10px;
+  right: 200px;
+  z-index: 2;
+}
+
+.iconMode {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  background-image: var(--icon-mode);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
