@@ -8,7 +8,7 @@ export function Card() {
 
   return (
     <div className={styles.card}>
-      <div className={styles.imageConteiner}>
+      <div className={styles.imageContainer}>
         {' '}
         <img
           data-testid="test-img"

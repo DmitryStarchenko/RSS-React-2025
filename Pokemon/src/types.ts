@@ -32,3 +32,8 @@ export interface Results {
   name: string;
   url: string;
 }
+
+export interface ParamsQuery {
+  name: string | undefined;
+  pageNumber: number | undefined;
+}

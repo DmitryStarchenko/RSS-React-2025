@@ -40,7 +40,7 @@
 .buttonClose {
   height: 20px;
   border: none;
-  background-color: var(--tarnsparent);
+  background-color: var(--transparent);
   color: var(--text-color);
   cursor: pointer;
   transform: rotate(-90deg);

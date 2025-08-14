@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useAppSelector } from '../../../../shared/store';
+import { useAppSelector } from '../../../../shared';
 import styles from '../styles/popup.module.css';
 
 export function FileDownloader() {
@@ -34,7 +34,7 @@ export function FileDownloader() {
         data-testid="linkDownload"
         ref={downloadRef}
         href={downloadUrl}
-        download={`${pokemons.length}-pokemons.txt`}
+        download={`${pokemons.length}-pokemons.csv`}
         style={{ display: 'none' }}>
         Download
       </a>

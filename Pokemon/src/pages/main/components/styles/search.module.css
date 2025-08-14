@@ -15,6 +15,10 @@
   background-color: var(--transparent);
 }
 
+.input::placeholder {
+  color: var(--placeholder);
+}
+
 .buttonSearch {
   width: 100px;
   height: 40px;

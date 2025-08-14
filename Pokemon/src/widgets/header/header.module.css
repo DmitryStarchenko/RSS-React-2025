@@ -9,7 +9,7 @@ body {
   width: 70%;
 }
 
-.conteinerLogo {
+.containerLogo {
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
@@ -18,9 +18,15 @@ body {
 
 .logo {
   width: 250px;
+  height: 250px;
+  background-image: var(--logo);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
 }
 
-.dialogBuble {
+.dialogBubble {
   position: absolute;
   width: 170px;
   height: 120px;
@@ -40,4 +46,21 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+}
+
+.resetCache {
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  width: 100px;
+  height: 40px;
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  background-color: var(--main-color);
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.resetCache:hover {
+  background-color: var(--hover-color);
 }

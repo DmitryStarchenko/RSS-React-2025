@@ -1,5 +1,5 @@
-import { FullList, Main, NotFound } from '../pages/main';
 import { Navigate, Route, Routes } from 'react-router';
+import { FullList, Main, NotFound } from '../pages/main';
 import { About } from '../pages/about';
 
 export function Router() {

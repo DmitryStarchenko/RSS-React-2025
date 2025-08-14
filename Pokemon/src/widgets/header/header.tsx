@@ -1,36 +1,42 @@
 import { useContext } from 'react';
 import styles from './header.module.css';
 import { NavLink } from 'react-router';
-import { StyleContext } from '../../shared';
+import { pokemonApi, StyleContext } from '../../shared';
 import { changeTheme } from '../../shared';
+import { useDispatch } from 'react-redux';
 
 export function Header() {
   const { isDarkTheme, setIsDarkTheme } = useContext(StyleContext);
+  const dispatch = useDispatch();
+
+  const handleResetCache = (event) => {
+    event.preventDefault();
+    dispatch(pokemonApi.util.resetApiState());
+  };
+
+  const handleChangeTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+    changeTheme();
+  };
 
   return (
     <header className={styles.header}>
-      <div className={styles.conteinerLogo}>
+      <button className={styles.resetCache} onClick={handleResetCache}>
+        Reset Cache
+      </button>
+      <div className={styles.containerLogo}>
         <NavLink to="">
-          <img
-            className={styles.logo}
-            src="../../assets/Pikachu.webp"
-            alt="pikachu"
-          />
+          <div className={styles.logo}></div>
         </NavLink>
         <NavLink to="/about">
           <img
-            className={styles.dialogBuble}
+            className={styles.dialogBubble}
             src="../../../assets/dialogue-bubble.png"
             alt="dialogue-bubble"
           />
         </NavLink>
       </div>
-      <div
-        className={styles.iconMode}
-        onClick={() => {
-          setIsDarkTheme(!isDarkTheme);
-          changeTheme();
-        }}></div>
+      <div className={styles.iconMode} onClick={handleChangeTheme}></div>
     </header>
   );
 }

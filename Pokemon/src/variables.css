@@ -7,17 +7,21 @@
   --hover-color: rgba(255, 255, 0, 0.151);
   --popup-background-color: rgb(250, 252, 166);
   --disabled-color: rgb(212, 212, 71);
-  --icon-mode: url('../../../assets/icon-dark-mode.png');
+  --icon-mode: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/103.svg');
+  --logo: url('../../../assets/Pikachu.webp');
+  --placeholder: rgb(158, 158, 158);
 }
 
 .darkTheme {
-  --main-background-color: rgba(46, 46, 0, 0.493);
-  --border-color: rgb(255, 255, 93);
-  --main-color: rgb(158, 158, 2);
-  --text-color: rgb(255, 255, 1);
+  --main-background-color: rgba(6, 70, 0, 0.63);
+  --border-color: rgb(30, 255, 0);
+  --main-color: rgb(15, 158, 2);
+  --text-color: rgb(248, 243, 165);
   --transparent: rgba(0, 0, 0, 0);
-  --hover-color: rgba(252, 252, 97, 0.432);
-  --popup-background-color: rgb(135, 138, 1);
-  --disabled-color: rgb(212, 212, 71);
-  --icon-mode: url('../../../assets/icon-light-mode.png');
+  --hover-color: rgb(15, 179, 0);
+  --popup-background-color: rgb(24, 138, 1);
+  --disabled-color: rgb(94, 212, 71);
+  --icon-mode: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg');
+  --logo: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/103.svg');
+  --placeholder: rgb(18, 110, 0);
 }

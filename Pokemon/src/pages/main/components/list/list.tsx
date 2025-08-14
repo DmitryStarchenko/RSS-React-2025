@@ -1,39 +1,37 @@
 import { useContext, useEffect, useState } from 'react';
 import styles from '../styles/list.module.css';
-import { Pokemon, Results } from '../../../../types';
-import { apiRequest, CardContext } from '../../../../shared';
-import { useSearchParams } from 'react-router';
-import { useAppDispatch, useAppSelector } from '../../../../shared/store';
+import { Results } from '../../../../types';
 import {
+  CardContext,
+  useAppDispatch,
+  useAppSelector,
   deletePokemon,
   setPokemon,
-} from '../../../../shared/store/slices/pokemonSlice';
+} from '../../../../shared';
 
 export function List(props: Results) {
+  const sliceLeft = 34;
+  const sliceRight = -1;
   const {
-    setCard,
-    setIsLoadingDetails,
+    setParamsQuery,
     currentSearchParam,
     setCurrentSearchParam,
     setCardView,
   } = useContext(CardContext);
-  const [searchParams, setSearchParams] = useSearchParams();
   const [isChecked, setIsChecked] = useState(false);
-  const pokemonId = props.url.slice(34).slice(0, -1);
-  searchParams.get('details');
+  const pokemonId = props.url.slice(sliceLeft).slice(0, sliceRight);
   const dispatch = useAppDispatch();
   const pokemon = useAppSelector((state) => state.pokemon.pokemon);
+  const paramsQuery = {
+    name: props.name,
+    pageNumber: undefined,
+  };
 
   const handleClick = (event) => {
     setCardView(true);
     event.preventDefault();
     setCurrentSearchParam({ ...currentSearchParam, details: `${props.name}` });
-    apiRequest(props.name)
-      .then((response) => response.json())
-      .then((response: Pokemon) => {
-        setCard(response);
-        setIsLoadingDetails(false);
-      });
+    setParamsQuery(paramsQuery);
   };
 
   const handleChecked = () => {
@@ -56,10 +54,6 @@ export function List(props: Results) {
     }
   }, [pokemon]);
 
-  useEffect(() => {
-    setSearchParams(currentSearchParam);
-  }, [setCurrentSearchParam]);
-
   return (
     <div className={styles.content}>
       <input
@@ -68,7 +62,7 @@ export function List(props: Results) {
         checked={isChecked}
         onChange={handleChecked}
       />
-      <li className={styles.listItem} onClick={(event) => handleClick(event)}>
+      <li className={styles.listItem} onClick={handleClick}>
         <p data-testid="pokemonName" className={styles.liName}>
           {props.name}
         </p>

@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
-import styles from '../styles/pagination.module.css';
-import { handleSearchRequest } from '../../../../shared';
-import { useContext } from 'react';
-import { CardContext } from '../../../../shared';
+import { useEffect, useState, useContext } from 'react';
 import { useSearchParams } from 'react-router';
+import styles from '../styles/pagination.module.css';
+import { CardContext } from '../../../../shared';
 
 export function Pagination() {
   const MAX_PAGE = 15;
@@ -14,13 +12,16 @@ export function Pagination() {
   const [isRightButtonDisabled, setIsRightButtonDisabled] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const {
-    setList,
-    setCard,
-    setError,
     currentSearchParam,
     setCurrentSearchParam,
     setCardView,
+    setParamsQuery,
   } = useContext(CardContext);
+
+  const paramsQuery = {
+    name: '',
+    pageNumber: (numberPage - 1) * 40,
+  };
 
   const increment = () => {
     setNumberPage(numberPage + 1);
@@ -38,12 +39,6 @@ export function Pagination() {
   }, []);
 
   useEffect(() => {
-    const props = {
-      setList,
-      setCard,
-      setError,
-    };
-    handleSearchRequest('', numberPage - 1, props);
     if (numberPage === MIN_PAGE) {
       setIsLeftButtonDisabled(true);
     } else {
@@ -54,10 +49,8 @@ export function Pagination() {
     } else {
       setIsRightButtonDisabled(false);
     }
-  }, [setCard, setError, setList, numberPage]);
-
-  useEffect(() => {
     setCurrentSearchParam({ page: `${numberPage}` });
+    setParamsQuery(paramsQuery);
   }, [numberPage]);
 
   useEffect(() => {
@@ -70,9 +63,7 @@ export function Pagination() {
         data-testid="buttonLeft"
         className={styles.buttonLeft}
         disabled={isLeftButtonDisabled}
-        onClick={() => {
-          decrement();
-        }}>
+        onClick={decrement}>
         {'<<<'}
       </button>
       <span className={styles.numberPage}>{`Page ${numberPage}`}</span>
@@ -80,9 +71,7 @@ export function Pagination() {
         data-testid="buttonRight"
         className={styles.buttonRight}
         disabled={isRightButtonDisabled}
-        onClick={() => {
-          increment();
-        }}>
+        onClick={increment}>
         {'>>>'}
       </button>
     </div>

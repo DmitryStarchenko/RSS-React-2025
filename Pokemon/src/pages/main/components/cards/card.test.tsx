@@ -2,11 +2,10 @@ import '@testing-library/jest-dom/vitest';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
-import { Card } from './card';
-import { CardContext, StyleContextProvider } from '../../../../shared';
 import { Provider } from 'react-redux';
-import { store } from '../../../../shared/store';
-import { Pokemon } from 'types';
+import { Card } from './card';
+import { CardContext, StyleContextProvider, store } from '../../../../shared';
+import { Pokemon } from '../../../../types';
 
 type ProviderProps = { children: React.ReactNode };
 

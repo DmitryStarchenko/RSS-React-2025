@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 import { describe, test } from 'vitest';
-import { CardContext } from './context';
-import { List } from '../../../pages/main';
 import { BrowserRouter } from 'react-router';
 import { Provider } from 'react-redux';
-import { store } from '../../../shared/store';
+import { CardContext } from '.';
+import { List } from '../../../pages/main';
+import { store } from '../..';
 
 const mockContextValue = {
   userData: { name: 'Test User', age: 30 },

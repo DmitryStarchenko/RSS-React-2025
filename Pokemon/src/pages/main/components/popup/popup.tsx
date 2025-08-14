@@ -1,5 +1,8 @@
 import { setPokemon } from '../../../../shared/store/slices/pokemonSlice';
-import { useAppDispatch, useAppSelector } from '../../../../shared/store';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../shared/store/configureStore';
 import styles from '../styles/popup.module.css';
 import { FileDownloader } from './file-downloader';
 
@@ -13,7 +16,7 @@ export function Popup() {
         className={
           styles.text
         }>{`You have chosen ${pokemons.length} pokemon(s)`}</p>
-      <div className={styles.buttonConteiner}>
+      <div className={styles.buttonContainer}>
         <button
           className={styles.remove}
           onClick={() => dispatch(setPokemon([]))}>

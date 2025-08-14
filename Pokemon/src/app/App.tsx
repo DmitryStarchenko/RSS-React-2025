@@ -1,10 +1,9 @@
+import { BrowserRouter } from 'react-router';
+import { Provider } from 'react-redux';
 import { Footer, Header } from '../widgets';
 import { ErrorBoundary } from '../pages/main';
-import { BrowserRouter } from 'react-router';
-import { CardContextProvider, StyleContextProvider } from '../shared';
+import { CardContextProvider, StyleContextProvider, store } from '../shared';
 import { Router } from '.';
-import { Provider } from 'react-redux';
-import { store } from '../shared/store';
 
 export function App() {
   return (

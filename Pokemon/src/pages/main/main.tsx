@@ -1,49 +1,45 @@
 import { useContext, useEffect, useState } from 'react';
-import { Pokemon } from '../../types';
-import { Card, Loader, NotFound, Search, Popup } from '.';
-import { apiRequest, CardContext, useLocalStorage } from '../../shared';
 import { Outlet, useSearchParams } from 'react-router';
+import { Card, Loader, NotFound, Search, Popup } from '.';
+import { CardContext, useGetPokemonQuery } from '../../shared';
+import styles from './main.module.css';
 
 export function Main() {
-  const KEY = 'SavePokemon';
-  const [value] = useLocalStorage('', KEY);
-  const { card, setList, setCard, setIsLoading, error, isLoading } =
+  const { card, setList, setCard, paramsQuery, setIsLoadingDetails } =
     useContext(CardContext);
   const [searchParam] = useSearchParams();
   const [cardUrl, setCardUrl] = useState('');
+  const { data, error, isLoading, refetch } = useGetPokemonQuery(paramsQuery);
 
   useEffect(() => {
-    apiRequest(typeof value === 'string' ? value : '')
-      .then((response) => response.json())
-      .then((response: Pokemon) => {
-        if (value && response) {
-          setCard(response);
-          setIsLoading(false);
-        } else {
-          setList(response.results);
-          setIsLoading(false);
-        }
-      });
-  }, []);
+    if (!isLoading) {
+      if (data.results) {
+        setList(data.results);
+      } else {
+        setCard(data);
+        setIsLoadingDetails(false);
+      }
+    }
+  }, [data, isLoading]);
 
   useEffect(() => {
     setCardUrl(searchParam.get('card') || '');
   }, [searchParam]);
 
+  const renderContent = () => {
+    if (error) return <NotFound />;
+    if (isLoading) return <Loader />;
+    if (cardUrl === '') return <Outlet />;
+    if (card) return <Card />;
+  };
+
   return (
     <>
       <Search />
-      {error ? (
-        <NotFound />
-      ) : isLoading ? (
-        <Loader />
-      ) : cardUrl === '' ? (
-        <Outlet />
-      ) : card ? (
-        <Card />
-      ) : (
-        <Loader />
-      )}
+      <button className={styles.refetch} onClick={() => refetch()}>
+        Refetch
+      </button>
+      {renderContent()}
       <Popup />
     </>
   );
