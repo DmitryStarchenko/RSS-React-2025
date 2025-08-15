@@ -2,22 +2,17 @@
 import { useEffect, useState, useContext } from 'react';
 import styles from '../styles/pagination.module.css';
 import CardContext from '../../shared/context/card-context/context';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export function Pagination() {
   const MAX_PAGE = 15;
   const MIN_PAGE = 1;
-
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const { setCardView, setParamsQuery } = useContext(CardContext);
   const [numberPage, setNumberPage] = useState(MIN_PAGE);
   const [isLeftButtonDisabled, setIsLeftButtonDisabled] = useState(false);
   const [isRightButtonDisabled, setIsRightButtonDisabled] = useState(false);
-  const searchParams = useSearchParams();
-  const {
-    currentSearchParam,
-    setCurrentSearchParam,
-    setCardView,
-    setParamsQuery,
-  } = useContext(CardContext);
 
   const paramsQuery = {
     name: '',
@@ -34,9 +29,15 @@ export function Pagination() {
     setCardView(false);
   };
 
+  const handleAddParamsPage = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('page', numberPage.toString());
+    router.push(`?${params.toString()}`);
+  };
+
   useEffect(() => {
-    const currentParam = searchParams.get('page') || '1';
-    setNumberPage(Number(currentParam));
+    const currentPage = searchParams.get('page') || '1';
+    setNumberPage(Number(currentPage));
   }, []);
 
   useEffect(() => {
@@ -50,13 +51,9 @@ export function Pagination() {
     } else {
       setIsRightButtonDisabled(false);
     }
-    setCurrentSearchParam({ page: `${numberPage}` });
     setParamsQuery(paramsQuery);
+    handleAddParamsPage();
   }, [numberPage]);
-
-  /*useEffect(() => {
-    setSearchParams(currentSearchParam);
-  }, [currentSearchParam]);*/
 
   return (
     <div className={styles.pageButton}>

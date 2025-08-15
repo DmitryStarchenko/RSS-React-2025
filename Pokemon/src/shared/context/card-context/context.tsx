@@ -1,11 +1,6 @@
 'use client';
 import { createContext, Dispatch, SetStateAction } from 'react';
-import {
-  CurrentSearchParams,
-  ParamsQuery,
-  Pokemon,
-  Results,
-} from '../../../types';
+import { ParamsQuery, Pokemon, Results } from '../../../types';
 
 type Context = {
   list: Results[];
@@ -14,8 +9,6 @@ type Context = {
   setCard: Dispatch<SetStateAction<Pokemon | undefined>>;
   paramsQuery: ParamsQuery;
   setParamsQuery: Dispatch<SetStateAction<ParamsQuery>>;
-  currentSearchParam: CurrentSearchParams;
-  setCurrentSearchParam: Dispatch<SetStateAction<CurrentSearchParams>>;
   cardView: boolean;
   setCardView: Dispatch<SetStateAction<boolean>>;
   isLoadingDetails: boolean;
@@ -32,8 +25,6 @@ const value = {
     pageNumber: undefined,
   },
   setParamsQuery: () => {},
-  currentSearchParam: { page: '' },
-  setCurrentSearchParam: () => {},
   cardView: false,
   setCardView: () => {},
   isLoadingDetails: false,

@@ -1,11 +1,6 @@
 'use client';
 import { useState } from 'react';
-import {
-  CurrentSearchParams,
-  ParamsQuery,
-  Pokemon,
-  Results,
-} from '../../../types';
+import { ParamsQuery, Pokemon, Results } from '../../../types';
 import CardContext from './context';
 import { useLocalStorage } from '../../../shared/custom-hooks';
 
@@ -22,8 +17,6 @@ export default function CardContextProvider({ children }: ProviderProps) {
   const [card, setCard] = useState<Pokemon>();
   const [paramsQuery, setParamsQuery] = useState<ParamsQuery>(params);
   const [isLoadingDetails, setIsLoadingDetails] = useState(true);
-  const [currentSearchParam, setCurrentSearchParam] =
-    useState<CurrentSearchParams>({ page: '' });
   const [cardView, setCardView] = useState(false);
 
   const value = {
@@ -33,8 +26,6 @@ export default function CardContextProvider({ children }: ProviderProps) {
     setCard,
     paramsQuery,
     setParamsQuery,
-    currentSearchParam,
-    setCurrentSearchParam,
     cardView,
     setCardView,
     isLoadingDetails,

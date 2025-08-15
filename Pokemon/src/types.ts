@@ -37,9 +37,3 @@ export interface ParamsQuery {
   name: string | undefined;
   pageNumber: number | undefined;
 }
-
-export interface CurrentSearchParams {
-  page?: string;
-  card?: string;
-  details?: string;
-}
