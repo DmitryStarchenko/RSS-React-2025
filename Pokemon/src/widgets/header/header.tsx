@@ -1,25 +1,17 @@
 'use client';
-import { useContext } from 'react';
 import styles from './header.module.css';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
-import StyleContext from '../../shared/context/style-context/context';
 import { pokemonApi } from '../../shared/store/services/api';
-import { changeTheme } from '../../shared/change-theme';
 import image from '../../../public/assets/dialogue-bubble.png';
+import { useTheme } from '../../shared/custom-hooks/useTheme';
 
 export default function Header() {
-  const { isDarkTheme, setIsDarkTheme } = useContext(StyleContext);
   const dispatch = useDispatch();
-
+  const { theme, toggleTheme } = useTheme();
   const handleResetCache = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     dispatch(pokemonApi.util.resetApiState());
-  };
-
-  const handleChangeTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-    changeTheme();
   };
 
   return (
@@ -39,7 +31,10 @@ export default function Header() {
           />
         </Link>
       </div>
-      <div className={styles.iconMode} onClick={handleChangeTheme}></div>
+      <div
+        onClick={toggleTheme}
+        className={styles.iconMode}
+        aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}></div>
     </header>
   );
 }

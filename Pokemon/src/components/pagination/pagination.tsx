@@ -13,6 +13,7 @@ export function Pagination() {
   const [numberPage, setNumberPage] = useState(MIN_PAGE);
   const [isLeftButtonDisabled, setIsLeftButtonDisabled] = useState(false);
   const [isRightButtonDisabled, setIsRightButtonDisabled] = useState(false);
+  const params = new URLSearchParams(searchParams.toString());
 
   const paramsQuery = {
     name: '',
@@ -30,7 +31,6 @@ export function Pagination() {
   };
 
   const handleAddParamsPage = () => {
-    const params = new URLSearchParams(searchParams.toString());
     params.delete('details');
     params.set('page', numberPage.toString());
     router.push(`?${params.toString()}`);
@@ -53,7 +53,7 @@ export function Pagination() {
       setIsRightButtonDisabled(false);
     }
     setParamsQuery(paramsQuery);
-    handleAddParamsPage();
+    if (!params.has('card')) handleAddParamsPage();
   }, [numberPage]);
 
   return (

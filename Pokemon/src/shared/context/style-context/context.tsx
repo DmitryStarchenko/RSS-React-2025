@@ -1,15 +1,11 @@
 'use client';
-import { createContext, Dispatch, SetStateAction } from 'react';
+import { createContext } from 'react';
 
-type Value = {
-  isDarkTheme: boolean;
-  setIsDarkTheme: Dispatch<SetStateAction<boolean>>;
+type ThemeContextType = {
+  theme: string;
+  toggleTheme: () => void;
 };
 
-const value = {
-  isDarkTheme: false,
-  setIsDarkTheme: () => {},
-};
-
-const StyleContext = createContext<Value>(value);
-export default StyleContext;
+export const StyleContext = createContext<ThemeContextType | undefined>(
+  undefined,
+);

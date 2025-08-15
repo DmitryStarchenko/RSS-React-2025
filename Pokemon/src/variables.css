@@ -12,7 +12,7 @@
   --placeholder: rgb(158, 158, 158);
 }
 
-.darkTheme {
+[data-theme='dark'] {
   --main-background-color: rgba(6, 70, 0, 0.63);
   --border-color: rgb(30, 255, 0);
   --main-color: rgb(15, 158, 2);
