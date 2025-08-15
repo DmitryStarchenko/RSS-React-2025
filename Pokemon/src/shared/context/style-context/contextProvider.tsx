@@ -1,9 +1,10 @@
+'use client';
 import { useState } from 'react';
-import { StyleContext } from '.';
+import StyleContext from './context';
 
 type ProviderProps = { children: React.ReactNode };
 
-export function StyleContextProvider({ children }: ProviderProps) {
+export default function StyleContextProvider({ children }: ProviderProps) {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
   const value = {

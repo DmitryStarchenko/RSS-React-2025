@@ -8,7 +8,7 @@
   --popup-background-color: rgb(250, 252, 166);
   --disabled-color: rgb(212, 212, 71);
   --icon-mode: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/103.svg');
-  --logo: url('../../../assets/Pikachu.webp');
+  --logo: url('../public/assets/Pikachu.webp');
   --placeholder: rgb(158, 158, 158);
 }
 
