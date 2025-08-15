@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import RedirectHandler from './redirectHandler';
 
 export const metadata: Metadata = {
   title: 'Pokemon',
@@ -13,6 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body id="body">
+        <RedirectHandler />
         <div id="root">{children}</div>
       </body>
     </html>
