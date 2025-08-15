@@ -3,11 +3,15 @@ import styles from '../styles/search.module.css';
 import { useContext } from 'react';
 import CardContext from '../../shared/context/card-context/context';
 import { useLocalStorage } from '../../shared/custom-hooks/useLocalStorage';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export function Search() {
   const KEY = 'SavePokemon';
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [value, setValue] = useLocalStorage('', KEY);
-  const { setCurrentSearchParam, setParamsQuery } = useContext(CardContext);
+  const { setParamsQuery } = useContext(CardContext);
+  const params = new URLSearchParams(searchParams.toString());
   const paramsQuery = {
     name: typeof value === 'string' ? value : '',
     pageNumber: undefined,
@@ -16,10 +20,17 @@ export function Search() {
   const handleSearch = () => {
     setParamsQuery(paramsQuery);
     if (value === '') {
-      setCurrentSearchParam({});
+      router.push('/main');
+      params.delete('card');
     } else {
-      setCurrentSearchParam({ card: `${value}` });
+      params.delete('page');
+      handleAddSearchParams('card', value.toString());
     }
+  };
+
+  const handleAddSearchParams = (key: string, value: string) => {
+    params.set(key, value);
+    router.push(`?${params.toString()}`);
   };
 
   return (

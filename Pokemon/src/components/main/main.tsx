@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import styles from './main.module.css';
 import { useSearchParams } from 'next/navigation';
 import { NotFound } from '../not-found/not-found';
@@ -15,8 +15,8 @@ export default function Main() {
   const { card, list, setList, setCard, paramsQuery, setIsLoadingDetails } =
     useContext(CardContext);
   const searchParam = useSearchParams();
-  const [cardUrl, setCardUrl] = useState('');
   const { data, error, isLoading, refetch } = useGetPokemonQuery(paramsQuery);
+  const keyCard = searchParam.get('card') || undefined;
 
   useEffect(() => {
     if (!isLoading) {
@@ -29,15 +29,11 @@ export default function Main() {
     }
   }, [data, isLoading]);
 
-  useEffect(() => {
-    setCardUrl(searchParam.get('card') || '');
-  }, [searchParam]);
-
   const renderContent = () => {
     if (error) return <NotFound />;
     if (isLoading) return <Loader />;
+    if (card && keyCard) return <Card />;
     if (list) return <FullList />;
-    if (card) return <Card />;
   };
 
   return (

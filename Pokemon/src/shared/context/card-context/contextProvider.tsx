@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { ParamsQuery, Pokemon, Results } from '../../../types';
 import CardContext from './context';
-import { useLocalStorage } from '../../../shared/custom-hooks';
+import { useLocalStorage } from '../../custom-hooks/useLocalStorage';
 
 type ProviderProps = { children: React.ReactNode };
 
