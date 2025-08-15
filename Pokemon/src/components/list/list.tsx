@@ -11,16 +11,14 @@ import {
   deletePokemon,
   setPokemon,
 } from '../../shared/store/slices/pokemonSlice';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export function List(props: Results) {
   const sliceLeft = 34;
   const sliceRight = -1;
-  const {
-    setParamsQuery,
-    currentSearchParam,
-    setCurrentSearchParam,
-    setCardView,
-  } = useContext(CardContext);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const { setParamsQuery, setCardView } = useContext(CardContext);
   const [isChecked, setIsChecked] = useState(false);
   const pokemonId = props.url.slice(sliceLeft).slice(0, sliceRight);
   const dispatch = useAppDispatch();
@@ -33,8 +31,14 @@ export function List(props: Results) {
   const handleClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     setCardView(true);
     event.preventDefault();
-    setCurrentSearchParam({ ...currentSearchParam, details: `${props.name}` });
+    handleAddParamsPage();
     setParamsQuery(paramsQuery);
+  };
+
+  const handleAddParamsPage = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('details', props.name);
+    router.push(`?${params.toString()}`);
   };
 
   const handleChecked = () => {

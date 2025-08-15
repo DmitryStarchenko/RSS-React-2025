@@ -5,28 +5,29 @@ import CardContext from '../../shared/context/card-context/context';
 import { Card } from '../cards/card';
 import { Pagination } from '../pagination/pagination';
 import { List } from './list';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export function FullList() {
-  const {
-    list,
-    cardView,
-    setCardView,
-    setCurrentSearchParam,
-    isLoadingDetails,
-    setIsLoadingDetails,
-  } = useContext(CardContext);
-  const searchParam = useSearchParams();
-  const pageParam = searchParam.get('page') || undefined;
+  const { list, cardView, setCardView, isLoadingDetails, setIsLoadingDetails } =
+    useContext(CardContext);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pageParams = searchParams.get('page') || undefined;
 
   useEffect(() => {
-    if (!pageParam) setCardView(false);
-  }, [pageParam]);
+    if (!pageParams) setCardView(false);
+  }, [pageParams]);
 
   const handleClick = () => {
     setCardView(false);
-    setCurrentSearchParam({ page: `${pageParam}` });
+    handleDeleteParams();
     setIsLoadingDetails(true);
+  };
+
+  const handleDeleteParams = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('details');
+    router.push(`?${params.toString()}`);
   };
 
   const viewDetailsCard = () => {

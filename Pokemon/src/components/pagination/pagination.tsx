@@ -31,6 +31,7 @@ export function Pagination() {
 
   const handleAddParamsPage = () => {
     const params = new URLSearchParams(searchParams.toString());
+    params.delete('details');
     params.set('page', numberPage.toString());
     router.push(`?${params.toString()}`);
   };
