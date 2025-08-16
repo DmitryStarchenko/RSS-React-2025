@@ -1,6 +1,5 @@
 import { NextIntlClientProvider } from 'next-intl';
 import type { Metadata } from 'next';
-import RedirectHandler from './redirectHandler';
 import './global.css';
 
 export const metadata: Metadata = {
@@ -20,7 +19,6 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body>
-        <RedirectHandler />
         <NextIntlClientProvider>
           <div id="root">{children}</div>
         </NextIntlClientProvider>
