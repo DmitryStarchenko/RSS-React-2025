@@ -31,6 +31,16 @@ export default function Header() {
           />
         </Link>
       </div>
+      <div className={styles.selectContainer}>
+        <select className={styles.select}>
+          <option className={styles.options} value="en" selected>
+            Английский
+          </option>
+          <option className={styles.options} value="ru">
+            Русский
+          </option>
+        </select>
+      </div>
       <div
         onClick={toggleTheme}
         className={styles.iconMode}
