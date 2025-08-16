@@ -1,5 +1,4 @@
 'use client';
-import './styles.css';
 
 import { Provider } from 'react-redux';
 import store from '../../shared/store/configureStore';

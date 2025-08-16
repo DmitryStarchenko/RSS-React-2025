@@ -13,16 +13,16 @@ interface State {
 }
 
 export class ErrorBoundary extends Component<MyComponentProps, State> {
-  constructor(props) {
+  constructor(props: MyComponentProps) {
     super(props);
-    this.state = { hasError: false, error: null, info: null };
+    this.state = { hasError: false, error: undefined, info: undefined };
   }
 
   static getDerivedStateFromError() {
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('Error в ErrorBoundary:', error, errorInfo);
     this.setState({ error: error, info: errorInfo });
   }

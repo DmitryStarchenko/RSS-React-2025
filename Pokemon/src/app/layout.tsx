@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import RedirectHandler from './redirectHandler';
+import './global.css';
 
 export const metadata: Metadata = {
   title: 'Pokemon',
