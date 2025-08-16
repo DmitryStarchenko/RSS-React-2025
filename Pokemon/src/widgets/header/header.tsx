@@ -1,7 +1,6 @@
 'use client';
 import styles from './header.module.css';
 import { useDispatch } from 'react-redux';
-import Link from 'next/link';
 import { pokemonApi } from '../../shared/store/services/api';
 import image from '../../../public/assets/dialogue-bubble.png';
 import imageRu from '../../../public/assets/dialogue-bubble-ru.png';
@@ -9,6 +8,7 @@ import { useTheme } from '../../shared/custom-hooks/useTheme';
 import LanguageSwitcher from '../../components/language-switcher/language-switcher';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
+import { Link } from '../../i18n/navigation';
 
 export default function Header() {
   const header = useTranslations('Header');

@@ -26,20 +26,14 @@ export function FileDownloaderClient({ url, selectedNumberPokemon }: Props) {
 
   return (
     <div>
-      <button
-        data-testid="buttonDownload"
-        className={styles.download}
-        onClick={handleDownload}>
+      <button className={styles.download} onClick={handleDownload}>
         {popup('download')}
       </button>
       <a
-        data-testid="linkDownload"
         ref={downloadRef}
         href={downloadUrl}
         download={`${selectedNumberPokemon}-pokemons.csv`}
-        style={{ display: 'none' }}>
-        Download
-      </a>
+        style={{ display: 'none' }}></a>
     </div>
   );
 }
