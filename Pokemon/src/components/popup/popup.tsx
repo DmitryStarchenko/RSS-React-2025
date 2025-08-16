@@ -6,22 +6,23 @@ import {
 } from '../../shared/store/configureStore';
 import styles from '../styles/popup.module.css';
 import { FileDownloaderServer } from './file-downloader-server';
+import { useTranslations } from 'next-intl';
 
 export function Popup() {
+  const popup = useTranslations('Popup');
   const pokemons = useAppSelector((state) => state.pokemon.pokemon);
   const dispatch = useAppDispatch();
   return pokemons.length > 0 ? (
     <div className={styles.popup}>
       <p
-        data-testid="textPopup"
         className={
           styles.text
-        }>{`You have chosen ${pokemons.length} pokemon(s)`}</p>
+        }>{`${popup('leftStr')} ${pokemons.length} ${popup('rightStr')}`}</p>
       <div className={styles.buttonContainer}>
         <button
           className={styles.remove}
           onClick={() => dispatch(setPokemon([]))}>
-          Unselect all
+          {popup('button')}
         </button>
         <FileDownloaderServer />
       </div>

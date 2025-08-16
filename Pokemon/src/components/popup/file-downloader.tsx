@@ -1,6 +1,7 @@
 'use client';
 import { useRef, useState } from 'react';
 import styles from '../styles/popup.module.css';
+import { useTranslations } from 'next-intl';
 
 type Props = {
   url: string;
@@ -8,6 +9,7 @@ type Props = {
 };
 
 export function FileDownloaderClient({ url, selectedNumberPokemon }: Props) {
+  const popup = useTranslations('Popup');
   const [downloadUrl, setDownloadUrl] = useState('');
   const downloadRef = useRef<HTMLAnchorElement>(null);
 
@@ -28,7 +30,7 @@ export function FileDownloaderClient({ url, selectedNumberPokemon }: Props) {
         data-testid="buttonDownload"
         className={styles.download}
         onClick={handleDownload}>
-        Download
+        {popup('download')}
       </button>
       <a
         data-testid="linkDownload"

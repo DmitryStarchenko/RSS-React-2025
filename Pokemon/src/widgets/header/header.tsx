@@ -4,10 +4,15 @@ import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { pokemonApi } from '../../shared/store/services/api';
 import image from '../../../public/assets/dialogue-bubble.png';
+import imageRu from '../../../public/assets/dialogue-bubble-ru.png';
 import { useTheme } from '../../shared/custom-hooks/useTheme';
 import LanguageSwitcher from '../../components/language-switcher/language-switcher';
+import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
+  const header = useTranslations('Header');
+  const pathName = usePathname();
   const dispatch = useDispatch();
   const { theme, toggleTheme } = useTheme();
   const handleResetCache = (event: React.MouseEvent<HTMLElement>) => {
@@ -18,7 +23,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <button className={styles.resetCache} onClick={handleResetCache}>
-        Reset Cache
+        {header('reset')}
       </button>
       <div className={styles.containerLogo}>
         <Link href="/main">
@@ -27,7 +32,7 @@ export default function Header() {
         <Link href="/about">
           <img
             className={styles.dialogBubble}
-            src={image.src}
+            src={pathName.startsWith('/en') ? image.src : imageRu.src}
             alt="dialogue-bubble"
           />
         </Link>

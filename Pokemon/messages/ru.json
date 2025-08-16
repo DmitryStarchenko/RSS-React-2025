@@ -2,5 +2,43 @@
   "Search": {
     "placeholder": "Введите ID (1-640) или имя покемона",
     "button": "Поиск"
+  },
+  "Card": {
+    "tittle": "Нет данных"
+  },
+  "LanguageSwitcher": {
+    "en": "АН",
+    "ru": "РУ"
+  },
+  "FullList": {
+    "button": "ЗАКРЫТЬ",
+    "name": "Имя",
+    "descriptions": "Описание",
+    "loading": "Загрузка..."
+  },
+  "List": {
+    "id": "Айди покемона:"
+  },
+  "Loader": {
+    "loading": "Загрузка..."
+  },
+  "Main": {
+    "refetch": "Повторить"
+  },
+  "NotFound": {
+    "tittle": "Не найдено",
+    "button": "Назад"
+  },
+  "Pagination": {
+    "page": "Стр"
+  },
+  "Popup": {
+    "download": "Загрузить",
+    "leftStr": "Вы выбрали",
+    "rightStr": "покемона(ов)",
+    "button": "Отменить всё"
+  },
+  "Header": {
+    "reset": "Очистить кэш"
   }
 }

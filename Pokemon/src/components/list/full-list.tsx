@@ -6,8 +6,10 @@ import { Card } from '../cards/card';
 import { Pagination } from '../pagination/pagination';
 import { List } from './list';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export function FullList() {
+  const fullList = useTranslations('FullList');
   const { list, cardView, setCardView, isLoadingDetails, setIsLoadingDetails } =
     useContext(CardContext);
   const router = useRouter();
@@ -35,7 +37,7 @@ export function FullList() {
       <div className={styles.detailsContent}>
         <Card />
         <button className={styles.buttonClose} onClick={handleClick}>
-          CLOSE
+          {fullList('button')}
         </button>
       </div>
     );
@@ -48,12 +50,12 @@ export function FullList() {
         <div className={styles.cardList}>
           <div className={styles.headerList}>
             <p data-testid="nameColumn" className={styles.nameColumn}>
-              Name
+              {fullList('name')}
             </p>
             <p
               data-testid="descriptionsColumn"
               className={styles.descriptionsColumn}>
-              Descriptions
+              {fullList('descriptions')}
             </p>
           </div>
           {list.map((element) => {
@@ -62,7 +64,7 @@ export function FullList() {
         </div>
         {cardView ? (
           isLoadingDetails ? (
-            <h1 className={styles.loader}>Loading...</h1>
+            <h1 className={styles.loader}>{fullList('loading')}</h1>
           ) : (
             viewDetailsCard()
           )

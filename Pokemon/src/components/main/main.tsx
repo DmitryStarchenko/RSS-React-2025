@@ -1,6 +1,6 @@
 'use client';
 import { useContext, useEffect } from 'react';
-import styles from './main.module.css';
+import styles from '../styles/main.module.css';
 import { useSearchParams } from 'next/navigation';
 import { NotFound } from '../not-found/not-found';
 import { Loader } from '../loader/loader';
@@ -10,10 +10,12 @@ import { Popup } from '../popup/popup';
 import CardContext from '../../shared/context/card-context/context';
 import { useGetPokemonQuery } from '../../shared/store/services/api';
 import { FullList } from '../list/full-list';
+import { useTranslations } from 'next-intl';
 
 export default function Main() {
   const { card, list, setList, setCard, paramsQuery, setIsLoadingDetails } =
     useContext(CardContext);
+  const main = useTranslations('Main');
   const searchParam = useSearchParams();
   const { data, error, isLoading, refetch } = useGetPokemonQuery(paramsQuery);
   const keyCard = searchParam.get('card') || undefined;
@@ -40,7 +42,7 @@ export default function Main() {
     <>
       <Search />
       <button className={styles.refetch} onClick={() => refetch()}>
-        Refetch
+        {main('refetch')}
       </button>
       {renderContent()}
       <Popup />

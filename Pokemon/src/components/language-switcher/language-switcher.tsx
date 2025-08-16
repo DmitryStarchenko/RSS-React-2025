@@ -1,9 +1,10 @@
 'use client';
 import { useRouter, usePathname } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import styles from '../styles/language-switcher.module.css';
 
 export default function LanguageSwitcher() {
+  const switcher = useTranslations('LanguageSwitcher');
   const router = useRouter();
   const pathname = usePathname();
   const currentLocale = useLocale();
@@ -26,13 +27,13 @@ export default function LanguageSwitcher() {
         onClick={() => switchLocale('en')}
         disabled={currentLocale === 'en'}
         className={styles.en}>
-        EN
+        {switcher('en')}
       </button>
       <button
         onClick={() => switchLocale('ru')}
         disabled={currentLocale === 'ru'}
         className={styles.ru}>
-        RU
+        {switcher('ru')}
       </button>
     </div>
   );

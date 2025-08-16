@@ -1,9 +1,5 @@
-import { ClientOnly } from './client';
-
-export function generateStaticParams() {
-  return [{ slug: [''] }];
-}
+import { MainPage } from './client';
 
 export default function Page() {
-  return <ClientOnly />;
+  return <MainPage />;
 }

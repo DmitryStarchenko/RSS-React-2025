@@ -1,5 +1,4 @@
 'use client';
-
 import { Provider } from 'react-redux';
 import store from '../../../shared/store/configureStore';
 import { StyleContextProvider } from '../../../shared/context/style-context/contextProvider';

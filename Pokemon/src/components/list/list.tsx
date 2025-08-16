@@ -12,10 +12,12 @@ import {
   setPokemon,
 } from '../../shared/store/slices/pokemonSlice';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export function List(props: Results) {
   const sliceLeft = 34;
   const sliceRight = -1;
+  const list = useTranslations('List');
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setParamsQuery, setCardView } = useContext(CardContext);
@@ -70,12 +72,8 @@ export function List(props: Results) {
         onChange={handleChecked}
       />
       <li className={styles.listItem} onClick={handleClick}>
-        <p data-testid="pokemonName" className={styles.liName}>
-          {props.name}
-        </p>
-        <p
-          data-testid="pokemonDescription"
-          className={styles.description}>{`Pokemon id: ${pokemonId}`}</p>
+        <p className={styles.liName}>{props.name}</p>
+        <p className={styles.description}>{`${list('id')} ${pokemonId}`}</p>
       </li>
     </div>
   );

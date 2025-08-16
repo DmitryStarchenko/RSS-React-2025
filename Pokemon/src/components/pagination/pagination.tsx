@@ -3,10 +3,12 @@ import { useEffect, useState, useContext } from 'react';
 import styles from '../styles/pagination.module.css';
 import CardContext from '../../shared/context/card-context/context';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export function Pagination() {
   const MAX_PAGE = 15;
   const MIN_PAGE = 1;
+  const pagination = useTranslations('Pagination');
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setCardView, setParamsQuery } = useContext(CardContext);
@@ -65,7 +67,10 @@ export function Pagination() {
         onClick={decrement}>
         {'<<<'}
       </button>
-      <span className={styles.numberPage}>{`Page ${numberPage}`}</span>
+      <span
+        className={
+          styles.numberPage
+        }>{`${pagination('page')} ${numberPage}`}</span>
       <button
         data-testid="buttonRight"
         className={styles.buttonRight}
