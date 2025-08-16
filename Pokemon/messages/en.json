@@ -1,6 +1,6 @@
 {
-  "HomePage": {
-    "title": "Pokemon",
-    "about": "Pokemon search"
+  "Search": {
+    "placeholder": "Enter ID (1-640) or name",
+    "button": "Search"
   }
 }

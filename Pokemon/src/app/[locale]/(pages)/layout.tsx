@@ -1,5 +1,5 @@
-import Footer from '../../widgets/footer/footer';
-import Header from '../../widgets/header/header';
+import Footer from '../../../widgets/footer/footer';
+import Header from '../../../widgets/header/header';
 import { ClientProviders } from './Page';
 
 export default function PageLayout({

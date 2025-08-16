@@ -8,7 +8,12 @@ export default function RedirectHandler() {
   const router = useRouter();
 
   useEffect(() => {
-    if (pathname === '/' || pathname === '') {
+    if (
+      pathname === '/' ||
+      pathname === '' ||
+      pathname === '/en' ||
+      pathname === '/ru'
+    ) {
       router.replace('/main');
     }
   }, [pathname, router]);

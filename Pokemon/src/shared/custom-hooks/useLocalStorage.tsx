@@ -6,13 +6,12 @@ export function useLocalStorage(
   initialValue: string,
   key: string,
 ): [string, (value: string) => void] {
-  const [value, setValue] = useState<string>(() => {
-    if (typeof window === 'undefined') {
-      return initialValue;
-    }
+  const [value, setValue] = useState<string>(initialValue);
+
+  useEffect(() => {
     const item = localStorage.getItem(key);
-    return item ? item : initialValue;
-  });
+    setValue(item ? item : initialValue);
+  }, [key, initialValue]);
 
   useEffect(() => {
     localStorage.setItem(key, value);

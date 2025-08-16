@@ -4,8 +4,10 @@ import { useContext } from 'react';
 import CardContext from '../../shared/context/card-context/context';
 import { useLocalStorage } from '../../shared/custom-hooks/useLocalStorage';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export function Search() {
+  const search = useTranslations('Search');
   const KEY = 'SavePokemon';
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -38,7 +40,7 @@ export function Search() {
       <input
         className={styles.input}
         type="search"
-        placeholder={'Enter ID (1-640) or name'}
+        placeholder={search('placeholder')}
         onChange={(event) => {
           if (typeof setValue !== 'string') setValue(event.target.value);
         }}
@@ -48,7 +50,7 @@ export function Search() {
         className={styles.buttonSearch}
         type="submit"
         onClick={handleSearch}>
-        Search
+        {search('button')}
       </button>
     </div>
   );

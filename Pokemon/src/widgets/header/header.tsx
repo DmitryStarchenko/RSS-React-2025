@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { pokemonApi } from '../../shared/store/services/api';
 import image from '../../../public/assets/dialogue-bubble.png';
 import { useTheme } from '../../shared/custom-hooks/useTheme';
+import LanguageSwitcher from '../../components/language-switcher/language-switcher';
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -31,16 +32,7 @@ export default function Header() {
           />
         </Link>
       </div>
-      <div className={styles.selectContainer}>
-        <select className={styles.select}>
-          <option className={styles.options} value="en" selected>
-            Английский
-          </option>
-          <option className={styles.options} value="ru">
-            Русский
-          </option>
-        </select>
-      </div>
+      <LanguageSwitcher />
       <div
         onClick={toggleTheme}
         className={styles.iconMode}
