@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { Results } from 'types';
+import { Results } from '../../../types';
 
 interface State {
   pokemon: Results[];

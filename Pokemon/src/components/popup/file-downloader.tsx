@@ -1,19 +1,18 @@
 'use client';
 import { useRef, useState } from 'react';
 import styles from '../styles/popup.module.css';
-import { useAppSelector } from '../../shared/store/configureStore';
 
-export function FileDownloader() {
+type Props = {
+  url: string;
+  selectedNumberPokemon: number;
+};
+
+export function FileDownloaderClient({ url, selectedNumberPokemon }: Props) {
   const [downloadUrl, setDownloadUrl] = useState('');
-  const pokemons = useAppSelector((state) => state.pokemon.pokemon);
-  const downloadRef = useRef(null);
+  const downloadRef = useRef<HTMLAnchorElement>(null);
 
   const handleDownload = () => {
-    const fileContent = JSON.stringify(pokemons);
-    const blob = new Blob([fileContent], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
     setDownloadUrl(url);
-
     setTimeout(() => {
       if (downloadRef.current) {
         downloadRef.current.click();
@@ -35,7 +34,7 @@ export function FileDownloader() {
         data-testid="linkDownload"
         ref={downloadRef}
         href={downloadUrl}
-        download={`${pokemons.length}-pokemons.csv`}
+        download={`${selectedNumberPokemon}-pokemons.csv`}
         style={{ display: 'none' }}>
         Download
       </a>

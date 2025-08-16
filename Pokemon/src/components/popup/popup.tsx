@@ -5,7 +5,7 @@ import {
   useAppSelector,
 } from '../../shared/store/configureStore';
 import styles from '../styles/popup.module.css';
-import { FileDownloader } from './file-downloader';
+import { FileDownloaderServer } from './file-downloader-server';
 
 export function Popup() {
   const pokemons = useAppSelector((state) => state.pokemon.pokemon);
@@ -23,7 +23,7 @@ export function Popup() {
           onClick={() => dispatch(setPokemon([]))}>
           Unselect all
         </button>
-        <FileDownloader />
+        <FileDownloaderServer />
       </div>
     </div>
   ) : undefined;

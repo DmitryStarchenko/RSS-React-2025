@@ -1,4 +1,3 @@
-'use client';
 import styles from '../styles/loader.module.css';
 
 export function Loader() {
