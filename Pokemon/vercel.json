@@ -1,15 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/((?!api|_next/static|_next/image|images|favicon.ico).*)",
-      "destination": "/[locale]/main"
-    }
-  ],
-  "redirects": [
+      "source": "/:path*",
+      "destination": "/:path*/"
+    },
     {
-      "source": "/:locale",
-      "destination": "/:locale/main",
-      "permanent": false
+      "source": "/",
+      "destination": "/en"
     }
   ]
 }
