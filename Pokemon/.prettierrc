@@ -9,5 +9,5 @@
   "jsxBracketSameLine": true,
   "arrowParens": "always",
   "proseWrap": "preserve",
-  "endOfLine": "crlf"
+  "endOfLine": "auto"
 }
