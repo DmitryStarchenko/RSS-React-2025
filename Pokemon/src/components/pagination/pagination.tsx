@@ -16,7 +16,6 @@ export function Pagination() {
   const [isLeftButtonDisabled, setIsLeftButtonDisabled] = useState(false);
   const [isRightButtonDisabled, setIsRightButtonDisabled] = useState(false);
   const params = new URLSearchParams(searchParams.toString());
-
   const paramsQuery = {
     name: '',
     pageNumber: (numberPage - 1) * 40,

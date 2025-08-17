@@ -9,7 +9,13 @@ export default function NotFound() {
   return (
     <div className={styles.error}>
       <p className={styles.errorText}>{not('tittle')}</p>
-      <Image className={styles.animation} src={image.src} alt="animation" />
+      <Image
+        className={styles.animation}
+        src={image.src}
+        width={600}
+        height={350}
+        alt="animation"
+      />
       <Link href="/main">
         <button className={styles.buttonRefresh}>{not('button')}</button>
       </Link>

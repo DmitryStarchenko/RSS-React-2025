@@ -49,12 +49,8 @@ export function FullList() {
       <main className={styles.main}>
         <div className={styles.cardList}>
           <div className={styles.headerList}>
-            <p data-testid="nameColumn" className={styles.nameColumn}>
-              {fullList('name')}
-            </p>
-            <p
-              data-testid="descriptionsColumn"
-              className={styles.descriptionsColumn}>
+            <p className={styles.nameColumn}>{fullList('name')}</p>
+            <p className={styles.descriptionsColumn}>
               {fullList('descriptions')}
             </p>
           </div>
