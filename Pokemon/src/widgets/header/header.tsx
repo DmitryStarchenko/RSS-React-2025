@@ -1,42 +1,50 @@
-import { useContext } from 'react';
+'use client';
 import styles from './header.module.css';
-import { NavLink } from 'react-router';
-import { pokemonApi, StyleContext } from '../../shared';
-import { changeTheme } from '../../shared';
 import { useDispatch } from 'react-redux';
+import { pokemonApi } from '../../shared/store/services/api';
+import image from '../../../public/assets/dialogue-bubble.png';
+import imageRu from '../../../public/assets/dialogue-bubble-ru.png';
+import { useTheme } from '../../shared/custom-hooks/useTheme';
+import LanguageSwitcher from '../../components/language-switcher/language-switcher';
+import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
+import { Link } from '../../i18n/navigation';
+import Image from 'next/image';
 
-export function Header() {
-  const { isDarkTheme, setIsDarkTheme } = useContext(StyleContext);
+export default function Header() {
+  const header = useTranslations('Header');
+  const pathName = usePathname();
   const dispatch = useDispatch();
-
-  const handleResetCache = (event) => {
+  const { theme, toggleTheme } = useTheme();
+  const handleResetCache = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     dispatch(pokemonApi.util.resetApiState());
-  };
-
-  const handleChangeTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-    changeTheme();
   };
 
   return (
     <header className={styles.header}>
       <button className={styles.resetCache} onClick={handleResetCache}>
-        Reset Cache
+        {header('reset')}
       </button>
       <div className={styles.containerLogo}>
-        <NavLink to="">
+        <Link href="/main">
           <div className={styles.logo}></div>
-        </NavLink>
-        <NavLink to="/about">
-          <img
+        </Link>
+        <Link href="/about">
+          <Image
             className={styles.dialogBubble}
-            src="../../../assets/dialogue-bubble.png"
+            src={pathName.startsWith('/en') ? image.src : imageRu.src}
+            width={170}
+            height={120}
             alt="dialogue-bubble"
           />
-        </NavLink>
+        </Link>
       </div>
-      <div className={styles.iconMode} onClick={handleChangeTheme}></div>
+      <LanguageSwitcher />
+      <div
+        onClick={toggleTheme}
+        className={styles.iconMode}
+        aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}></div>
     </header>
   );
 }

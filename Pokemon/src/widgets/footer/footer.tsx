@@ -1,11 +1,15 @@
 import styles from './footer.module.css';
+import pokebol from '../../../public/assets/pokebol.png';
+import Image from 'next/image';
 
-export function Footer() {
+export default function Footer() {
   return (
     <div className={styles.footer}>
-      <img
+      <Image
         className={styles.pokebol}
-        src="../../../assets/pokebol.png"
+        src={pokebol.src}
+        width={100}
+        height={100}
         alt="pokebol"
       />
     </div>

@@ -1,0 +1,44 @@
+{
+  "Search": {
+    "placeholder": "Enter ID (1-640) or name",
+    "button": "Search"
+  },
+  "Card": {
+    "tittle": "Not data"
+  },
+  "LanguageSwitcher": {
+    "en": "EN",
+    "ru": "RU"
+  },
+  "FullList": {
+    "button": "CLOSE",
+    "name": "Name",
+    "descriptions": "Descriptions",
+    "loading": "Loading..."
+  },
+  "List": {
+    "id": "Pokemon id:"
+  },
+  "Loader": {
+    "loading": "Loading..."
+  },
+  "Main": {
+    "refetch": "Refetch"
+  },
+  "NotFound": {
+    "tittle": "Not Found",
+    "button": "Back"
+  },
+  "Pagination": {
+    "page": "Page"
+  },
+  "Popup": {
+    "download": "Download",
+    "leftStr": "You have chosen",
+    "rightStr": "pokemon(s)",
+    "button": "Unselect all"
+  },
+  "Header": {
+    "reset": "Reset Cache"
+  }
+}

@@ -6,15 +6,24 @@ import react from 'eslint-plugin-react';
 import tseslint from 'typescript-eslint';
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import reactCompiler from 'eslint-plugin-react-compiler';
+import nextPlugin from '@next/eslint-plugin-next';
+
+const nextConfig = {
+  files: ['**/*.{ts,tsx}'],
+  plugins: {
+    '@next/next': nextPlugin,
+  },
+  rules: {
+    ...nextPlugin.configs.recommended.rules,
+    '@next/next/no-html-link-for-pages': ['error', 'app/pages'],
+    '@next/next/no-img-element': 'warn',
+  },
+};
 
 export default tseslint.config(
   { ignores: ['dist'] },
   {
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.strict,
-      eslintPluginPrettier,
-    ],
+    extends: [js.configs.recommended, ...tseslint.configs.strict],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -35,15 +44,19 @@ export default tseslint.config(
       'react-compiler/react-compiler': 'error',
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
+      'prettier/prettier': [
+        'error',
+        {
+          endOfLine: 'auto',
+        },
+      ],
     },
     settings: {
       react: {
         version: 'detect',
       },
-      alias: {
-        extensions: ['.tsx', '.js', '.ts', '.scss', '.css', '.d.ts'],
-        map: ['@/header', 'src/header'],
-      },
     },
   },
+  nextConfig,
+  eslintPluginPrettier,
 );

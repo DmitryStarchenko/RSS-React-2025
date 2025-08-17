@@ -1,8 +1,10 @@
+'use client';
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import { pokemonReducer, pokemonApi } from '.';
+import { pokemonReducer } from './slices/pokemonSlice';
+import { pokemonApi } from './services/api';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     pokemon: pokemonReducer,
     [pokemonApi.reducerPath]: pokemonApi.reducer,
@@ -16,3 +18,4 @@ type AppDispatch = typeof store.dispatch;
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
+export default store;

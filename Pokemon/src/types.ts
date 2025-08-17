@@ -23,11 +23,6 @@ interface Stat {
   };
 }
 
-export interface List {
-  results: Results[];
-  name: string;
-}
-
 export interface Results {
   name: string;
   url: string;

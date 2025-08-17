@@ -1,3 +1,11 @@
+'use client';
 import { createContext } from 'react';
 
-export const StyleContext = createContext(undefined);
+type ThemeContextType = {
+  theme: string;
+  toggleTheme: () => void;
+};
+
+export const StyleContext = createContext<ThemeContextType | undefined>(
+  undefined,
+);
