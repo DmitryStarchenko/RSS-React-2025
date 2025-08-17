@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import styles from '../styles/card.module.css';
 import CardContext from '../../shared/context/card-context/context';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 export function Card() {
   const cardTranslation = useTranslations('Card');
@@ -12,7 +13,13 @@ export function Card() {
     return (
       <div className={styles.card}>
         <div className={styles.imageContainer}>
-          <img className={styles.image} src={urlImage} alt={card.name} />
+          <Image
+            className={styles.image}
+            src={urlImage}
+            width={280}
+            height={350}
+            alt={card.name}
+          />
         </div>
         <h2>{card.name.toUpperCase()}</h2>
         <div className={styles.stats}>

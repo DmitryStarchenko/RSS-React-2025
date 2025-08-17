@@ -9,6 +9,7 @@ import LanguageSwitcher from '../../components/language-switcher/language-switch
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { Link } from '../../i18n/navigation';
+import Image from 'next/image';
 
 export default function Header() {
   const header = useTranslations('Header');
@@ -30,9 +31,11 @@ export default function Header() {
           <div className={styles.logo}></div>
         </Link>
         <Link href="/about">
-          <img
+          <Image
             className={styles.dialogBubble}
             src={pathName.startsWith('/en') ? image.src : imageRu.src}
+            width={170}
+            height={120}
             alt="dialogue-bubble"
           />
         </Link>

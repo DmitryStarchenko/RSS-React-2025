@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import styles from '../styles/error-boundary.module.css';
 import { Link } from 'react-router';
+import Image from 'next/image';
 
 interface MyComponentProps {
   children?: React.ReactNode;
@@ -33,7 +34,7 @@ export class ErrorBoundary extends Component<MyComponentProps, State> {
       return (
         <div className={styles.error}>
           <p className={styles.errorText}>Not Found</p>
-          <img
+          <Image
             className={styles.animation}
             src="../../../../assets/animation.gif"
             alt="animation"
