@@ -23,7 +23,7 @@ export class ErrorBoundary extends Component<MyComponentProps, State> {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('Ошибка в ErrorBoundary:', error, errorInfo);
+    console.error('Error в ErrorBoundary:', error, errorInfo);
     this.setState({ error: error, info: errorInfo });
   }
 

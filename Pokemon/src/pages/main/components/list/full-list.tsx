@@ -1,10 +1,9 @@
 import { useContext, useEffect } from 'react';
+import { useSearchParams } from 'react-router';
 import styles from '../styles/full-list.module.css';
 import { List } from '.';
 import { CardContext } from '../../../../shared';
-import { Pagination } from '../pagination';
-import { Card } from '..';
-import { useSearchParams } from 'react-router';
+import { Pagination, Card } from '..';
 
 export function FullList() {
   const {
@@ -22,18 +21,18 @@ export function FullList() {
     if (!pageParam) setCardView(false);
   }, [pageParam]);
 
+  const handleClick = () => {
+    setCardView(false);
+    setCurrentSearchParam({ page: `${pageParam}` });
+    setIsLoadingDetails(true);
+  };
+
   const viewDetailsCard = () => {
     return (
       <>
         <div className={styles.detailsContent}>
           <Card />
-          <button
-            className={styles.buttonClose}
-            onClick={() => {
-              setCardView(false);
-              setCurrentSearchParam({ page: `${pageParam}` });
-              setIsLoadingDetails(true);
-            }}>
+          <button className={styles.buttonClose} onClick={handleClick}>
             CLOSE
           </button>
         </div>

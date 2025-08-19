@@ -1,11 +1,10 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, test, vi } from 'vitest';
 import '@testing-library/jest-dom/vitest';
-import { Search } from './search';
-import { BrowserRouter } from 'react-router-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { store } from '../../../../shared/store';
-import { CardContext, StyleContextProvider } from '../../../../shared';
+import { describe, expect, test, vi } from 'vitest';
+import { Search } from './search';
+import { CardContext, StyleContextProvider, store } from '../../../../shared';
+import { BrowserRouter } from 'react-router';
 
 type ProviderProps = { children: React.ReactNode };
 
@@ -13,13 +12,13 @@ export function MockCardContextProvider({ children }: ProviderProps) {
   const setCurrentSearchParam = () => {};
   const setList = () => {};
   const setCard = () => {};
-  const setError = () => {};
+  const setParamsQuery = () => {};
   const setCardView = () => {};
 
   const value = {
     setList,
     setCard,
-    setError,
+    setParamsQuery,
     setCurrentSearchParam,
     setCardView,
   };

@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { FileDownloader } from './file-downloader';
 import { Provider } from 'react-redux';
-import { store } from '../../../../shared/store';
+import { store } from '../../../../shared/store/configureStore';
 
 describe('header testing', () => {
   test('header testing', () => {

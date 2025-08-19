@@ -1,14 +1,20 @@
 import { useState } from 'react';
-import { Pokemon, Results } from '../../../types';
+import { ParamsQuery, Pokemon, Results } from '../../../types';
 import { CardContext } from '.';
+import { useLocalStorage } from '../../../shared/custom-hooks';
 
 type ProviderProps = { children: React.ReactNode };
 
 export function CardContextProvider({ children }: ProviderProps) {
+  const KEY = 'SavePokemon';
+  const [valueLS] = useLocalStorage('', KEY);
+  const params = {
+    name: typeof valueLS === 'string' ? valueLS : undefined,
+    pageNumber: undefined,
+  };
   const [list, setList] = useState<Results[]>([]);
   const [card, setCard] = useState<Pokemon>();
-  const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [paramsQuery, setParamsQuery] = useState<ParamsQuery>(params);
   const [isLoadingDetails, setIsLoadingDetails] = useState(true);
   const [currentSearchParam, setCurrentSearchParam] = useState();
   const [cardView, setCardView] = useState(false);
@@ -18,10 +24,8 @@ export function CardContextProvider({ children }: ProviderProps) {
     setList,
     card,
     setCard,
-    error,
-    setError,
-    isLoading,
-    setIsLoading,
+    paramsQuery,
+    setParamsQuery,
     currentSearchParam,
     setCurrentSearchParam,
     cardView,
