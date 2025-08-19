@@ -6,7 +6,7 @@ import { Results } from 'types';
 import { CardContext, StyleContextProvider } from '../../../../shared';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from '../../../../shared/store';
+import { store } from '../../../../shared/store/configureStore';
 
 type ProviderProps = { children: React.ReactNode };
 
