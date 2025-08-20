@@ -9,6 +9,7 @@ export interface FormData {
   gender: string;
   terms: boolean;
   country: string;
+  avatar: FileList | null;
 }
 
 export interface ImageState {

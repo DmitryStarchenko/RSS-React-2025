@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useSelector } from 'react-redux';
 import { validationSchema } from './validationSchema';
 import { FormData, RootState } from './types';
 import styles from './form.module.css';
@@ -15,6 +14,11 @@ import { Country } from './components/country';
 import { useClickOutside } from '../../shared/hooks/useClickOutside';
 import { useEscapeKey } from '../../shared/hooks/useEscapeKey';
 import { useState } from 'react';
+import {
+  setInfo,
+  useAppDispatch,
+  useAppSelector,
+} from '../../shared/store/store';
 
 type Props = {
   isShowing: boolean;
@@ -22,7 +26,8 @@ type Props = {
 };
 
 export function ControlledForm({ isShowing, hide }: Props) {
-  const countries = useSelector((state: RootState) => state.countries.list);
+  const dispatch = useAppDispatch();
+  const countries = useAppSelector((state: RootState) => state.countries.list);
   const [formId] = useState('controlledForm');
   const {
     register,
@@ -39,7 +44,7 @@ export function ControlledForm({ isShowing, hide }: Props) {
   useEscapeKey(hide);
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    dispatch(setInfo(data));
     hide();
   };
 

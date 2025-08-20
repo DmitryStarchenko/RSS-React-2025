@@ -3,9 +3,11 @@ import styles from './app.module.css';
 import { useModal } from './shared/hooks/useModal';
 import { store } from './shared/store/store';
 import { Provider } from 'react-redux';
+import { ResultView } from './components/result-view/result-view';
 
 export function App() {
   const { isShowing, toggle } = useModal();
+
   return (
     <Provider store={store}>
       <main className={styles.main}>
@@ -15,7 +17,7 @@ export function App() {
             Show controlled form
           </button>
         </div>
-        <div className={styles.result}>{isShowing}</div>
+        <ResultView isShowing={isShowing} />
         <Modal isShowing={isShowing} hide={toggle} />
       </main>
     </Provider>

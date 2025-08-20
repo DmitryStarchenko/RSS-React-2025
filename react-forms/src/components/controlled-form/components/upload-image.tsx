@@ -21,20 +21,19 @@ export function UploadImage({ clearErrors, setError }: Props) {
     clearErrors('avatar');
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
     if (!allowedTypes.includes(file.type)) {
-      const errorMsg = 'Only JPG and PNG files are allowed';
-      setFileError(errorMsg);
-      setError('avatar', { type: 'manual', message: errorMsg });
+      const errorMessage = 'Only JPG and PNG files are allowed';
+      setFileError(errorMessage);
+      setError('avatar', { type: 'manual', message: errorMessage });
       return false;
     }
 
     const maxSize = 4 * 1024 * 1024;
     if (file.size > maxSize) {
-      const errorMsg = 'File is too big. Max size: 4MB';
-      setFileError(errorMsg);
-      setError('avatar', { type: 'manual', message: errorMsg });
+      const errorMessage = 'File is too big. Max size: 4MB';
+      setFileError(errorMessage);
+      setError('avatar', { type: 'manual', message: errorMessage });
       return false;
     }
-
     return true;
   };
 
@@ -83,7 +82,6 @@ export function UploadImage({ clearErrors, setError }: Props) {
         className={styles.inputFile}
         id="avatar"
         type="file"
-        accept=".jpg,.jpeg,.png"
         onChange={handleImageUpload}
       />
       <label htmlFor="avatar" className={styles.customFileButton}>
@@ -93,7 +91,7 @@ export function UploadImage({ clearErrors, setError }: Props) {
         {fileError && <span className={styles.errorMessage}>{fileError}</span>}
       </div>
       <div className={styles.imageInfo}>
-        {storedImage.data && !fileError && (
+        {selectedFile && !fileError && (
           <img
             className={styles.imagePreview}
             src={storedImage.data}

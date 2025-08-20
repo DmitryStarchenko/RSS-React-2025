@@ -21,13 +21,6 @@
   color: rgb(121, 42, 248);
 }
 
-.result {
-  width: 70%;
-  height: 300px;
-  border: 2px solid rgb(121, 42, 248);
-  border-radius: 20px;
-}
-
 .button:hover {
   background-color: rgba(214, 190, 253, 0.733);
 }

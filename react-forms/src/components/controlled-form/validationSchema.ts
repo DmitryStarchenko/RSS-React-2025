@@ -1,4 +1,4 @@
-import { boolean, number, object, ref, string } from 'yup';
+import { boolean, mixed, number, object, ref, string } from 'yup';
 
 export const validationSchema = object({
   firstName: string()
@@ -38,4 +38,6 @@ export const validationSchema = object({
   terms: boolean().oneOf([true], 'You must accept the terms and conditions'),
 
   country: string().required('Select country'),
+
+  avatar: mixed<FileList>().nullable(),
 });
