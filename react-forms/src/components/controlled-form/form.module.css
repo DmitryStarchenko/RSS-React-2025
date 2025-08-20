@@ -1,0 +1,208 @@
+.formContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  font-family: Arial, sans-serif;
+  border: 2px solid rgb(121, 42, 248);
+  border-radius: 15px;
+  background-color: rgb(242, 235, 253);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formContent {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  gap: 50px;
+  margin-bottom: 50px;
+}
+
+.partForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 50%;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.submitButton {
+  padding: 12px 20px;
+  border: 2px solid rgb(121, 42, 248);
+  color: rgb(121, 42, 248);
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.submitButton:hover {
+  background-color: rgba(214, 190, 253, 0.733);
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type='text'],
+input[type='number'],
+input[type='email'],
+input[type='password'],
+select {
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+input[type='text']:focus,
+input[type='number']:focus,
+input[type='email']:focus,
+input[type='password']:focus,
+select:focus {
+  outline: none;
+  border-color: rgb(121, 42, 248);
+}
+
+input.error,
+select.error {
+  border-color: #dc3545;
+}
+
+.errorMessage {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 20px;
+}
+
+.radioGroup label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: normal;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: normal;
+}
+
+.imageInfo {
+  display: flex;
+}
+
+.imagePreview {
+  width: 120px;
+  max-height: 160px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fileInfo {
+  background: #f8f9fa;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 13px;
+  border-left: 4px solid rgb(121, 42, 248);
+}
+
+.countrySelectContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.countryDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 2px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.countryOption {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #eee;
+}
+
+.countryOption:last-child {
+  border-bottom: none;
+}
+
+.countryOption:hover {
+  background-color: rgba(214, 190, 253, 0.733);
+}
+
+.inputFile {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.customFileButton {
+  height: 18px;
+  padding: 12px 20px;
+  border: 2px solid rgb(121, 42, 248);
+  color: rgb(121, 42, 248);
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: normal;
+  text-align: center;
+  cursor: pointer;
+}
+
+.customFileButton:hover {
+  background-color: rgba(214, 190, 253, 0.733);
+}
+
+.errorView {
+  height: 20px;
+}
+
+.buttonClose {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: none;
+  color: rgba(214, 190, 253, 0.733);
+  font-weight: bold;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.buttonClose:hover {
+  color: rgb(121, 42, 248);
+}
