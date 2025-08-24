@@ -1,62 +1,40 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { clearImage, setImage } from '../../../shared/store/store';
+import {
+  clearImage,
+  setImage,
+  useAppDispatch,
+  useAppSelector,
+} from '../../../shared/store/store';
 import styles from '../form.module.css';
 import { useState } from 'react';
-import { UseFormClearErrors, UseFormSetError } from 'react-hook-form';
 import { FormData, RootState } from '../types';
+import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 type Props = {
-  clearErrors: UseFormClearErrors<FormData>;
-  setError: UseFormSetError<FormData>;
+  errors: FieldErrors<FormData>;
+  setValue: UseFormSetValue<FormData>;
+  register: UseFormRegister<FormData>;
 };
 
-export function UploadImage({ clearErrors, setError }: Props) {
-  const dispatch = useDispatch();
-  const storedImage = useSelector((state: RootState) => state.image);
-  const [fileError, setFileError] = useState<string>('');
+export function UploadImage({ errors, setValue, register }: Props) {
+  const dispatch = useAppDispatch();
+  const storedImage = useAppSelector((state: RootState) => state.image);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
-  const validateFile = (file: File): boolean => {
-    setFileError('');
-    clearErrors('avatar');
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-    if (!allowedTypes.includes(file.type)) {
-      const errorMessage = 'Only JPG and PNG files are allowed';
-      setFileError(errorMessage);
-      setError('avatar', { type: 'manual', message: errorMessage });
-      return false;
-    }
-
-    const maxSize = 4 * 1024 * 1024;
-    if (file.size > maxSize) {
-      const errorMessage = 'File is too big. Max size: 4MB';
-      setFileError(errorMessage);
-      setError('avatar', { type: 'manual', message: errorMessage });
-      return false;
-    }
-    return true;
-  };
 
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const files = event.target.files;
-
     if (!files || files.length === 0) {
       dispatch(clearImage());
       setSelectedFile(null);
-      setFileError('');
-      clearErrors('avatar');
       return;
     }
 
     const file = files[0];
+    setValue('avatar', file, { shouldValidate: true });
+    setValue('imageType', file.type, { shouldValidate: true });
+    setValue('imageSize', file.size, { shouldValidate: true });
     setSelectedFile(file);
-
-    if (!validateFile(file)) {
-      dispatch(clearImage());
-      return;
-    }
 
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -69,9 +47,6 @@ export function UploadImage({ clearErrors, setError }: Props) {
         );
       }
     };
-    reader.onerror = () => {
-      setFileError('Error reading file');
-    };
     reader.readAsDataURL(file);
   };
 
@@ -82,23 +57,33 @@ export function UploadImage({ clearErrors, setError }: Props) {
         className={styles.inputFile}
         id="avatar"
         type="file"
+        {...register('avatar')}
         onChange={handleImageUpload}
       />
       <label htmlFor="avatar" className={styles.customFileButton}>
         <span className={styles.buttonText}>Select file</span>
       </label>
       <div className={styles.errorView}>
-        {fileError && <span className={styles.errorMessage}>{fileError}</span>}
+        {errors.imageSize && (
+          <span className={styles.errorMessage}>
+            {errors.imageSize.message}
+          </span>
+        )}
+        {errors.imageType && (
+          <span className={styles.errorMessage}>
+            {errors.imageType.message}
+          </span>
+        )}
       </div>
       <div className={styles.imageInfo}>
-        {selectedFile && !fileError && (
+        {selectedFile && !errors.imageSize && !errors.imageType && (
           <img
             className={styles.imagePreview}
             src={storedImage.data}
             alt="Preview"
           />
         )}
-        {selectedFile && !fileError && (
+        {selectedFile && !errors.imageSize && !errors.imageType && (
           <div className={styles.fileInfo}>
             <p>File selected: {selectedFile.name}</p>
             <p>Size: {(selectedFile.size / 1024).toFixed(2)} KB</p>

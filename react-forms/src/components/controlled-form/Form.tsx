@@ -34,8 +34,6 @@ export function ControlledForm({ isShowing, hide }: Props) {
     handleSubmit,
     formState: { errors },
     setValue,
-    setError,
-    clearErrors,
   } = useForm<FormData>({
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
@@ -44,6 +42,7 @@ export function ControlledForm({ isShowing, hide }: Props) {
   useEscapeKey(hide);
 
   const onSubmit = (data: FormData) => {
+    delete data.avatar;
     dispatch(setInfo(data));
     hide();
   };
@@ -69,7 +68,11 @@ export function ControlledForm({ isShowing, hide }: Props) {
               error={errors.country?.message}
               countries={countries}
             />
-            <UploadImage clearErrors={clearErrors} setError={setError} />
+            <UploadImage
+              register={register}
+              setValue={setValue}
+              errors={errors}
+            />
           </div>
         </div>
         <TermsAgreement register={register} errors={errors} />

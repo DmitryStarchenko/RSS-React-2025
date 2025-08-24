@@ -73,8 +73,6 @@ export function Country({ setValue, error, countries }: CountrySelectProps) {
       if (filteredCountries.length > 0) {
         handleCountrySelect(filteredCountries[0]);
       }
-    } else if (e.key === 'Escape') {
-      setIsOpen(false);
     }
   };
 

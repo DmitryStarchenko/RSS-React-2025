@@ -1,5 +1,7 @@
 import { boolean, mixed, number, object, ref, string } from 'yup';
 
+const MAX_SIZE_BYTES = 4 * 1024 * 1024;
+
 export const validationSchema = object({
   firstName: string()
     .required('Name is required')
@@ -39,5 +41,21 @@ export const validationSchema = object({
 
   country: string().required('Select country'),
 
-  avatar: mixed<FileList>().nullable(),
+  avatar: mixed<File>().required('Image is required'),
+
+  imageType: mixed<string>()
+    .required('Image is required')
+    .test('fileType', 'Only JPG and PNG files are allowed', (value: string) => {
+      if (!value) return false;
+      return ['image/jpeg', 'image/png', 'image/jpg'].includes(value);
+    }),
+
+  imageSize: mixed<number>().test(
+    'fileSize',
+    'File is too big. Max size: 4MB',
+    (value: number) => {
+      if (!value) return false;
+      return value <= MAX_SIZE_BYTES;
+    },
+  ),
 });

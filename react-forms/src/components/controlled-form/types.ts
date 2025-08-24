@@ -9,7 +9,9 @@ export interface FormData {
   gender: string;
   terms: boolean;
   country: string;
-  avatar: FileList | null;
+  avatar: File;
+  imageType: string;
+  imageSize: number;
 }
 
 export interface ImageState {
