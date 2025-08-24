@@ -1,40 +1,40 @@
 import { useState } from 'react';
-import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
-import styles from '../../../shared/form.module.css';
-import { RootState } from '../types';
-import { FormData } from '../../../globalTypes';
 import {
   clearImage,
   setImage,
   useAppDispatch,
-  useAppSelector,
-} from '../../../shared';
+} from '../../../shared/store/store';
+import { FormData } from '../../../globalTypes';
+import styles from '../../../shared/form.module.css';
 
 type Props = {
-  errors: FieldErrors<FormData>;
-  setValue: UseFormSetValue<FormData>;
-  register: UseFormRegister<FormData>;
+  setFieldErrors: React.Dispatch<
+    React.SetStateAction<Partial<Record<keyof FormData, string>>>
+  >;
+  fieldErrors: Partial<Record<keyof FormData, string>>;
+  avatarRef: React.RefObject<HTMLInputElement>;
 };
 
-export function UploadImage({ errors, setValue, register }: Props) {
+export function UploadImage({ setFieldErrors, fieldErrors, avatarRef }: Props) {
   const dispatch = useAppDispatch();
-  const storedImage = useAppSelector((state: RootState) => state.image);
+
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const files = event.target.files;
+    const newErrors: Partial<Record<keyof FormData, string>> = {};
+
     if (!files || files.length === 0) {
       dispatch(clearImage());
       setSelectedFile(null);
+      newErrors['avatar'] = '';
+      setFieldErrors(newErrors);
       return;
     }
 
     const file = files[0];
-    setValue('avatar', file, { shouldValidate: true });
-    setValue('imageType', file.type, { shouldValidate: true });
-    setValue('imageSize', file.size, { shouldValidate: true });
     setSelectedFile(file);
 
     const reader = new FileReader();
@@ -48,44 +48,39 @@ export function UploadImage({ errors, setValue, register }: Props) {
         );
       }
     };
+    reader.onerror = () => {
+      newErrors['avatar'] = 'Error reading file';
+      setFieldErrors(newErrors);
+    };
     reader.readAsDataURL(file);
   };
-
   return (
     <div className={styles.formGroup}>
       <label htmlFor="avatar">Upload image</label>
       <input
+        ref={avatarRef}
         className={styles.inputFile}
         id="avatar"
         type="file"
-        {...register('avatar')}
+        name="avatar"
         onChange={handleImageUpload}
       />
       <label htmlFor="avatar" className={styles.customFileButton}>
         <span className={styles.buttonText}>Select file</span>
       </label>
       <div className={styles.errorView}>
-        {errors.imageType ? (
-          <span className={styles.errorMessage}>
-            {errors.imageType.message}
-          </span>
-        ) : errors.imageSize ? (
-          <span className={styles.errorMessage}>
-            {errors.imageSize.message}
-          </span>
-        ) : (
-          ''
-        )}
+        <span id="avatar-error" className={styles.errorMessage}>
+          {fieldErrors
+            ? fieldErrors.avatar
+              ? fieldErrors.avatar
+              : fieldErrors.imageType
+                ? fieldErrors.imageType
+                : fieldErrors.imageSize
+            : ''}
+        </span>
       </div>
       <div className={styles.imageInfo}>
-        {selectedFile && !errors.imageSize && !errors.imageType && (
-          <img
-            className={styles.imagePreview}
-            src={storedImage.data}
-            alt="Preview"
-          />
-        )}
-        {selectedFile && !errors.imageSize && !errors.imageType && (
+        {selectedFile && (
           <div className={styles.fileInfo}>
             <p>File selected: {selectedFile.name}</p>
             <p>Size: {(selectedFile.size / 1024).toFixed(2)} KB</p>

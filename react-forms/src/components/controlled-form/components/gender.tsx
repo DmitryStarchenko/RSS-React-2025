@@ -1,5 +1,5 @@
 import { ComponentsProps } from '../types';
-import styles from '../form.module.css';
+import styles from '../../../shared/form.module.css';
 
 export function Gender({ register, errors }: ComponentsProps) {
   return (

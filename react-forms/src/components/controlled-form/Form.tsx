@@ -1,24 +1,27 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { validationSchema } from './validationSchema';
-import { FormData, RootState } from './types';
-import styles from './form.module.css';
-import { Name } from './components/name';
-import { Age } from './components/age';
-import { Email } from './components/email';
-import { Password } from './components/password';
-import { Gender } from './components/gender';
-import { UploadImage } from './components/upload-image';
-import { TermsAgreement } from './components/terms-agreement';
-import { Country } from './components/country';
-import { useClickOutside } from '../../shared/hooks/useClickOutside';
-import { useEscapeKey } from '../../shared/hooks/useEscapeKey';
-import { useState } from 'react';
+import { RootState } from './types';
+import { FormData } from '../../globalTypes';
+import styles from '../../shared/form.module.css';
 import {
   setInfo,
   useAppDispatch,
   useAppSelector,
-} from '../../shared/store/store';
+  useClickOutside,
+  useEscapeKey,
+  validationSchema,
+} from '../../shared';
+import {
+  Age,
+  Country,
+  Email,
+  Gender,
+  Name,
+  Password,
+  TermsAgreement,
+  UploadImage,
+} from './components';
 
 type Props = {
   isShowing: boolean;

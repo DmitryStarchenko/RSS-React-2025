@@ -1,5 +1,5 @@
+import { useAppSelector } from '../../shared';
 import styles from './result-view.module.css';
-import { useAppSelector } from '../../shared/store/store';
 
 type Props = {
   isShowing: boolean;

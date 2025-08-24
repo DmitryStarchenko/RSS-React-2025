@@ -1,6 +1,11 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Data, SetImagePayload } from '../../types';
+import { Data } from '../../globalTypes';
 import { useDispatch, useSelector } from 'react-redux';
+
+interface SetImagePayload {
+  data: string;
+  name: string;
+}
 
 const countriesSlice = createSlice({
   name: 'countries',

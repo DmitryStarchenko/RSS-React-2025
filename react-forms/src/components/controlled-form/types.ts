@@ -1,18 +1,5 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-
-export interface FormData {
-  firstName: string;
-  age: number;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  gender: string;
-  terms: boolean;
-  country: string;
-  avatar: File;
-  imageType: string;
-  imageSize: number;
-}
+import { FormData } from '../../globalTypes';
 
 export interface ImageState {
   data: string | null;

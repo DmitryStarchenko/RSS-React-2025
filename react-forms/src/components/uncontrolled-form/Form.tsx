@@ -1,18 +1,16 @@
-import { useRef, FormEvent, useState, useCallback } from 'react';
-import { RootState } from '../controlled-form/types';
-import styles from '../controlled-form/form.module.css';
-import { useClickOutside } from '../../shared/hooks/useClickOutside';
-import { useEscapeKey } from '../../shared/hooks/useEscapeKey';
+import { useRef, FormEvent, useState } from 'react';
+import styles from '../../shared/form.module.css';
+import { ValidationError } from 'yup';
+import { FormData } from '../../globalTypes';
 import {
   clearImage,
-  setImage,
   setInfo,
   useAppDispatch,
-  useAppSelector,
-} from '../../shared/store/store';
-import { validationSchema } from '../controlled-form/validationSchema';
-import { ValidationError } from 'yup';
-import { FormData } from '../controlled-form/types';
+  useClickOutside,
+  useEscapeKey,
+  validationSchema,
+} from '../../shared';
+import { Country, UploadImage } from './components';
 
 type Props = {
   isShowing: boolean;
@@ -21,8 +19,6 @@ type Props = {
 
 export const UncontrolledForm = ({ isShowing, hide }: Props) => {
   const dispatch = useAppDispatch();
-  const countries = useAppSelector((state: RootState) => state.countries.list);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [formId] = useState('uncontrolledForm');
   useClickOutside(formId, hide, isShowing);
   useEscapeKey(hide);
@@ -38,11 +34,7 @@ export const UncontrolledForm = ({ isShowing, hide }: Props) => {
   const agreeToTermsRef = useRef<HTMLInputElement>(null);
   const countryRef = useRef<HTMLInputElement>(null);
   const avatarRef = useRef<HTMLInputElement>(null);
-  const countrySelectRef = useRef<HTMLDivElement>(null);
 
-  const [filteredCountries, setFilteredCountries] =
-    useState<string[]>(countries);
-  const [showDropdown, setShowDropdown] = useState(false);
   const [fieldErrors, setFieldErrors] =
     useState<Partial<Record<keyof FormData, string>>>();
 
@@ -102,59 +94,6 @@ export const UncontrolledForm = ({ isShowing, hide }: Props) => {
       dispatch(setInfo(formValues));
       hide();
     }
-  };
-
-  const selectCountry = (country: string) => {
-    if (countryRef.current) {
-      countryRef.current.value = country;
-      setShowDropdown(false);
-    }
-  };
-
-  const handleCountryInput = useCallback(() => {
-    if (countryRef.current) {
-      const inputValue = countryRef.current.value.toLowerCase();
-      const filtered = countries.filter((country) =>
-        country.toLowerCase().includes(inputValue),
-      );
-      setFilteredCountries(filtered);
-      setShowDropdown(true);
-    }
-  }, [countries, fieldErrors]);
-
-  const handleImageUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const files = event.target.files;
-    const newErrors: Partial<Record<keyof FormData, string>> = {};
-
-    if (!files || files.length === 0) {
-      dispatch(clearImage());
-      setSelectedFile(null);
-      newErrors['avatar'] = '';
-      setFieldErrors(newErrors);
-      return;
-    }
-
-    const file = files[0];
-    setSelectedFile(file);
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      if (e.target?.result) {
-        dispatch(
-          setImage({
-            data: typeof e.target.result === 'string' ? e.target.result : '',
-            name: file.name,
-          }),
-        );
-      }
-    };
-    reader.onerror = () => {
-      newErrors['avatar'] = 'Error reading file';
-      setFieldErrors(newErrors);
-    };
-    reader.readAsDataURL(file);
   };
 
   return (
@@ -249,73 +188,12 @@ export const UncontrolledForm = ({ isShowing, hide }: Props) => {
                 </span>
               </div>
             </div>
-            <div className={styles.formGroup}>
-              <div className={styles.countrySelectContainer}>
-                <label htmlFor="countryInput">Country *</label>
-                <input
-                  ref={countryRef}
-                  id="countryInput"
-                  type="text"
-                  onInput={handleCountryInput}
-                  onFocus={() => setShowDropdown(true)}
-                  placeholder="Start typing country name..."
-                />
-                {showDropdown && filteredCountries.length > 0 && (
-                  <div
-                    className={styles.countryDropdown}
-                    ref={countrySelectRef}>
-                    {filteredCountries.map((country) => (
-                      <div
-                        key={country}
-                        className={styles.countryOption}
-                        onClick={() => selectCountry(country)}
-                        onMouseDown={(e) => e.preventDefault()}>
-                        {country}
-                      </div>
-                    ))}
-                  </div>
-                )}
-                <div className={styles.errorView}>
-                  <span id="country-error" className={styles.errorMessage}>
-                    {fieldErrors ? fieldErrors.country : ''}
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className={styles.formGroup}>
-              <label htmlFor="avatar">Upload image</label>
-              <input
-                ref={avatarRef}
-                className={styles.inputFile}
-                id="avatar"
-                type="file"
-                name="avatar"
-                onChange={handleImageUpload}
-              />
-              <label htmlFor="avatar" className={styles.customFileButton}>
-                <span className={styles.buttonText}>Select file</span>
-              </label>
-              <div className={styles.errorView}>
-                <span id="avatar-error" className={styles.errorMessage}>
-                  {fieldErrors
-                    ? fieldErrors.avatar
-                      ? fieldErrors.avatar
-                      : fieldErrors.imageType
-                        ? fieldErrors.imageType
-                        : fieldErrors.imageSize
-                    : ''}
-                </span>
-              </div>
-              <div className={styles.imageInfo}>
-                {selectedFile && (
-                  <div className={styles.fileInfo}>
-                    <p>File selected: {selectedFile.name}</p>
-                    <p>Size: {(selectedFile.size / 1024).toFixed(2)} KB</p>
-                    <p>Type: {selectedFile.type}</p>
-                  </div>
-                )}
-              </div>
-            </div>
+            <Country countryRef={countryRef} fieldErrors={fieldErrors} />
+            <UploadImage
+              setFieldErrors={setFieldErrors}
+              fieldErrors={fieldErrors}
+              avatarRef={avatarRef}
+            />
           </div>
         </div>
         <div className={styles.formGroup}>

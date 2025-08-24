@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
-import { FormData } from '../types';
-import styles from '../form.module.css';
+import { FormData } from '../../../globalTypes';
+import styles from '../../../shared/form.module.css';
 
 interface CountrySelectProps {
   setValue: UseFormSetValue<FormData>;
