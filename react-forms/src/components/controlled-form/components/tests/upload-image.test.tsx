@@ -34,7 +34,6 @@ describe('UploadImage', () => {
     vi.clearAllMocks();
     mockRegister.mockReturnValue({});
   });
-
   const renderWithProvider = (component: React.ReactElement) => {
     return render(<Provider store={mockStore}>{component}</Provider>);
   };
@@ -47,14 +46,12 @@ describe('UploadImage', () => {
         register={mockRegister}
       />,
     );
-
     expect(screen.getByLabelText('Upload image *')).toBeInTheDocument();
     expect(screen.getByText('Select file')).toBeInTheDocument();
   });
 
   it('should handle file selection', async () => {
     const file = new File(['test'], 'test.png', { type: 'image/png' });
-
     renderWithProvider(
       <UploadImage
         errors={mockErrors}
@@ -62,11 +59,8 @@ describe('UploadImage', () => {
         register={mockRegister}
       />,
     );
-
     const fileInput = screen.getByLabelText('Upload image *');
-
     fireEvent.change(fileInput, { target: { files: [file] } });
-
     expect(mockSetValue).toHaveBeenCalledWith('avatar', file, {
       shouldValidate: true,
     });
@@ -86,11 +80,8 @@ describe('UploadImage', () => {
         register={mockRegister}
       />,
     );
-
     const fileInput = screen.getByLabelText('Upload image *');
-
     fireEvent.change(fileInput, { target: { files: null } });
-
     expect(mockSetValue).not.toHaveBeenCalled();
   });
 
@@ -98,7 +89,6 @@ describe('UploadImage', () => {
     const errorsWithImageType: FieldErrors<FormData> = {
       imageType: { message: 'Invalid image type', type: 'validate' },
     };
-
     renderWithProvider(
       <UploadImage
         errors={errorsWithImageType}
@@ -106,7 +96,6 @@ describe('UploadImage', () => {
         register={mockRegister}
       />,
     );
-
     expect(screen.getByText('Invalid image type')).toBeInTheDocument();
   });
 
@@ -115,7 +104,6 @@ describe('UploadImage', () => {
     const errorsWithImageSize: FieldErrors<FormData> = {
       imageSize: { message: 'File too large', type: 'validate' },
     };
-
     renderWithProvider(
       <UploadImage
         errors={errorsWithImageSize}
@@ -123,10 +111,8 @@ describe('UploadImage', () => {
         register={mockRegister}
       />,
     );
-
     const fileInput = screen.getByLabelText('Upload image *');
     fireEvent.change(fileInput, { target: { files: [file] } });
-
     expect(screen.queryByAltText('Preview')).not.toBeInTheDocument();
     expect(
       screen.queryByText('File selected: test.png'),
@@ -138,7 +124,6 @@ describe('UploadImage', () => {
       imageType: { message: 'Invalid type', type: 'validate' },
       imageSize: { message: 'Too large', type: 'validate' },
     };
-
     renderWithProvider(
       <UploadImage
         errors={errorsWithBoth}
@@ -146,7 +131,6 @@ describe('UploadImage', () => {
         register={mockRegister}
       />,
     );
-
     expect(screen.getByText('Invalid type')).toBeInTheDocument();
     expect(screen.queryByText('Too large')).not.toBeInTheDocument();
   });

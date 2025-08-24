@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom/vitest';
-
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Country } from '../country';
@@ -141,7 +140,6 @@ describe('Country', () => {
 
   it('should clear value when no exact match is found during typing', () => {
     render(<Country {...defaultProps} />);
-
     const input = screen.getByRole('textbox');
     fireEvent.change(input, { target: { value: 'Canada' } });
     vi.clearAllMocks();

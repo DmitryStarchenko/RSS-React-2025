@@ -61,7 +61,6 @@ describe('Country', () => {
       <Country countryRef={mockCountryRef} fieldErrors={mockFieldErrors} />,
       mockCountries,
     );
-
     expect(screen.getByLabelText('Country *')).toBeInTheDocument();
     expect(
       screen.getByPlaceholderText('Start typing country name...'),
@@ -71,7 +70,6 @@ describe('Country', () => {
   it('should show error message when fieldErrors contains country error', () => {
     const mockCountryRef = createMockRef();
     const fieldErrorsWithError = { country: 'Country is required' };
-
     renderWithProvider(
       <Country
         countryRef={mockCountryRef}
@@ -79,7 +77,6 @@ describe('Country', () => {
       />,
       mockCountries,
     );
-
     expect(screen.getByText('Country is required')).toBeInTheDocument();
   });
 
@@ -89,7 +86,6 @@ describe('Country', () => {
       <Country countryRef={mockCountryRef} fieldErrors={mockFieldErrors} />,
       mockCountries,
     );
-
     const errorElement = screen.getByTestId('country-error');
     expect(errorElement).toHaveTextContent('');
   });
@@ -100,10 +96,8 @@ describe('Country', () => {
       <Country countryRef={mockCountryRef} fieldErrors={mockFieldErrors} />,
       mockCountries,
     );
-
     const input = screen.getByLabelText('Country *');
     fireEvent.input(input, { target: { value: 'unit' } });
-
     const dropdownOptions = screen.getAllByRole('option');
     expect(dropdownOptions).toHaveLength(2);
     expect(screen.getByText('United States')).toBeInTheDocument();
@@ -116,10 +110,8 @@ describe('Country', () => {
       <Country countryRef={mockCountryRef} fieldErrors={mockFieldErrors} />,
       mockCountries,
     );
-
     const input = screen.getByLabelText('Country *');
     fireEvent.input(input, { target: { value: '' } });
-
     const dropdownOptions = screen.getAllByRole('option');
     expect(dropdownOptions).toHaveLength(mockCountries.length);
   });
@@ -130,13 +122,10 @@ describe('Country', () => {
       <Country countryRef={mockCountryRef} fieldErrors={mockFieldErrors} />,
       mockCountries,
     );
-
     const input = screen.getByLabelText('Country *');
     fireEvent.input(input, { target: { value: 'unit' } });
-
     const option = screen.getByText('United States');
     fireEvent.click(option);
-
     expect(input).toHaveValue('United States');
   });
 
@@ -146,11 +135,9 @@ describe('Country', () => {
       <Country countryRef={mockCountryRef} fieldErrors={mockFieldErrors} />,
       mockCountries,
     );
-
     const input = screen.getByLabelText('Country *');
     fireEvent.input(input, { target: { value: 'unit' } });
     expect(screen.getByRole('listbox')).toBeInTheDocument();
-
     const option = screen.getByText('United States');
     fireEvent.click(option);
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
@@ -162,10 +149,8 @@ describe('Country', () => {
       <Country countryRef={mockCountryRef} fieldErrors={mockFieldErrors} />,
       mockCountries,
     );
-
     const input = screen.getByLabelText('Country *');
     fireEvent.focus(input);
-
     expect(screen.getByRole('listbox')).toBeInTheDocument();
   });
 
@@ -175,10 +160,8 @@ describe('Country', () => {
       <Country countryRef={mockCountryRef} fieldErrors={mockFieldErrors} />,
       mockCountries,
     );
-
     const input = screen.getByLabelText('Country *');
     fireEvent.input(input, { target: { value: 'xyz' } });
-
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   });
 
@@ -188,10 +171,8 @@ describe('Country', () => {
       <Country countryRef={mockCountryRef} fieldErrors={mockFieldErrors} />,
       mockCountries,
     );
-
     const input = screen.getByLabelText('Country *');
     fireEvent.input(input, { target: { value: 'UNITED' } });
-
     const dropdownOptions = screen.getAllByRole('option');
     expect(dropdownOptions).toHaveLength(2);
     expect(screen.getByText('United States')).toBeInTheDocument();
@@ -204,10 +185,8 @@ describe('Country', () => {
       <Country countryRef={mockCountryRef} fieldErrors={mockFieldErrors} />,
       [],
     );
-
     const input = screen.getByLabelText('Country *');
     fireEvent.focus(input);
-
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   });
 });

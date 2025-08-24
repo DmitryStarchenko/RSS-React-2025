@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom/vitest';
-
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Name } from '../name';
@@ -25,7 +24,6 @@ describe('Name', () => {
 
   it('should render name input field with label', () => {
     render(<Name {...defaultProps} />);
-
     expect(screen.getByLabelText('Name *')).toBeInTheDocument();
     expect(screen.getByText('Name *')).toBeInTheDocument();
     expect(screen.getByRole('textbox')).toHaveAttribute('id', 'firstName');
@@ -34,7 +32,6 @@ describe('Name', () => {
 
   it('should call register function with correct field name', () => {
     render(<Name {...defaultProps} />);
-
     expect(mockRegister).toHaveBeenCalledWith('firstName');
   });
 
@@ -53,7 +50,6 @@ describe('Name', () => {
         },
       },
     };
-
     render(<Name {...errorProps} />);
     expect(screen.getByText('Name is required')).toBeInTheDocument();
     expect(screen.getByText('Name is required')).toHaveClass('errorMessage');
@@ -69,16 +65,13 @@ describe('Name', () => {
         },
       },
     };
-
     render(<Name {...errorProps} />);
-
     const input = screen.getByRole('textbox');
     expect(input).toHaveClass('error');
   });
 
   it('should not apply error class to input when there are no errors', () => {
     render(<Name {...defaultProps} />);
-
     const input = screen.getByRole('textbox');
     expect(input).not.toHaveClass('error');
   });
@@ -95,7 +88,6 @@ describe('Name', () => {
     };
 
     render(<Name {...errorProps} />);
-
     const input = screen.getByRole('textbox');
     expect(input).toHaveClass('error');
   });
@@ -109,9 +101,7 @@ describe('Name', () => {
         },
       },
     };
-
     render(<Name {...errorProps} />);
-
     const input = screen.getByRole('textbox');
     expect(input).toHaveClass('error');
   });

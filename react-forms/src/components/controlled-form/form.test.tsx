@@ -109,7 +109,6 @@ describe('ControlledForm', () => {
       resetField: vi.fn(),
       subscribe: vi.fn(),
     });
-
     vi.mocked(useAppDispatch).mockReturnValue(mockDispatch);
     vi.mocked(useAppSelector).mockImplementation((selector) => {
       if (selector.toString().includes('countries.list')) {
@@ -117,23 +116,19 @@ describe('ControlledForm', () => {
       }
       return [];
     });
-
     vi.mocked(useClickOutside).mockImplementation(() => {});
     vi.mocked(useEscapeKey).mockImplementation(() => {});
   });
 
   it('should call hide when close button is clicked', () => {
     render(<ControlledForm isShowing={true} hide={mockHide} />);
-
     const closeButton = screen.getByText('X');
     fireEvent.click(closeButton);
-
     expect(mockHide).toHaveBeenCalledTimes(1);
   });
 
   it('should render form title and submit button when isShowing is true', () => {
     render(<ControlledForm isShowing={true} hide={mockHide} />);
-
     expect(screen.getByText('Controlled Form')).toBeInTheDocument();
     expect(screen.getByText('Submit')).toBeInTheDocument();
   });
@@ -147,7 +142,6 @@ describe('ControlledForm', () => {
 
   it('should initialize useForm with correct parameters', () => {
     render(<ControlledForm isShowing={true} hide={mockHide} />);
-
     expect(useForm).toHaveBeenCalledWith({
       resolver: expect.anything(),
       mode: 'onChange',
@@ -156,13 +150,11 @@ describe('ControlledForm', () => {
 
   it('should call useAppSelector for countries', () => {
     render(<ControlledForm isShowing={true} hide={mockHide} />);
-
     expect(useAppSelector).toHaveBeenCalled();
   });
 
   it('should call useClickOutside and useEscapeKey hooks when isShowing is true', () => {
     render(<ControlledForm isShowing={true} hide={mockHide} />);
-
     expect(useClickOutside).toHaveBeenCalledWith(
       'controlledForm',
       mockHide,
@@ -173,7 +165,6 @@ describe('ControlledForm', () => {
 
   it('should handle form submission', () => {
     render(<ControlledForm isShowing={true} hide={mockHide} />);
-
     const form = document.querySelector('form');
     if (form) {
       fireEvent.submit(form);
@@ -182,7 +173,6 @@ describe('ControlledForm', () => {
 
   it('should render all form components when isShowing is true', () => {
     render(<ControlledForm isShowing={true} hide={mockHide} />);
-
     expect(screen.getByText('Name')).toBeInTheDocument();
     expect(screen.getByText('Age')).toBeInTheDocument();
     expect(screen.getByText('Email')).toBeInTheDocument();
@@ -195,12 +185,11 @@ describe('ControlledForm', () => {
 
   it('should call setInfo on form submission', () => {
     const mockHandleSubmitImpl = vi.fn().mockImplementation((callback) => {
-      return async (e?: React.BaseSyntheticEvent) => {
-        e?.preventDefault();
+      return async (event: React.BaseSyntheticEvent) => {
+        event.preventDefault();
         await callback({ name: 'Test' });
       };
     });
-
     vi.mocked(useForm).mockReturnValue({
       register: mockRegister,
       handleSubmit: mockHandleSubmitImpl,
@@ -219,12 +208,9 @@ describe('ControlledForm', () => {
       resetField: vi.fn(),
       subscribe: vi.fn(),
     });
-
     render(<ControlledForm isShowing={true} hide={mockHide} />);
-
     const submitButton = screen.getByText('Submit');
     fireEvent.click(submitButton);
-
     expect(mockDispatch).toHaveBeenCalledWith(setInfo(expect.anything()));
     expect(mockHide).toHaveBeenCalled();
   });

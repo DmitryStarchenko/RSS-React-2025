@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom/vitest';
-
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { UncontrolledForm } from './Form';
@@ -13,7 +12,6 @@ import {
 } from '../../shared';
 import { ValidationError } from 'yup';
 
-// Мокируем все зависимости
 vi.mock('../../shared', () => {
   const mockDispatch = vi.fn();
   const mockClearImage = vi.fn();
@@ -72,7 +70,6 @@ vi.mock(import('../../shared/form.module.css'), async (importOriginal) => {
   };
 });
 
-// Мокируем React hooks глобально
 vi.mock('react', async () => {
   const actual = await vi.importActual('react');
   return {
@@ -94,22 +91,15 @@ describe('UncontrolledForm', () => {
 
   beforeEach(async () => {
     vi.clearAllMocks();
-
-    // Получаем моки из shared модуля
     mockDispatch = vi.mocked(useAppDispatch)();
     mockClearImage = vi.mocked(clearImage);
-
-    // Мокируем validationSchema через динамический импорт
     const sharedModule = await import('../../shared');
     mockValidate = vi.fn().mockResolvedValue({});
     sharedModule.validationSchema.validate = mockValidate;
 
-    // Мокируем custom hooks
     vi.mocked(useClickOutside).mockImplementation(() => {});
     vi.mocked(useEscapeKey).mockImplementation(() => {});
     vi.mocked(useAppSelector).mockReturnValue([]);
-
-    // Мокируем функции из shared
     vi.mocked(setInfo).mockImplementation((data) => ({
       type: 'Info/setInfo',
       payload: data,
@@ -172,7 +162,6 @@ describe('UncontrolledForm', () => {
 
     const submitButton = screen.getByText('Submit');
     fireEvent.click(submitButton);
-
     await vi.waitFor(() => {
       expect(mockDispatch).toHaveBeenCalledWith(expect.any(Object));
       expect(mockHide).toHaveBeenCalled();
@@ -225,7 +214,6 @@ describe('UncontrolledForm', () => {
 
     const submitButton = screen.getByText('Submit');
     fireEvent.click(submitButton);
-
     await vi.waitFor(() => {
       expect(mockDispatch).not.toHaveBeenCalledWith(expect.any(Object));
       expect(mockHide).not.toHaveBeenCalled();
@@ -240,7 +228,6 @@ describe('UncontrolledForm', () => {
 
     const submitButton = screen.getByText('Submit');
     fireEvent.click(submitButton);
-
     await vi.waitFor(() => {
       expect(mockValidate).toHaveBeenCalled();
     });

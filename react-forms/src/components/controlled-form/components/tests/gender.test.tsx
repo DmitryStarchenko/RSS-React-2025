@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom/vitest';
-
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Gender } from '../gender';
@@ -19,14 +18,12 @@ describe('Gender', () => {
     register: mockRegister as UseFormRegister<FormData>,
     errors: {} as FieldErrors<FormData>,
   };
-
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   it('should render gender radio buttons', () => {
     render(<Gender {...defaultProps} />);
-
     expect(screen.getByLabelText('Male')).toBeInTheDocument();
     expect(screen.getByLabelText('Female')).toBeInTheDocument();
     expect(screen.getByText('Gender *')).toBeInTheDocument();
@@ -34,14 +31,11 @@ describe('Gender', () => {
 
   it('should have correct input attributes', () => {
     render(<Gender {...defaultProps} />);
-
     const maleInput = screen.getByLabelText('Male') as HTMLInputElement;
     const femaleInput = screen.getByLabelText('Female') as HTMLInputElement;
-
     expect(maleInput.type).toBe('radio');
     expect(maleInput.value).toBe('male');
     expect(maleInput.id).toBe('male');
-
     expect(femaleInput.type).toBe('radio');
     expect(femaleInput.value).toBe('female');
     expect(femaleInput.id).toBe('female');
@@ -49,7 +43,6 @@ describe('Gender', () => {
 
   it('should call register function for both inputs', () => {
     render(<Gender {...defaultProps} />);
-
     expect(mockRegister).toHaveBeenCalledWith('gender');
   });
 
@@ -63,9 +56,7 @@ describe('Gender', () => {
         },
       } as FieldErrors<FormData>,
     };
-
     render(<Gender {...propsWithError} />);
-
     expect(screen.getByText('Gender is required')).toBeInTheDocument();
     expect(screen.getByText('Gender is required')).toHaveClass('errorMessage');
   });
@@ -80,19 +71,15 @@ describe('Gender', () => {
         },
       } as FieldErrors<FormData>,
     };
-
     render(<Gender {...propsWithOtherError} />);
-
     expect(screen.queryByText('Email is invalid')).not.toBeInTheDocument();
   });
 
   it('should render with correct structure', () => {
     const { container } = render(<Gender {...defaultProps} />);
-
     const formGroup = container.querySelector('.formGroup');
     const radioGroup = container.querySelector('.radioGroup');
     const errorView = container.querySelector('.errorView');
-
     expect(formGroup).toBeInTheDocument();
     expect(radioGroup).toBeInTheDocument();
     expect(errorView).toBeInTheDocument();
@@ -100,10 +87,8 @@ describe('Gender', () => {
 
   it('should have accessible labels', () => {
     render(<Gender {...defaultProps} />);
-
     const maleInput = screen.getByLabelText('Male');
     const femaleInput = screen.getByLabelText('Female');
-
     expect(maleInput).toBeInTheDocument();
     expect(femaleInput).toBeInTheDocument();
     expect(maleInput).toHaveAccessibleName('Male');
