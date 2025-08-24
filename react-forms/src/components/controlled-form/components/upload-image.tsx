@@ -53,7 +53,7 @@ export function UploadImage({ errors, setValue, register }: Props) {
 
   return (
     <div className={styles.formGroup}>
-      <label htmlFor="avatar">Upload image</label>
+      <label htmlFor="avatar">Upload image *</label>
       <input
         className={styles.inputFile}
         id="avatar"

@@ -11,7 +11,7 @@ export function Name({ register, errors }: ComponentsProps) {
         {...register('firstName')}
         className={errors.firstName ? `${styles.error}` : ''}
       />
-      <div className={styles.errorView}>
+      <div className={styles.errorView} data-testid="error-view">
         {errors.firstName && (
           <span className={styles.errorMessage}>
             {errors.firstName.message}

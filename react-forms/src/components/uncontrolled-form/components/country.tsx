@@ -47,20 +47,28 @@ export function Country({ countryRef, fieldErrors }: Props) {
           placeholder="Start typing country name..."
         />
         {showDropdown && filteredCountries.length > 0 && (
-          <div className={styles.countryDropdown}>
+          <div
+            className={styles.countryDropdown}
+            role="listbox"
+            aria-labelledby="countryInput">
             {filteredCountries.map((country) => (
               <div
                 key={country}
                 className={styles.countryOption}
                 onClick={() => selectCountry(country)}
-                onMouseDown={(e) => e.preventDefault()}>
+                onMouseDown={(e) => e.preventDefault()}
+                role="option"
+                tabIndex={0}>
                 {country}
               </div>
             ))}
           </div>
         )}
         <div className={styles.errorView}>
-          <span id="country-error" className={styles.errorMessage}>
+          <span
+            id="country-error"
+            className={styles.errorMessage}
+            data-testid="country-error">
             {fieldErrors ? fieldErrors.country : ''}
           </span>
         </div>

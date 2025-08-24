@@ -56,7 +56,7 @@ export function UploadImage({ setFieldErrors, fieldErrors, avatarRef }: Props) {
   };
   return (
     <div className={styles.formGroup}>
-      <label htmlFor="avatar">Upload image</label>
+      <label htmlFor="avatar">Upload image *</label>
       <input
         ref={avatarRef}
         className={styles.inputFile}
