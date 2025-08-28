@@ -1,0 +1,10 @@
+.yearLabel {
+  font-size: 15px;
+}
+
+.yearSelect {
+  padding: 8px 13px;
+  border: 2px solid #5e69fd;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0);
+}
