@@ -23,9 +23,6 @@ export const DataModal = ({
         onClick={(event) => event.stopPropagation()}>
         <div className={styles.modalHeader}>
           <h3>Select Additional Columns</h3>
-          <button className={styles.closeButton} onClick={onClose}>
-            ×
-          </button>
         </div>
 
         <div className={styles.modalBody}>
@@ -39,6 +36,11 @@ export const DataModal = ({
               {column.label}
             </label>
           ))}
+        </div>
+        <div className={styles.modalFooter}>
+          <button className={styles.closeButton} onClick={onClose}>
+            Close
+          </button>
         </div>
       </div>
     </div>

@@ -15,6 +15,7 @@
   background: white;
   padding: 20px;
   border-radius: 8px;
+  border: 2px solid #5e69fd;
   max-width: 500px;
   width: 90%;
   max-height: 80vh;
@@ -28,16 +29,6 @@
   margin-bottom: 20px;
 }
 
-.closeButton {
-  position: absolute;
-  right: 500px;
-  top: 330px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-}
-
 .modalBody {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -49,4 +40,21 @@
   align-items: center;
   gap: 8px;
   padding: 5px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: right;
+}
+
+.closeButton {
+  padding: 8px 13px;
+  border: 2px solid #0011ff;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background: #75baff;
 }
