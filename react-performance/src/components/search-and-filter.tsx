@@ -8,7 +8,6 @@ interface SearchAndFilterProps {
   onSortChange: (sort: string) => void;
   sortOrder: 'asc' | 'desc';
   onSortOrderChange: (order: 'asc' | 'desc') => void;
-  showYearlyData?: boolean;
 }
 
 export const SearchAndFilter = memo(
@@ -19,7 +18,6 @@ export const SearchAndFilter = memo(
     onSortChange,
     sortOrder,
     onSortOrderChange,
-    showYearlyData = false,
   }: SearchAndFilterProps) => {
     return (
       <div className={styles.searchFilter}>
@@ -38,12 +36,8 @@ export const SearchAndFilter = memo(
             onChange={(e) => onSortChange(e.target.value)}>
             <option value="country">Name</option>
             <option value="population">Population</option>
-            {!showYearlyData && (
-              <>
-                <option value="co2">CO2</option>
-                <option value="co2_per_capita">CO2 per Capita</option>
-              </>
-            )}
+            <option value="co2">CO2</option>
+            <option value="co2_per_capita">CO2 per Capita</option>
           </select>
 
           <button

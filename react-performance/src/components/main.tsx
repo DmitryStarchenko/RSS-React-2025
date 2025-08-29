@@ -1,29 +1,16 @@
 import { useState, useMemo, useCallback } from 'react';
 import { useData } from '../shared/hooks/use-data';
-import type {
-  AvailableColumn,
-  CountryData,
-  CountryYearData,
-} from '../shared/types/types';
+import type { AvailableColumn } from '../shared/types/types';
 import { LoadingSpinner } from './loading-spinner';
 import { YearSelector } from './year-selector';
 import { SearchAndFilter } from './search-and-filter';
 import { CountryTable } from './country-table';
-import { CountryYearTable } from './country-year-table';
 import { DataModal } from './data-modal';
-import { getFilteredAndSortedCountries } from './utils/get-filtered-and-sorted-countries';
 import { availableAdditionalColumns } from '../shared/constants';
 import styles from './styles/main.module.css';
 
 export const Main = () => {
-  const {
-    data,
-    loading,
-    error,
-    getCountries,
-    getCountriesByYear,
-    getAvailableYears,
-  } = useData();
+  const { data, loading, error, getCountries, getAvailableYears } = useData();
   const [selectedYear, setSelectedYear] = useState(2023);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('country');
@@ -32,44 +19,12 @@ export const Main = () => {
   const [additionalColumns, setAdditionalColumns] = useState<AvailableColumn[]>(
     availableAdditionalColumns,
   );
-  const [showYearlyData, setShowYearlyData] = useState(true);
 
   const availableYears = useMemo(
     () => getAvailableYears(),
     [getAvailableYears],
   );
   const allCountries = useMemo(() => getCountries(), [getCountries]);
-  const countriesByYear = useMemo(
-    () => getCountriesByYear(selectedYear),
-    [getCountriesByYear, selectedYear],
-  );
-
-  const filteredAndSortedCountries = useMemo(
-    () =>
-      getFilteredAndSortedCountries(
-        allCountries,
-        countriesByYear,
-        searchTerm,
-        showYearlyData,
-        sortBy,
-        sortOrder,
-        selectedYear,
-      ),
-    [
-      allCountries,
-      countriesByYear,
-      searchTerm,
-      showYearlyData,
-      sortBy,
-      sortOrder,
-      selectedYear,
-    ],
-  );
-
-  const selectedAdditionalColumns = useMemo(
-    () => additionalColumns.filter((col) => col.selected),
-    [additionalColumns],
-  );
 
   const handleColumnToggle = useCallback((key: string) => {
     setAdditionalColumns((prev) =>
@@ -81,11 +36,6 @@ export const Main = () => {
 
   const handleYearChange = useCallback((year: number) => {
     setSelectedYear(year);
-    setShowYearlyData(false);
-  }, []);
-
-  const toggleViewMode = useCallback(() => {
-    setShowYearlyData((prev) => !prev);
   }, []);
 
   const handleSearchChange = useCallback((term: string) => {
@@ -117,9 +67,6 @@ export const Main = () => {
       <header className={styles.appHeader}>
         <h1>CO2 Emissions by Country</h1>
         <div className={styles.controls}>
-          <button className={styles.viewToggle} onClick={toggleViewMode}>
-            {showYearlyData ? 'Show Single Year' : 'Show All Years'}
-          </button>
           <div className={styles.controlsFilters}>
             <SearchAndFilter
               searchTerm={searchTerm}
@@ -128,7 +75,6 @@ export const Main = () => {
               onSortChange={handleSortChange}
               sortOrder={sortOrder}
               onSortOrderChange={handleSortOrderChange}
-              showYearlyData={showYearlyData}
             />
             <YearSelector
               selectedYear={selectedYear}
@@ -142,18 +88,16 @@ export const Main = () => {
         </div>
       </header>
       <main>
-        {showYearlyData ? (
-          <CountryTable
-            countries={filteredAndSortedCountries as CountryData[]}
-            selectedYear={selectedYear}
-            additionalColumns={selectedAdditionalColumns}
-          />
-        ) : (
-          <CountryYearTable
-            countries={filteredAndSortedCountries as CountryYearData[]}
-            additionalColumns={selectedAdditionalColumns}
-          />
-        )}
+        <CountryTable
+          countries={allCountries}
+          selectedYear={selectedYear}
+          additionalColumns={additionalColumns}
+          searchTerm={searchTerm}
+          sortBy={sortBy}
+          sortOrder={sortOrder}
+          onSortChange={handleSortChange}
+          onSortOrderChange={handleSortOrderChange}
+        />
       </main>
       <DataModal
         isOpen={isModalOpen}
