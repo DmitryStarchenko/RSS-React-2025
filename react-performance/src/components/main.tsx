@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useData } from '../shared/hooks/use-data';
 import type {
   AvailableColumn,
@@ -34,35 +34,79 @@ export const Main = () => {
   );
   const [showYearlyData, setShowYearlyData] = useState(true);
 
-  const availableYears = getAvailableYears();
-  const allCountries = getCountries();
-  const countriesByYear = getCountriesByYear(selectedYear);
-  const filteredAndSortedCountries = getFilteredAndSortedCountries(
-    allCountries,
-    countriesByYear,
-    searchTerm,
-    showYearlyData,
-    sortBy,
-    sortOrder,
-    selectedYear,
+  const availableYears = useMemo(
+    () => getAvailableYears(),
+    [getAvailableYears],
+  );
+  const allCountries = useMemo(() => getCountries(), [getCountries]);
+  const countriesByYear = useMemo(
+    () => getCountriesByYear(selectedYear),
+    [getCountriesByYear, selectedYear],
   );
 
-  const handleColumnToggle = (key: string) => {
+  const filteredAndSortedCountries = useMemo(
+    () =>
+      getFilteredAndSortedCountries(
+        allCountries,
+        countriesByYear,
+        searchTerm,
+        showYearlyData,
+        sortBy,
+        sortOrder,
+        selectedYear,
+      ),
+    [
+      allCountries,
+      countriesByYear,
+      searchTerm,
+      showYearlyData,
+      sortBy,
+      sortOrder,
+      selectedYear,
+    ],
+  );
+
+  const selectedAdditionalColumns = useMemo(
+    () => additionalColumns.filter((col) => col.selected),
+    [additionalColumns],
+  );
+
+  const handleColumnToggle = useCallback((key: string) => {
     setAdditionalColumns((prev) =>
       prev.map((column) =>
         column.key === key ? { ...column, selected: !column.selected } : column,
       ),
     );
-  };
+  }, []);
 
-  const handleYearChange = (year: number) => {
+  const handleYearChange = useCallback((year: number) => {
     setSelectedYear(year);
     setShowYearlyData(false);
-  };
+  }, []);
 
-  const toggleViewMode = () => {
-    setShowYearlyData(!showYearlyData);
-  };
+  const toggleViewMode = useCallback(() => {
+    setShowYearlyData((prev) => !prev);
+  }, []);
+
+  const handleSearchChange = useCallback((term: string) => {
+    setSearchTerm(term);
+  }, []);
+
+  const handleSortChange = useCallback((sort: string) => {
+    setSortBy(sort);
+  }, []);
+
+  const handleSortOrderChange = useCallback((order: 'asc' | 'desc') => {
+    setSortOrder(order);
+  }, []);
+
+  const openModal = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
 
   if (loading) return <LoadingSpinner />;
   if (error) return <div className={styles.error}>Error: {error}</div>;
@@ -79,27 +123,21 @@ export const Main = () => {
           <div className={styles.controlsFilters}>
             <SearchAndFilter
               searchTerm={searchTerm}
-              onSearchChange={setSearchTerm}
+              onSearchChange={handleSearchChange}
               sortBy={sortBy}
-              onSortChange={setSortBy}
+              onSortChange={handleSortChange}
               sortOrder={sortOrder}
-              onSortOrderChange={setSortOrder}
+              onSortOrderChange={handleSortOrderChange}
               showYearlyData={showYearlyData}
             />
-            {showYearlyData ? undefined : (
-              <>
-                <YearSelector
-                  selectedYear={selectedYear}
-                  onYearChange={handleYearChange}
-                  availableYears={availableYears}
-                />
-                <button
-                  className={styles.columnsButton}
-                  onClick={() => setIsModalOpen(true)}>
-                  Select Columns
-                </button>
-              </>
-            )}
+            <YearSelector
+              selectedYear={selectedYear}
+              onYearChange={handleYearChange}
+              availableYears={availableYears}
+            />
+            <button className={styles.columnsButton} onClick={openModal}>
+              Select Columns
+            </button>
           </div>
         </div>
       </header>
@@ -108,18 +146,18 @@ export const Main = () => {
           <CountryTable
             countries={filteredAndSortedCountries as CountryData[]}
             selectedYear={selectedYear}
-            additionalColumns={additionalColumns}
+            additionalColumns={selectedAdditionalColumns}
           />
         ) : (
           <CountryYearTable
             countries={filteredAndSortedCountries as CountryYearData[]}
-            additionalColumns={additionalColumns}
+            additionalColumns={selectedAdditionalColumns}
           />
         )}
       </main>
       <DataModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={closeModal}
         availableColumns={additionalColumns}
         onColumnToggle={handleColumnToggle}
       />

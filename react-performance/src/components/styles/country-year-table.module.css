@@ -27,19 +27,6 @@
   z-index: 10;
 }
 
-.countryYearTable tr.highlighted {
-  animation: highlight-row 1s ease;
-}
-
-@keyframes highlight-row {
-  0% {
-    background-color: #fff3cd;
-  }
-  100% {
-    background-color: #fff8eb;
-  }
-}
-
 .countryYearTable tr:nth-child(even) {
   background: #eefcfb;
 }
