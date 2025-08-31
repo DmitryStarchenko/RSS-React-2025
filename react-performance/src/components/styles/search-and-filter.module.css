@@ -1,0 +1,35 @@
+.searchFilter {
+  display: flex;
+  gap: 15px;
+}
+
+.searchInput {
+  padding: 8px;
+  border: 2px solid #5e69fd;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0);
+  width: 200px;
+}
+
+.sortGroup {
+  display: flex;
+  gap: 5px;
+}
+
+.sortSelect {
+  border: 2px solid #5e69fd;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0);
+}
+
+.sortButton {
+  padding: 8px 13px;
+  border: 2px solid #0011ff;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
+
+.sortButton:hover {
+  background: #75baff;
+}

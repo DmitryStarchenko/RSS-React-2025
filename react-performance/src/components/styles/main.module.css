@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  background-color: #007bff46;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.appHeader {
+  margin-bottom: 20px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 20px;
+}
+
+.viewToggle,
+.columnsButton {
+  padding: 8px 16px;
+  border: 2px solid #0011ff;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
+
+.viewToggle:hover,
+.columnsButton:hover {
+  background: #75baff;
+}
+
+.controlsFilters {
+  display: flex;
+  gap: 15px;
+}
+
+.error {
+  color: #dc3545;
+  padding: 20px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+
+  .searchFilter {
+    flex-direction: column;
+  }
+
+  .modalBody {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .countryYearTable {
+    font-size: 14px;
+  }
+
+  .countryYearTable th,
+  .countryYearTable td {
+    padding: 8px 6px;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
